@@ -11,25 +11,15 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          Aprendizagem Baseada em Exemplos
-        </q-toolbar-title>
+        <q-toolbar-title> Aprendizagem Baseada em Exemplos </q-toolbar-title>
 
         <div></div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label
-          header
-        >
-          Menu
-        </q-item-label>
+        <q-item-label header> Menu </q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"
@@ -50,6 +40,18 @@ import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
+  {
+    title: 'Home',
+    caption: '',
+    icon: 'home',
+    route: { name: 'home' }
+  },
+  {
+    title: 'Tutorial',
+    caption: '',
+    icon: 'explore',
+    route: { name: 'tutorial' }
+  },
   {
     title: 'Ensino da Teoria',
     caption: '',
