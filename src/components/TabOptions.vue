@@ -94,7 +94,7 @@
           <q-tab-panel name="tab-atividades">
             <div class="text-h6">Selecione as opções</div>
             <br/>
-            <div class="text-body1">
+            <div class="text-body2">
               Deseja trabalhar com exemplos corretos ou errôneos?
             </div>
             <div class="q-pa-md">
@@ -903,9 +903,7 @@
           align="justify"
           narrow-indicator
         >
-          <q-tab name="tab-aulaTeorica" label="Aula Teórica" />
-          <q-tab name="tab-atividades" label="Atividades" />
-          <q-tab name="tab-feedback" label="Feedback" />
+
         </q-tabs>
       </q-card>
     </div>
