@@ -904,9 +904,10 @@
                       >
                     </div>
                     <div class="text-body1 text-italic q-mt-sm">
-                  Iniciante: Aluno que não realizou exercícios sobre o conteúdo.
-                  <br />
-                  Intermediário: Aluno já realizou exercícios sobre o conteúdo
+                  Sugestão de regras: <br/>
+                  Erro encontrado corretamente e explicação do motivo correta: 10 pontos<br/>
+                  Erro encontrado corretamente, porém, explicação incorreta: 5 pontos<br/>
+                  Pódio: Os três alunos com maior pontuação.
                 </div>
                   </q-timeline-entry>
 
@@ -928,8 +929,8 @@
                   >
                     <div class="text-body1">
                       O Professor realiza a validação do que foi apresentado
-                      pelo aluno. Se o aluno acertou, recebe a pontuação, caso
-                      contrário, o erro continua em aberto.
+                      pelo aluno. Se o aluno acertou, recebe a pontuação completa, caso
+                      contrário, recebe pontuação parcial e o erro continua em aberto.
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry
