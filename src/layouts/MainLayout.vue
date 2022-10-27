@@ -56,7 +56,7 @@ const linksList = [
     title: 'Ensino da Teoria',
     caption: '',
     icon: 'school',
-    link: ''
+    route: { name: 'teachingTheory' }
   },
   {
     title: 'Atividades',
