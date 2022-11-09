@@ -18,6 +18,7 @@
             node-key="label"
             selected-color="primary"
             v-model:selected="selected"
+            default-expand-all
 
           />
         </div>
@@ -32,20 +33,16 @@
         >
           <q-tab-panel name="Aula Expositiva">
             <div class="text-h4 q-mb-md">Aula Expositiva</div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Essa etapa é sugerida para casos em que os alunos ainda não tenham tipo contato com o conteúdo.</p>
+            <p>Esse tipo de abordagem se mostrou efetiva quando utilizada como ponto inicial do processo de ensino</p>
+            <p>A última etapa do processo consiste na utilização de exemplos para ajudar os alunos a relacionar o conteúdo com uma situação concreta.</p>
           </q-tab-panel>
 
           <q-tab-panel name="Sala de aula invertida">
             <div class="text-h4 q-mb-md">Sala de aula invertida</div>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Essa etapa é sugerida para casos em que os alunos ainda não tenham tipo contato com o conteúdo.</p>
+            <p>A utilização da Sala de Aula Invertida consiste em transpor a exposição do conteúdo para antes do período da aula por meio de vídeos, artigos ou livros. Isso contribui para tornar a absorção de conteúdo mais eficaz e envolvente.</p>
+            <p>A última etapa do processo consiste na utilização de exemplos para ajudar os alunos a relacionar o conteúdo com uma situação concreta.</p>
           </q-tab-panel>
 
         </q-tab-panels>

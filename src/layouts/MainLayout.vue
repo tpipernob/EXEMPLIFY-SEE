@@ -74,7 +74,7 @@ const linksList = [
     title: 'Repositório de Exemplos',
     caption: '',
     icon: 'folder',
-    link: ''
+    route: { name: 'repository' }
   }
 ]
 
