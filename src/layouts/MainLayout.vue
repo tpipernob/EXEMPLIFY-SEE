@@ -68,7 +68,7 @@ const linksList = [
     title: 'Feedback',
     caption: '',
     icon: 'chat',
-    link: ''
+    route: { name: 'feedbacks' }
   },
   {
     title: 'Repositório de Exemplos',

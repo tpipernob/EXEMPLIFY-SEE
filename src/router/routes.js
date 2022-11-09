@@ -8,6 +8,7 @@ const routes = [
       { path: 'tutorial-page', name: 'tutorial', component: () => import('src/pages/TutorialPage.vue') },
       { path: 'theory-page', name: 'teachingTheory', component: () => import('src/pages/TeachingTheoryPage.vue') },
       { path: 'activities-page', name: 'activities', component: () => import('src/pages/ActivitiesPage.vue') },
+      { path: 'feedbacks-page', name: 'feedbacks', component: () => import('src/pages/FeedbacksPage.vue') },
       { path: 'repository-page', name: 'repository', component: () => import('src/pages/RepositoryPage.vue') }
 
     ]
