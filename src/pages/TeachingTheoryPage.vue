@@ -4,6 +4,7 @@
     <p class="text-h5">
       Ensino da teoria
     </p>
+    <p>Ao clicar na seta os passos sugeridos são exibidos.</p>
 
     <div>
     <q-splitter
@@ -18,7 +19,6 @@
             node-key="label"
             selected-color="primary"
             v-model:selected="selected"
-            default-expand-all
 
           />
         </div>

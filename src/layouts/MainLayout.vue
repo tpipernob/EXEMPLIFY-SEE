@@ -62,7 +62,7 @@ const linksList = [
     title: 'Atividades',
     caption: '',
     icon: 'tips_and_updates',
-    link: ''
+    route: { name: 'activities' }
   },
   {
     title: 'Feedback',
