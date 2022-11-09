@@ -37,7 +37,7 @@
             <p>No caso de alunos iniciantes, é sugerido uma abordagem que se inicia com o professor demonstrando a construção do modelo. </p>
             <p>Após essa etapa, o professor apresenta aos alunos um domínio e solicita que os alunos realizem a construção do modelo para o domínio apresentado. </p>
             <p>Depois da modelagem realizada pelos alunos, o professor apresenta como seria a modelagem correta e solicita que os alunos façam a correção dos seus próprios modelos. Após a correção dos modelos, os alunos enviam para o professor o resultado.</p>
-            <p>Para finalizar a atividade o professor pode optar por um dos tipos de sugeridos</p>
+            <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos</p>
           </q-tab-panel>
 
           <q-tab-panel name="Exemplo correto aluno intermediario">
@@ -45,7 +45,7 @@
             <p>O aluno intermediário é aquele que já realizou algum tipo de exercício que aborde o conteúdo a ser explorado.</p>
             <p>O professor começa ensinando aos alunos exemplos positivos do modelo escolhido.</p>
             <p>Em seguida, o professor apresenta um domínio para que os alunos possam construir um modelo de acordo com os padrões apresentados.</p>
-            <p>Para finalizar a atividade o professor pode optar por um dos tipos de sugeridos.</p>
+            <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos.</p>
           </q-tab-panel>
 
           <q-tab-panel name="Exemplo errôneo aluno iniciante (domínio)">
@@ -55,7 +55,25 @@
             <p>Depois da modelagem realizada pelos alunos, o professor apresenta alguns anti-padrões e como é possível solucioná-los.</p>
             <p>O próximo passo será a correção dos modelos construídos. Para isso, o professor pode optar por disponibilizar um artefato que auxilie os alunos nessa etapa. Esse artefato pode ser um checklist com os anti-padrões ensinados ou um artefato de inspeção.</p>
             <p>Em relação à correção dos diagramas, o professor pode escolher entre o aluno corrigir o seu próprio diagrama ou fazer com que ele corrija o diagrama de um outro colega.</p>
-            <p>Para finalizar a atividade o professor pode optar por um dos tipos de sugeridos.</p>
+            <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos.</p>
+          </q-tab-panel>
+
+          <q-tab-panel name="Exemplo errôneo aluno iniciante (modelo com erros)">
+            <div class="text-h4 q-mb-md">Exemplo errôneo aluno iniciante (modelo com erros)</div>
+            <p>Aluno iniciante é aquele que ainda não realizou exercícios sobre o conteúdo.</p>
+            <p>Para alunos iniciantes, a sugestão é que sejam utilizados modelos mais simples.</p>
+            <p>O professor apresenta um modelo que contenha erros, explica os erros existentes e faz o passo a passo para corrigir esses erros.</p>
+            <p>O professor apresenta um outro modelo e solicita que os alunos localizem os erros e construam um novo modelo que apresente a solução dos erros encontrados.</p>
+            <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos.</p>
+          </q-tab-panel>
+
+          <q-tab-panel name="Exemplo errôneo aluno intermediário (modelo com erros)">
+            <div class="text-h4 q-mb-md">Exemplo errôneo aluno intermediário (modelo com erros)</div>
+            <p>O aluno intermediário é aquele que já realizou algum tipo de exercício que aborde o conteúdo a ser explorado.</p>
+            <p>Para alunos intermediários, a sugestão é que sejam utilizados modelos mais complexos.</p>
+            <p>O professor apresenta um modelo que contenha erros, explica os erros existentes e faz o passo a passo para corrigir esses erros.</p>
+            <p>O professor apresenta um outro modelo e solicita que os alunos localizem os erros e construam um novo modelo que apresente a solução dos erros encontrados.</p>
+            <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos.</p>
           </q-tab-panel>
 
         </q-tab-panels>
@@ -160,6 +178,72 @@ export default defineComponent({
             },
             {
               label: 'Alunos criam uma nova versão dos diagramas',
+              disabled: true
+            },
+            {
+              label: 'Feedback',
+              disabled: true
+            }
+          ]
+        },
+        {
+          label: 'Exemplo errôneo aluno iniciante (modelo com erros)',
+          children: [
+            {
+              label: 'Apresentar um modelo com erros',
+              disabled: true
+            },
+            {
+              label: 'Professor explica os erros modelo',
+              disabled: true
+            },
+            {
+              label: 'Professor demonstra a correção',
+              disabled: true
+            },
+            {
+              label: 'Professor apresenta outro modelo',
+              disabled: true
+            },
+            {
+              label: 'Alunos identificam os erros',
+              disabled: true
+            },
+            {
+              label: 'Alunos corrigem o modelo',
+              disabled: true
+            },
+            {
+              label: 'Feedback',
+              disabled: true
+            }
+          ]
+        },
+        {
+          label: 'Exemplo errôneo aluno intermediário (modelo com erros)',
+          children: [
+            {
+              label: 'Apresentar um modelo com erros',
+              disabled: true
+            },
+            {
+              label: 'Professor explica os erros modelo',
+              disabled: true
+            },
+            {
+              label: 'Professor demonstra a correção',
+              disabled: true
+            },
+            {
+              label: 'Professor apresenta outro modelo',
+              disabled: true
+            },
+            {
+              label: 'Alunos identificam os erros',
+              disabled: true
+            },
+            {
+              label: 'Alunos corrigem o modelo',
               disabled: true
             },
             {
