@@ -4,7 +4,7 @@
     <p class="text-h5">
       Atividades
     </p>
-    <p>Ao clicar na seta os passos sugeridos são exibidos.</p>
+    <p>Ao clicar na seta as opções e os passos sugeridos são exibidos. Clicando nos títulos com setas mais detalhes sobre os passos aparecem a direita.</p>
 
     <div>
     <q-splitter
@@ -16,9 +16,10 @@
         <div class="q-pa-md">
           <q-tree
             :nodes="simple"
-            node-key="label"
+            node-key="value"
             selected-color="primary"
             v-model:selected="selected"
+            no-connectors
 
           />
         </div>
@@ -31,7 +32,15 @@
           transition-prev="jump-up"
           transition-next="jump-up"
         >
-          <q-tab-panel name="Exemplo correto aluno iniciante">
+          <q-tab-panel name="defaultCorreto">
+              <div class="text-h4 q-mb-md">Exemplos corretos</div>
+              <p>Navegue pelas opções a esquerda para ter mais detalhes sobre o passo a passo desejado.</p>
+          </q-tab-panel>
+          <q-tab-panel name="defaultErroneo">
+              <div class="text-h4 q-mb-md">Exemplos errôneos</div>
+              <p>Navegue pelas opções a esquerda para ter mais detalhes sobre o passo a passo desejado.</p>
+          </q-tab-panel>
+          <q-tab-panel name="corretoIniciante">
             <div class="text-h4 q-mb-md">Exemplo correto aluno iniciante</div>
             <p>Aluno iniciante é aquele que ainda não realizou exercícios sobre o conteúdo.</p>
             <p>No caso de alunos iniciantes, é sugerido uma abordagem que se inicia com o professor demonstrando a construção do modelo. </p>
@@ -40,7 +49,7 @@
             <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos</p>
           </q-tab-panel>
 
-          <q-tab-panel name="Exemplo correto aluno intermediario">
+          <q-tab-panel name="corretoIntermediario">
             <div class="text-h4 q-mb-md">Exemplo correto aluno intermediario</div>
             <p>O aluno intermediário é aquele que já realizou algum tipo de exercício que aborde o conteúdo a ser explorado.</p>
             <p>O professor começa ensinando aos alunos exemplos positivos do modelo escolhido.</p>
@@ -48,7 +57,7 @@
             <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos.</p>
           </q-tab-panel>
 
-          <q-tab-panel name="Exemplo errôneo aluno iniciante (domínio)">
+          <q-tab-panel name="erroneoInicianteDominio">
             <div class="text-h4 q-mb-md">Exemplo errôneo aluno iniciante (domínio)</div>
             <p>Aluno iniciante é aquele que ainda não realizou exercícios sobre o conteúdo.</p>
             <p>O professor inicia apresentando um domínio para que os alunos realizem a modelagem.</p>
@@ -58,7 +67,7 @@
             <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos.</p>
           </q-tab-panel>
 
-          <q-tab-panel name="Exemplo errôneo aluno iniciante (modelo com erros)">
+          <q-tab-panel name="erroneoInicianteModelo">
             <div class="text-h4 q-mb-md">Exemplo errôneo aluno iniciante (modelo com erros)</div>
             <p>Aluno iniciante é aquele que ainda não realizou exercícios sobre o conteúdo.</p>
             <p>Para alunos iniciantes, a sugestão é que sejam utilizados modelos mais simples.</p>
@@ -67,7 +76,7 @@
             <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos.</p>
           </q-tab-panel>
 
-          <q-tab-panel name="Exemplo errôneo aluno intermediário (modelo com erros)">
+          <q-tab-panel name="erroneoIntermediarioModelo">
             <div class="text-h4 q-mb-md">Exemplo errôneo aluno intermediário (modelo com erros)</div>
             <p>O aluno intermediário é aquele que já realizou algum tipo de exercício que aborde o conteúdo a ser explorado.</p>
             <p>Para alunos intermediários, a sugestão é que sejam utilizados modelos mais complexos.</p>
@@ -92,169 +101,267 @@ export default defineComponent({
   setup () {
     return {
       splitterModel: ref(30),
-      selected: ref('Exemplo correto aluno intermediario'),
+      selected: ref('defaultCorreto'),
 
       simple: [
         {
-          label: 'Exemplo correto aluno iniciante',
+          label: 'Exemplo correto',
+          value: 'defaultCorreto',
           children: [
             {
-              label: 'Escolher o exemplo',
-              disabled: true
+              label: 'Aluno Iniciante',
+              value: 'corretoIniciante',
+              children: [
+                {
+                  label: 'Escolher o exemplo',
+                  disabled: true
+                },
+                {
+                  label: 'Professor realiza a demonstração',
+                  disabled: true
+                },
+                {
+                  label: 'Apresentar um domínio',
+                  disabled: true
+                },
+                {
+                  label: 'Alunos realizam a modelagem',
+                  disabled: true
+                },
+                {
+                  label: 'Professor realiza a demonstração',
+                  disabled: true
+                },
+                {
+                  label: 'Alunos corrigem o modelo',
+                  disabled: true
+                },
+                {
+                  label: 'Feedback',
+                  disabled: true
+                }
+              ]
             },
             {
-              label: 'Professor realiza a demonstração',
-              disabled: true
-            },
-            {
-              label: 'Apresentar um domínio',
-              disabled: true
-            },
-            {
-              label: 'Alunos realizam a modelagem',
-              disabled: true
-            },
-            {
-              label: 'Professor realiza a demonstração',
-              disabled: true
-            },
-            {
-              label: 'Alunos corrigem o modelo',
-              disabled: true
-            },
-            {
-              label: 'Feedback',
-              disabled: true
+              label: 'Aluno intermediario',
+              value: 'corretoIntermediario',
+              children: [
+                {
+                  label: 'Escolher um exemplo positivo',
+                  disabled: true
+                },
+                {
+                  label: 'Professor ensina o exemplo',
+                  disabled: true
+                },
+                {
+                  label: 'Apresentar um domínio',
+                  disabled: true
+                },
+                {
+                  label: 'Alunos realizam a modelagem',
+                  disabled: true
+                },
+                {
+                  label: 'Feedback',
+                  disabled: true
+                }
+              ]
             }
           ]
         },
         {
-          label: 'Exemplo correto aluno intermediario',
+          label: 'Exemplo errôneo',
+          value: 'defaultErroneo',
           children: [
             {
-              label: 'Escolher um exemplo positivo',
-              disabled: true
+              label: 'Aluno Iniciante',
+              value: 'erroneoIniciante',
+              children: [
+                {
+                  label: 'Modelagem de domínio',
+                  value: 'erroneoInicianteDominio',
+                  children: [
+                    {
+                      label: 'Apresentar um domínio',
+                      disabled: true
+                    },
+                    {
+                      label: 'Alunos realizam a modelagem',
+                      disabled: true
+                    },
+                    {
+                      label: 'Selecionar anti-padrões',
+                      disabled: true
+                    },
+                    {
+                      label: 'Explicação dos anti-padrões',
+                      disabled: true
+                    },
+                    {
+                      label: 'Alunos corrigem seus diagramas',
+                      disabled: true
+                    },
+                    {
+                      label: 'Alunos criam uma nova versão dos diagramas',
+                      disabled: true
+                    },
+                    {
+                      label: 'Feedback',
+                      disabled: true
+                    }
+
+                  ]
+                },
+                {
+                  label: 'Modelo com erros',
+                  value: 'erroneoInicianteModelo',
+                  children: [
+                    {
+                      label: 'Apresentar um modelo com erros',
+                      disabled: true
+                    },
+                    {
+                      label: 'Professor explica os erros modelo',
+                      disabled: true
+                    },
+                    {
+                      label: 'Professor demonstra a correção',
+                      disabled: true
+                    },
+                    {
+                      label: 'Professor apresenta outro modelo',
+                      disabled: true
+                    },
+                    {
+                      label: 'Alunos identificam os erros',
+                      disabled: true
+                    },
+                    {
+                      label: 'Alunos corrigem o modelo',
+                      disabled: true
+                    },
+                    {
+                      label: 'Feedback',
+                      disabled: true
+                    }
+                  ]
+                }
+              ]
             },
             {
-              label: 'Professor ensina o exemplo',
-              disabled: true
-            },
-            {
-              label: 'Apresentar um domínio',
-              disabled: true
-            },
-            {
-              label: 'Alunos realizam a modelagem',
-              disabled: true
-            },
-            {
-              label: 'Feedback',
-              disabled: true
-            }
-          ]
-        },
-        {
-          label: 'Exemplo errôneo aluno iniciante (domínio)',
-          children: [
-            {
-              label: 'Apresentar um domínio',
-              disabled: true
-            },
-            {
-              label: 'Alunos realizam a modelagem',
-              disabled: true
-            },
-            {
-              label: 'Selecionar anti-padrões',
-              disabled: true
-            },
-            {
-              label: 'Explicação dos anti-padrões',
-              disabled: true
-            },
-            {
-              label: 'Alunos corrigem seus diagramas',
-              disabled: true
-            },
-            {
-              label: 'Alunos criam uma nova versão dos diagramas',
-              disabled: true
-            },
-            {
-              label: 'Feedback',
-              disabled: true
-            }
-          ]
-        },
-        {
-          label: 'Exemplo errôneo aluno iniciante (modelo com erros)',
-          children: [
-            {
-              label: 'Apresentar um modelo com erros',
-              disabled: true
-            },
-            {
-              label: 'Professor explica os erros modelo',
-              disabled: true
-            },
-            {
-              label: 'Professor demonstra a correção',
-              disabled: true
-            },
-            {
-              label: 'Professor apresenta outro modelo',
-              disabled: true
-            },
-            {
-              label: 'Alunos identificam os erros',
-              disabled: true
-            },
-            {
-              label: 'Alunos corrigem o modelo',
-              disabled: true
-            },
-            {
-              label: 'Feedback',
-              disabled: true
-            }
-          ]
-        },
-        {
-          label: 'Exemplo errôneo aluno intermediário (modelo com erros)',
-          children: [
-            {
-              label: 'Apresentar um modelo com erros',
-              disabled: true
-            },
-            {
-              label: 'Professor explica os erros modelo',
-              disabled: true
-            },
-            {
-              label: 'Professor demonstra a correção',
-              disabled: true
-            },
-            {
-              label: 'Professor apresenta outro modelo',
-              disabled: true
-            },
-            {
-              label: 'Alunos identificam os erros',
-              disabled: true
-            },
-            {
-              label: 'Alunos corrigem o modelo',
-              disabled: true
-            },
-            {
-              label: 'Feedback',
-              disabled: true
+              label: 'Aluno Intermediário',
+              value: 'erroneoIntermediario',
+              children: [
+                {
+                  label: 'Modelo com erros',
+                  value: 'erroneoIntermediarioModelo',
+                  children: [
+                    {
+                      label: 'Apresentar um modelo com erros',
+                      disabled: true
+                    },
+                    {
+                      label: 'Professor explica os erros modelo',
+                      disabled: true
+                    },
+                    {
+                      label: 'Professor demonstra a correção',
+                      disabled: true
+                    },
+                    {
+                      label: 'Professor apresenta outro modelo',
+                      disabled: true
+                    },
+                    {
+                      label: 'Alunos identificam os erros',
+                      disabled: true
+                    },
+                    {
+                      label: 'Alunos corrigem o modelo',
+                      disabled: true
+                    },
+                    {
+                      label: 'Feedback',
+                      disabled: true
+                    }
+                  ]
+                },
+                {
+                  label: 'Jogo dos 7 erros',
+                  value: 'erroneoIntermediarioJogo7erros',
+                  children: [
+                    {
+                      label: '-----',
+                      disabled: true
+                    },
+                    {
+                      label: '-----',
+                      disabled: true
+                    },
+                    {
+                      label: '-----',
+                      disabled: true
+                    },
+                    {
+                      label: 'Professor apresenta outro modelo',
+                      disabled: true
+                    },
+                    {
+                      label: 'Alunos identificam os erros',
+                      disabled: true
+                    },
+                    {
+                      label: 'Alunos corrigem o modelo',
+                      disabled: true
+                    },
+                    {
+                      label: 'Feedback',
+                      disabled: true
+                    }
+                  ]
+                },
+                {
+                  label: 'Alunos identificando erros',
+                  value: 'erroneoIntermediarioIdentificando',
+                  children: [
+                    {
+                      label: '-----',
+                      disabled: true
+                    },
+                    {
+                      label: '-----',
+                      disabled: true
+                    },
+                    {
+                      label: '-----',
+                      disabled: true
+                    },
+                    {
+                      label: 'Professor apresenta outro modelo',
+                      disabled: true
+                    },
+                    {
+                      label: 'Alunos identificam os erros',
+                      disabled: true
+                    },
+                    {
+                      label: 'Alunos corrigem o modelo',
+                      disabled: true
+                    },
+                    {
+                      label: 'Feedback',
+                      disabled: true
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
       ]
     }
   }
-
 })
+
 </script>

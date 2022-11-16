@@ -19,7 +19,7 @@
             node-key="label"
             selected-color="primary"
             v-model:selected="selected"
-
+            no-connectors
           />
         </div>
       </template>
@@ -68,11 +68,11 @@ export default defineComponent({
           label: 'Aula Expositiva',
           children: [
             {
-              label: 'Palestra',
+              label: '- Palestra',
               disabled: true
             },
             {
-              label: 'Explicar exemplos dos conceitos ensinados',
+              label: '- Explicar exemplos dos conceitos ensinados',
               disabled: true
             }
           ]
@@ -81,16 +81,17 @@ export default defineComponent({
           label: 'Sala de aula invertida',
           children: [
             {
-              label: 'Compartilhar o material',
+              label: '- Compartilhar o material',
               disabled: true
             },
             {
-              label: 'Revisão dos conceitos e tira dúvidas',
+              label: '- Revisão dos conceitos e tira dúvidas',
               disabled: true
             },
             {
-              label: 'Explicar exemplos dos conceitos ensinados',
+              label: '- Explicar exemplos dos conceitos ensinados',
               disabled: true
+
             }
           ]
         }
