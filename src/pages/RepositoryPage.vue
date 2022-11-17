@@ -19,17 +19,17 @@
       <code-tabs :tagParts="tagParts"></code-tabs>
     </q-card-section>
     <q-card-section>
-      <q-grid :data="data" :columns="columns" :columns_filter="true" :draggable="true" :fullscreen="true" :csv_download="false" :global_search="true">
+      <q-grid :data="data" :columns="columns" :columns_filter="false" :draggable="true" :fullscreen="true" :csv_download="false" :global_search="true" :groupby_filter="false" :header_filter="true" >
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td key="name">
-              {{ props.row.name }}
-            </q-td>
             <q-td key="exampleType">
               {{ props.row.exampleType }}
             </q-td>
             <q-td key="model">
               {{ props.row.model }}
+            </q-td>
+            <q-td key="name">
+              {{ props.row.name }}
             </q-td>
             <q-td key="additionalInformation">
                 {{ props.row.additionalInformation }}
@@ -58,14 +58,6 @@ export default {
     return {
       columns: [
         {
-          name: 'name',
-          required: true,
-          label: 'Local',
-          align: 'left',
-          field: 'name',
-          sortable: true
-        },
-        {
           name: 'exampleType',
           align: 'left',
           label: 'Tipo',
@@ -74,6 +66,14 @@ export default {
           filter_type: 'text'
         },
         { name: 'model', align: 'left', label: 'Modelo', field: 'model', sortable: true },
+        {
+          name: 'name',
+          required: true,
+          label: 'Local',
+          align: 'left',
+          field: 'name',
+          sortable: true
+        },
         { name: 'additionalInformation', align: 'left', label: 'Informação adicinoal', field: 'additionalInformation' },
         { name: 'link', align: 'left', label: 'Link', field: 'link' }
       ],

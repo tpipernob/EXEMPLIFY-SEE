@@ -43,6 +43,11 @@
             <p>Essa etapa é sugerida para casos em que os alunos ainda não tenham tipo contato com o conteúdo.</p>
             <p>A utilização da Sala de Aula Invertida consiste em transpor a exposição do conteúdo para antes do período da aula por meio de vídeos, artigos ou livros. Isso contribui para tornar a absorção de conteúdo mais eficaz e envolvente.</p>
             <p>A última etapa do processo consiste na utilização de exemplos para ajudar os alunos a relacionar o conteúdo com uma situação concreta.</p>
+            <p>Para mais informações a respeito deste método de ensino, acessar as referências a seguir:</p>
+            <ul>
+              <li><a href="https://www.jite.org/documents/Vol17/JITEv17IIPp181-200Joy4734.pdf" target="_blank" rel="noopener noreferrer">Activity Oriented Teaching Strategy for Software Engineering Course: An Experience Report</a></li>
+              <li><a href="https://omerad.msu.edu/teaching/teaching-skills-strategies/27-teaching/162-what-why-and-how-to-implement-a-flipped-classroom-model" target="_blank" rel="noopener noreferrer">What, why, and how to implement a flipped classroom model</a></li>
+            </ul>
           </q-tab-panel>
 
         </q-tab-panels>
@@ -94,6 +99,10 @@ export default defineComponent({
 
             }
           ]
+        },
+        {
+          label: 'Outras metodologias'
+
         }
       ]
     }
