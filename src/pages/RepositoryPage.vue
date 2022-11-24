@@ -20,7 +20,7 @@
     </q-card-section>
     <q-card-section>
       <q-grid :data="data" :columns="columns" :columns_filter="false" :draggable="true" :fullscreen="true" :csv_download="false" :global_search="true" :groupby_filter="false" :header_filter="true" >
-        <template v-slot:body="props">
+        <template v-slot:body="props" >
           <q-tr :props="props">
             <q-td key="exampleType">
               {{ props.row.exampleType }}
@@ -28,10 +28,10 @@
             <q-td key="model">
               {{ props.row.model }}
             </q-td>
-            <q-td key="name">
+            <q-td key="name" style="white-space: pre-wrap;">
               {{ props.row.name }}
             </q-td>
-            <q-td key="additionalInformation">
+            <q-td key="additionalInformation" style="white-space: pre-wrap;">
                 {{ props.row.additionalInformation }}
             </q-td>
             <q-td key="link">
@@ -72,7 +72,9 @@ export default {
           label: 'Local',
           align: 'left',
           field: 'name',
-          sortable: true
+          sortable: true,
+          style: 'width: 10%',
+          headerStyle: 'width: 0px'
         },
         { name: 'additionalInformation', align: 'left', label: 'Informação adicinoal', field: 'additionalInformation' },
         { name: 'link', align: 'left', label: 'Link', field: 'link' }
@@ -80,9 +82,9 @@ export default {
       data: [
         {
           name: 'Faculty',
-          exampleType: 'Exemplo Correto',
+          exampleType: 'Exemplo Errôneo',
           model: 'Diagrama de Caso de Uso',
-          additionalInformation: '--',
+          additionalInformation: '21 exemplos de antipadrões',
           link: 'https://faculty.kfupm.edu.sa/ICS/melattar/UCAntipatterns.htm'
 
         },
@@ -90,29 +92,50 @@ export default {
           name: 'Metamodeling Anti-Patterns',
           exampleType: 'Exemplo Errôneo',
           model: 'Diagrama de Classes',
-          additionalInformation: 'Generalização de Associação com Fins Inconsistentes',
-          link: 'https://sites.google.com/site/metamodelingantipatterns/catalog/uml/association-generalization-with-inconsistent-ends'
+          additionalInformation: '31 exemplos de antipadrões com imagens dos diagramas',
+          link: 'https://sites.google.com/site/metamodelingantipatterns/catalog/uml'
         },
         {
-          name: 'Metamodeling Anti-Patterns',
+          name: 'OpenSMALS',
           exampleType: 'Exemplo Errôneo',
           model: 'Diagrama de Classes',
-          additionalInformation: 'Classe com proprietário obrigatório define outro proprietário',
-          link: 'https://sites.google.com/site/metamodelingantipatterns/catalog/uml/class-has-multiple-containers-and-at-least-one-is-required'
+          additionalInformation: '6 exemplos textuais',
+          link: 'https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxhY3RpdmVsZWFybmluZ21ldGhvZHN8Z3g6MTFhOGY2ZDBhMGY4MGZhMg'
         },
         {
-          name: 'Metamodeling Anti-Patterns',
-          exampleType: 'Exemplo Errôneo',
+          name: 'OpenSMALS',
+          exampleType: 'Exemplo Correto',
           model: 'Diagrama de Classes',
-          additionalInformation: 'O elemento de multiplicidade tem limite superior menor que inferior',
-          link: 'https://sites.google.com/site/metamodelingantipatterns/catalog/uml/multiplicity-element-has-upper-small-than-lower-bound'
+          additionalInformation: '6 exemplos textuais',
+          link: 'https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxhY3RpdmVsZWFybmluZ21ldGhvZHN8Z3g6MzgxZjY3MzczOGE5NWNmNg'
         },
         {
-          name: 'Metamodeling Anti-Patterns',
-          exampleType: 'Exemplo Errôneo',
+          name: 'OpenSMALS',
+          exampleType: 'Exemplo de domínio',
+          model: 'Não especificado',
+          additionalInformation: '9 exemplos de domínio que podem ser usados para modelagem',
+          link: 'https://sites.google.com/site/activelearningmethods/escolha-aqui-seu-cenario'
+        },
+        {
+          name: 'Artigo',
+          exampleType: 'Exemplo Correto e Errôneo',
           model: 'Diagrama de Classes',
-          additionalInformation: 'Atributo com o mesmo nome de um atributo herdado',
-          link: 'https://sites.google.com/site/metamodelingantipatterns/catalog/uml/classifier-has-attribute-not-redefining-inherited-one-with-same-name'
+          additionalInformation: 'Conteúdo no apêndice 1: Alguns problemas comuns de qualidade e exemplos positivos e negativos correspondentes',
+          link: 'https://link.springer.com/chapter/10.1007/978-1-4419-7355-9_8'
+        },
+        {
+          name: 'Steam',
+          exampleType: 'Exemplo Errôneo',
+          model: 'Diagrama de Caso de Uso',
+          additionalInformation: 'Análise completa dos modelos de caso de uso de quatro sistemas do mundo real',
+          link: 'http://www.steam.ualberta.ca/main/research_areas/AntiPatterns.htm'
+        },
+        {
+          name: 'Evaluating the layout quality of UML class diagrams using machine learning',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Classes',
+          additionalInformation: 'Um conjunto de 609 diagramas de classe UML rotulados.',
+          link: 'https://zenodo.org/record/5037744#.Y3Y-eOzMLjh'
         }
       ]
     }

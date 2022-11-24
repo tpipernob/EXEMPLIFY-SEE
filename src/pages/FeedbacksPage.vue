@@ -19,7 +19,7 @@
             node-key="label"
             selected-color="primary"
             v-model:selected="selected"
-
+            no-connectors
           />
         </div>
       </template>
@@ -71,11 +71,11 @@ export default defineComponent({
           label: 'Entrega por escrito com feedback individual',
           children: [
             {
-              label: 'Alunos realizam a entrega por escrito',
+              label: '- Alunos realizam a entrega por escrito',
               disabled: true
             },
             {
-              label: 'Professor devolve feedback escrito individual',
+              label: '- Professor devolve feedback escrito individual',
               disabled: true
             }
           ]
@@ -84,11 +84,11 @@ export default defineComponent({
           label: 'Entrega por escrito com feedback coletivo',
           children: [
             {
-              label: 'Alunos realizam a entrega por escrito',
+              label: '- Alunos realizam a entrega por escrito',
               disabled: true
             },
             {
-              label: 'Professor mostra um exemplo de solução',
+              label: '- Professor mostra um exemplo de solução',
               disabled: true
             }
           ]
@@ -97,11 +97,11 @@ export default defineComponent({
           label: 'Apresentação de seminários',
           children: [
             {
-              label: 'Alunos apresentam os seminários',
+              label: '- Alunos apresentam os seminários',
               disabled: true
             },
             {
-              label: 'Professor realiza o feedback das apresentações',
+              label: '- Professor realiza o feedback das apresentações',
               disabled: true
             }
           ]

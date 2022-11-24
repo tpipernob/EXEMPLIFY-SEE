@@ -77,12 +77,33 @@
           </q-tab-panel>
 
           <q-tab-panel name="erroneoIntermediarioModelo">
-            <div class="text-h4 q-mb-md">Exemplo errôneo aluno intermediário (modelo com erros)</div>
+            <div class="text-h4 q-mb-md">Exemplo errôneo aluno intermediário - Usando modelo com erros</div>
             <p>O aluno intermediário é aquele que já realizou algum tipo de exercício que aborde o conteúdo a ser explorado.</p>
             <p>Para alunos intermediários, a sugestão é que sejam utilizados modelos mais complexos.</p>
             <p>O professor apresenta um modelo que contenha erros, explica os erros existentes e faz o passo a passo para corrigir esses erros.</p>
             <p>O professor apresenta um outro modelo e solicita que os alunos localizem os erros e construam um novo modelo que apresente a solução dos erros encontrados.</p>
             <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos.</p>
+          </q-tab-panel>
+
+          <q-tab-panel name="erroneoIntermediarioJogo7erros">
+            <div class="text-h4 q-mb-md">Exemplo errôneo aluno intermediário - Jogo 7 erros</div>
+            <p>O aluno intermediário é aquele que já realizou algum tipo de exercício que aborde o conteúdo a ser explorado.</p>
+            <p>O professor inicia as atividades apresentando um modelo com sete erros e explicando as regras do jogo.</p>
+            <p>Sugestão de regras: <br>
+                Erro encontrado corretamente e explicação do motivo correta: 10 pontos <br>
+                Erro encontrado corretamente, porém, explicação incorreta: 5 pontos <br>
+                Pódio: Os três alunos com maior pontuação.</p>
+            <p>Em seguida, a atividade entra em um loop no qual os alunos tentam localizar os erros presentes no modelo. Cada erro localizado precisa ser justificado pelo aluno perante a sala e logo em seguida o professor realiza a validação da explicação. Isso se repete até que mais nenhum erro seja apontado pelos alunos.</p>
+            <p>Por fim, o professor verifica se algum erro existente não foi localizado pelos alunos. Caso exista, o professor explica o erro e encerra a atividade demonstrando a correção do modelo.</p>
+          </q-tab-panel>
+
+          <q-tab-panel name="erroneoIntermediarioIdentificando">
+            <div class="text-h4 q-mb-md">Exemplo errôneo aluno intermediário - Alunos identificando erros</div>
+            <p>A atividade começa com o professor apresentando um modelo com erros.</p>
+            <p>Na sequência, o professor estabelece um tempo para que os alunos possam identificar os erros existentes.</p>
+            <p>Após os alunos relatarem os erros, o professor faz a correção dos erros identificados.</p>
+            <p>O professor pode escolher entre apresentar ou não uma aula com os anti-padrões relacionados aos erros do modelo e mostra como solucioná-los.</p>
+            <p>Para finalizar a atividade, o professor mostra os erros não encontrados (caso existam) e demonstra a correção do diagrama.</p>
           </q-tab-panel>
 
         </q-tab-panels>
@@ -113,31 +134,31 @@ export default defineComponent({
               value: 'corretoIniciante',
               children: [
                 {
-                  label: 'Escolher o exemplo',
+                  label: '- Escolher o exemplo',
                   disabled: true
                 },
                 {
-                  label: 'Professor realiza a demonstração',
+                  label: '- Professor realiza a demonstração',
                   disabled: true
                 },
                 {
-                  label: 'Apresentar um domínio',
+                  label: '- Apresentar um domínio',
                   disabled: true
                 },
                 {
-                  label: 'Alunos realizam a modelagem',
+                  label: '- Alunos realizam a modelagem',
                   disabled: true
                 },
                 {
-                  label: 'Professor realiza a demonstração',
+                  label: '- Professor realiza a demonstração',
                   disabled: true
                 },
                 {
-                  label: 'Alunos corrigem o modelo',
+                  label: '- Alunos corrigem o modelo',
                   disabled: true
                 },
                 {
-                  label: 'Feedback',
+                  label: '- Feedback',
                   disabled: true
                 }
               ]
@@ -147,23 +168,23 @@ export default defineComponent({
               value: 'corretoIntermediario',
               children: [
                 {
-                  label: 'Escolher um exemplo positivo',
+                  label: '- Escolher um exemplo positivo',
                   disabled: true
                 },
                 {
-                  label: 'Professor ensina o exemplo',
+                  label: '- Professor ensina o exemplo',
                   disabled: true
                 },
                 {
-                  label: 'Apresentar um domínio',
+                  label: '- Apresentar um domínio',
                   disabled: true
                 },
                 {
-                  label: 'Alunos realizam a modelagem',
+                  label: '- Alunos realizam a modelagem',
                   disabled: true
                 },
                 {
-                  label: 'Feedback',
+                  label: '- Feedback',
                   disabled: true
                 }
               ]
@@ -183,31 +204,31 @@ export default defineComponent({
                   value: 'erroneoInicianteDominio',
                   children: [
                     {
-                      label: 'Apresentar um domínio',
+                      label: '- Apresentar um domínio',
                       disabled: true
                     },
                     {
-                      label: 'Alunos realizam a modelagem',
+                      label: '- Alunos realizam a modelagem',
                       disabled: true
                     },
                     {
-                      label: 'Selecionar anti-padrões',
+                      label: '- Selecionar anti-padrões',
                       disabled: true
                     },
                     {
-                      label: 'Explicação dos anti-padrões',
+                      label: '- Explicação dos anti-padrões',
                       disabled: true
                     },
                     {
-                      label: 'Alunos corrigem seus diagramas',
+                      label: '- Alunos corrigem seus diagramas',
                       disabled: true
                     },
                     {
-                      label: 'Alunos criam uma nova versão dos diagramas',
+                      label: '- Alunos criam uma nova versão dos diagramas',
                       disabled: true
                     },
                     {
-                      label: 'Feedback',
+                      label: '- Feedback',
                       disabled: true
                     }
 
@@ -218,31 +239,31 @@ export default defineComponent({
                   value: 'erroneoInicianteModelo',
                   children: [
                     {
-                      label: 'Apresentar um modelo com erros',
+                      label: '- Apresentar um modelo com erros',
                       disabled: true
                     },
                     {
-                      label: 'Professor explica os erros modelo',
+                      label: '- Professor explica os erros modelo',
                       disabled: true
                     },
                     {
-                      label: 'Professor demonstra a correção',
+                      label: '- Professor demonstra a correção',
                       disabled: true
                     },
                     {
-                      label: 'Professor apresenta outro modelo',
+                      label: '- Professor apresenta outro modelo',
                       disabled: true
                     },
                     {
-                      label: 'Alunos identificam os erros',
+                      label: '- Alunos identificam os erros',
                       disabled: true
                     },
                     {
-                      label: 'Alunos corrigem o modelo',
+                      label: '- Alunos corrigem o modelo',
                       disabled: true
                     },
                     {
-                      label: 'Feedback',
+                      label: '- Feedback',
                       disabled: true
                     }
                   ]
@@ -258,31 +279,31 @@ export default defineComponent({
                   value: 'erroneoIntermediarioModelo',
                   children: [
                     {
-                      label: 'Apresentar um modelo com erros',
+                      label: '- Apresentar um modelo com erros',
                       disabled: true
                     },
                     {
-                      label: 'Professor explica os erros modelo',
+                      label: '- Professor explica os erros modelo',
                       disabled: true
                     },
                     {
-                      label: 'Professor demonstra a correção',
+                      label: '- Professor demonstra a correção',
                       disabled: true
                     },
                     {
-                      label: 'Professor apresenta outro modelo',
+                      label: '- Professor apresenta outro modelo',
                       disabled: true
                     },
                     {
-                      label: 'Alunos identificam os erros',
+                      label: '- Alunos identificam os erros',
                       disabled: true
                     },
                     {
-                      label: 'Alunos corrigem o modelo',
+                      label: '- Alunos corrigem o modelo',
                       disabled: true
                     },
                     {
-                      label: 'Feedback',
+                      label: '- Feedback',
                       disabled: true
                     }
                   ]
@@ -292,31 +313,27 @@ export default defineComponent({
                   value: 'erroneoIntermediarioJogo7erros',
                   children: [
                     {
-                      label: '-----',
+                      label: '- Professor apresenta um modelo com 7 erros',
                       disabled: true
                     },
                     {
-                      label: '-----',
+                      label: '- Alunos tentam encontrar encontrar os erros',
                       disabled: true
                     },
                     {
-                      label: '-----',
+                      label: '- Aluno explica o motivo do erro encontrado',
                       disabled: true
                     },
                     {
-                      label: 'Professor apresenta outro modelo',
+                      label: '- Professor faz a validação do erro encontrado',
                       disabled: true
                     },
                     {
-                      label: 'Alunos identificam os erros',
+                      label: '- Se algum erro não for localizado, o professor faz a explicação do erro',
                       disabled: true
                     },
                     {
-                      label: 'Alunos corrigem o modelo',
-                      disabled: true
-                    },
-                    {
-                      label: 'Feedback',
+                      label: '- Professor faz a demonstração das correções dos erros do modelo',
                       disabled: true
                     }
                   ]
@@ -326,31 +343,31 @@ export default defineComponent({
                   value: 'erroneoIntermediarioIdentificando',
                   children: [
                     {
-                      label: '-----',
+                      label: '- Professor apresenta um modelo com erros',
                       disabled: true
                     },
                     {
-                      label: '-----',
+                      label: '- Professor estabelece um tempo para os alunos identificarem os erros',
                       disabled: true
                     },
                     {
-                      label: '-----',
+                      label: '- Alunos relatam os erros encontrados',
                       disabled: true
                     },
                     {
-                      label: 'Professor apresenta outro modelo',
+                      label: '- Professor faz a correção dos erros encontrados',
                       disabled: true
                     },
                     {
-                      label: 'Alunos identificam os erros',
+                      label: '- Professor mostra os erros não localizados',
                       disabled: true
                     },
                     {
-                      label: 'Alunos corrigem o modelo',
+                      label: '- Opcional: Apresentação de anti-padrões',
                       disabled: true
                     },
                     {
-                      label: 'Feedback',
+                      label: '- Professor faz a demonstração das correções dos erros do modelo',
                       disabled: true
                     }
                   ]

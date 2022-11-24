@@ -22,6 +22,7 @@
             no-connectors
           />
         </div>
+
       </template>
 
       <template v-slot:after>
@@ -48,6 +49,11 @@
               <li><a href="https://www.jite.org/documents/Vol17/JITEv17IIPp181-200Joy4734.pdf" target="_blank" rel="noopener noreferrer">Activity Oriented Teaching Strategy for Software Engineering Course: An Experience Report</a></li>
               <li><a href="https://omerad.msu.edu/teaching/teaching-skills-strategies/27-teaching/162-what-why-and-how-to-implement-a-flipped-classroom-model" target="_blank" rel="noopener noreferrer">What, why, and how to implement a flipped classroom model</a></li>
             </ul>
+          </q-tab-panel>
+
+          <q-tab-panel name="Outras metodologias">
+            <div class="text-h4 q-mb-md">Outras metodologias</div>
+            <p>Em construção.</p>
           </q-tab-panel>
 
         </q-tab-panels>
@@ -101,8 +107,13 @@ export default defineComponent({
           ]
         },
         {
-          label: 'Outras metodologias'
-
+          label: 'Outras metodologias',
+          children: [
+            {
+              label: '',
+              disabled: true
+            }
+          ]
         }
       ]
     }
