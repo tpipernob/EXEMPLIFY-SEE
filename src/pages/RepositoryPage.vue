@@ -12,7 +12,7 @@
         <q-toolbar-title
           class="example-title"
           style="padding: 5px 20px;"
-        ><span class="ellipsis">Selecione o tipo de exemplo</span></q-toolbar-title>
+        ><span class="ellipsis">Repositório de Exemplos</span></q-toolbar-title>
       </q-ribbon>
     </q-toolbar>
     <q-card-section class="q-pb-sm">

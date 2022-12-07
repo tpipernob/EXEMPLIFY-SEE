@@ -563,7 +563,7 @@
                     <div class="text-body1">
                       Professor seleciona um exemplo do modelo a ser ensinado.
                       Caso não possua exemplo, realize uma busca no
-                      <a href="/repositorioExemplos" target="_blank"
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
                         >Repositório de exemplos</a
                       >
                     </div>
@@ -608,7 +608,7 @@
                     <div class="text-body1">
                       Professor seleciona exemplos positivos de um determinado
                       modelo. Caso não possua exemplo, realize uma busca no
-                      <a href="/repositorioExemplos" target="_blank"
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
                         >Repositório de exemplos</a
                       >
                     </div>
@@ -636,7 +636,7 @@
                       <div class="text-body1">
                         Professor seleciona os anti-padrões que deseja ensinar.
                         Caso não possua, realize uma busca no
-                        <a href="/repositorioExemplos" target="_blank"
+                        <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
                           >Repositório de exemplos</a
                         >
                       </div>
@@ -714,7 +714,7 @@
                     <div class="text-body1">
                       Professor seleciona os anti-padrões que deseja ensinar.
                       Caso não possua, realize uma busca no
-                      <a href="/repositorioExemplos" target="_blank"
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
                         >Repositório de exemplos</a
                       >
                     </div>
@@ -781,7 +781,7 @@
                       Como os alunos são de nível iniciante, o professor
                       apresenta um modelo simples com erros. Caso não possua
                       exemplo, realize uma busca no
-                      <a href="/repositorioExemplos" target="_blank"
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
                         >Repositório de exemplos</a
                       >
                     </div>
@@ -840,7 +840,7 @@
                       Como os alunos são de nível intermediário, o professor
                       apresenta um modelo com erros de maior complexidade. Caso
                       não possua exemplo, realize uma busca no
-                      <a href="/repositorioExemplos" target="_blank"
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
                         >Repositório de exemplos</a
                       >
                     </div>
@@ -899,7 +899,7 @@
                       Professor apresenta um modelo com 7 erros e explica as
                       regras do jogo. Caso não possua exemplo, realize uma busca
                       no
-                      <a href="/repositorioExemplos" target="_blank"
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
                         >Repositório de exemplos</a
                       >
                     </div>
@@ -968,7 +968,7 @@
                     <div class="text-body1">
                       Professor apresenta um modelo com erros. Caso não possua
                       exemplo, realize uma busca no
-                      <a href="/repositorioExemplos" target="_blank"
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
                         >Repositório de exemplos</a
                       >
                     </div>
