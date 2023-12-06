@@ -4,7 +4,7 @@
     <p class="text-h5">
       Feedback
     </p>
-    <p>Ao clicar na seta os passos sugeridos são exibidos.</p>
+    <p>When clicking on the arrow, the suggested steps are displayed.</p>
 
     <div>
     <q-splitter
@@ -31,21 +31,21 @@
           transition-prev="jump-up"
           transition-next="jump-up"
         >
-          <q-tab-panel name="Entrega por escrito com feedback individual">
-            <div class="text-h4 q-mb-md">Entrega por escrito com feedback individual</div>
-            <p>Os alunos realizam uma entrega por escrito e o professor envia um feedback individual realizado também por escrito.</p>
+          <q-tab-panel name="Written delivery with individual feedback">
+            <div class="text-h4 q-mb-md">Written delivery with individual feedback</div>
+            <p>Students submit a written assignment, and the teacher provides individual feedback, also in writing.</p>
           </q-tab-panel>
 
-          <q-tab-panel name="Entrega por escrito com feedback coletivo">
-            <div class="text-h4 q-mb-md">Entrega por escrito com feedback coletivo</div>
-            <p>Os alunos realizam uma entrega por escrito.</p>
-            <p>O feedback pode ser feito de forma coletiva, apresentando a solução correta do modelo ou utilizando os modelos dos próprios alunos para exemplificar os erros e acertos cometidos.</p>
+          <q-tab-panel name="Written submission with collective feedback">
+            <div class="text-h4 q-mb-md">Written submission with collective feedback</div>
+            <p> Students submit a written assignment.</p>
+            <p>Feedback can be provided collectively, presenting the correct solution model or using students' own models to illustrate errors and successes.</p>
           </q-tab-panel>
 
-          <q-tab-panel name="Apresentação de seminários">
-            <div class="text-h4 q-mb-md">Apresentação de seminários</div>
-            <p>Solicitar aos alunos que apresentem os seus modelos por meio de seminários.</p>
-            <p>Após a apresentação dos seminários, o professor fornece um feedback aos alunos a respeito do que foi apresentado.</p>
+          <q-tab-panel name="Seminar presentations">
+            <div class="text-h4 q-mb-md">Seminar presentations</div>
+            <p>Requesting students to present their models through seminars.</p>
+            <p>After the seminar presentations, the professor provides feedback to the students regarding what was presented.</p>
           </q-tab-panel>
 
         </q-tab-panels>
@@ -64,44 +64,44 @@ export default defineComponent({
   setup () {
     return {
       splitterModel: ref(30),
-      selected: ref('Entrega por escrito com feedback individual'),
+      selected: ref('Written delivery with individual feedback'),
 
       simple: [
         {
-          label: 'Entrega por escrito com feedback individual',
+          label: 'Written delivery with individual feedback',
           children: [
             {
-              label: '- Alunos realizam a entrega por escrito',
+              label: '- Students submit their work in writing',
               disabled: true
             },
             {
-              label: '- Professor devolve feedback escrito individual',
+              label: '- The professor provides individual written feedback',
               disabled: true
             }
           ]
         },
         {
-          label: 'Entrega por escrito com feedback coletivo',
+          label: 'Written submission with collective feedback',
           children: [
             {
-              label: '- Alunos realizam a entrega por escrito',
+              label: '- Students submit their work in writing',
               disabled: true
             },
             {
-              label: '- Professor mostra um exemplo de solução',
+              label: '- The professor provides an example solution as collective feedback',
               disabled: true
             }
           ]
         },
         {
-          label: 'Apresentação de seminários',
+          label: 'Seminar presentations',
           children: [
             {
-              label: '- Alunos apresentam os seminários',
+              label: '- Students conduct seminar presentations',
               disabled: true
             },
             {
-              label: '- Professor realiza o feedback das apresentações',
+              label: '- The professor provides feedback on the presentations',
               disabled: true
             }
           ]

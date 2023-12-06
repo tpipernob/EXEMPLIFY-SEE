@@ -2,9 +2,9 @@
   <q-page padding>
 
     <p class="text-h5">
-      Atividades
+      Activities
     </p>
-    <p>Ao clicar na seta as opções e os passos sugeridos são exibidos. Clicando nos títulos com setas mais detalhes sobre os passos aparecem a direita.</p>
+    <p>By clicking on the arrow, the options and suggested steps are displayed. Clicking on the titles with arrows, more details about the steps appear on the right.</p>
 
     <div>
     <q-splitter
@@ -32,79 +32,79 @@
           transition-prev="jump-up"
           transition-next="jump-up"
         >
-          <q-tab-panel name="defaultCorreto">
-              <div class="text-h4 q-mb-md">Exemplos corretos</div>
-              <p>Navegue pelas opções a esquerda para ter mais detalhes sobre o passo a passo desejado.</p>
-          </q-tab-panel>
-          <q-tab-panel name="defaultErroneo">
-              <div class="text-h4 q-mb-md">Exemplos errôneos</div>
-              <p>Navegue pelas opções a esquerda para ter mais detalhes sobre o passo a passo desejado.</p>
-          </q-tab-panel>
-          <q-tab-panel name="corretoIniciante">
-            <div class="text-h4 q-mb-md">Exemplo correto aluno iniciante</div>
-            <p>Aluno iniciante é aquele que ainda não realizou exercícios sobre o conteúdo.</p>
-            <p>No caso de alunos iniciantes, é sugerido uma abordagem que se inicia com o professor demonstrando a construção do modelo. </p>
-            <p>Após essa etapa, o professor apresenta aos alunos um domínio e solicita que os alunos realizem a construção do modelo para o domínio apresentado. </p>
-            <p>Depois da modelagem realizada pelos alunos, o professor apresenta como seria a modelagem correta e solicita que os alunos façam a correção dos seus próprios modelos. Após a correção dos modelos, os alunos enviam para o professor o resultado.</p>
-            <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos</p>
-          </q-tab-panel>
+        <q-tab-panel name="defaultCorrect">
+          <div class="text-h4 q-mb-md">Correct examples</div>
+          <p>Navigate through the options on the left for more details about the desired step by step.</p>
+        </q-tab-panel>
+        <q-tab-panel name="defaultErroneous">
+          <div class="text-h4 q-mb-md">Erroneous examples</div>
+          <p>Navigate through the options on the left for more details about the desired step by step.</p>
+        </q-tab-panel>
+        <q-tab-panel name="correctBeginner">
+          <div class="text-h4 q-mb-md">Correct example beginner student</div>
+          <p>The beginner student is one who has not yet performed exercises on the content.</p>
+          <p>For beginner students, an approach is suggested that begins with the professor demonstrating the construction of the model. </p>
+          <p>After this step, the professor presents a domain to the students and asks them to construct the model for the presented domain. </p>
+          <p>After the modeling performed by the students, the professor presents what the correct modeling would be and asks the students to correct their own models. After correcting the models, the students send the result to the professor.</p>
+          <p>To finalize the activity, the professor can choose one of the suggested types of feedback</p>
+        </q-tab-panel>
 
-          <q-tab-panel name="corretoIntermediario">
-            <div class="text-h4 q-mb-md">Exemplo correto aluno intermediario</div>
-            <p>O aluno intermediário é aquele que já realizou algum tipo de exercício que aborde o conteúdo a ser explorado.</p>
-            <p>O professor começa ensinando aos alunos exemplos positivos do modelo escolhido.</p>
-            <p>Em seguida, o professor apresenta um domínio para que os alunos possam construir um modelo de acordo com os padrões apresentados.</p>
-            <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos.</p>
-          </q-tab-panel>
+        <q-tab-panel name="correctIntermediate">
+          <div class="text-h4 q-mb-md">Correct example intermediate student</div>
+          <p>The intermediate student is one who has already performed some type of exercise that addresses the content to be explored.</p>
+          <p>The professor starts by teaching students positive examples of the chosen model.</p>
+          <p>Then, the professor presents a domain so that students can build a model according to the presented standards.</p>
+          <p>To finalize the activity, the professor can choose one of the suggested types of feedback.</p>
+        </q-tab-panel>
 
-          <q-tab-panel name="erroneoInicianteDominio">
-            <div class="text-h4 q-mb-md">Exemplo errôneo aluno iniciante (domínio)</div>
-            <p>Aluno iniciante é aquele que ainda não realizou exercícios sobre o conteúdo.</p>
-            <p>O professor inicia apresentando um domínio para que os alunos realizem a modelagem.</p>
-            <p>Depois da modelagem realizada pelos alunos, o professor apresenta alguns anti-padrões e como é possível solucioná-los.</p>
-            <p>O próximo passo será a correção dos modelos construídos. Para isso, o professor pode optar por disponibilizar um artefato que auxilie os alunos nessa etapa. Esse artefato pode ser um checklist com os anti-padrões ensinados ou um artefato de inspeção.</p>
-            <p>Em relação à correção dos diagramas, o professor pode escolher entre o aluno corrigir o seu próprio diagrama ou fazer com que ele corrija o diagrama de um outro colega.</p>
-            <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos.</p>
-          </q-tab-panel>
+        <q-tab-panel name="erroneousBeginnerDomain">
+          <div class="text-h4 q-mb-md">Erroneous example beginner student (domain)</div>
+          <p>The beginner student is one who has not yet performed exercises on the content.</p>
+          <p>The professor starts by presenting a domain for students to model.</p>
+          <p>After the modeling performed by the students, the professor presents some anti-patterns and how to solve them.</p>
+          <p>The next step will be the correction of the constructed models. For this, the professor can choose to provide an artifact that helps the students in this stage. This artifact can be a checklist with the taught anti-patterns or an inspection artifact.</p>
+          <p>Regarding the correction of the diagrams, the professor can choose between the student correcting his own diagram or having him correct another student's diagram.</p>
+          <p>To finalize the activity, the professor can choose one of the suggested types of feedback.</p>
+        </q-tab-panel>
 
-          <q-tab-panel name="erroneoInicianteModelo">
-            <div class="text-h4 q-mb-md">Exemplo errôneo aluno iniciante (modelo com erros)</div>
-            <p>Aluno iniciante é aquele que ainda não realizou exercícios sobre o conteúdo.</p>
-            <p>Para alunos iniciantes, a sugestão é que sejam utilizados modelos mais simples.</p>
-            <p>O professor apresenta um modelo que contenha erros, explica os erros existentes e faz o passo a passo para corrigir esses erros.</p>
-            <p>O professor apresenta um outro modelo e solicita que os alunos localizem os erros e construam um novo modelo que apresente a solução dos erros encontrados.</p>
-            <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos.</p>
-          </q-tab-panel>
+        <q-tab-panel name="erroneousBeginnerModel">
+          <div class="text-h4 q-mb-md">Erroneous example beginner student (model with errors)</div>
+          <p>The beginner student is one who has not yet performed exercises on the content.</p>
+          <p>For beginner students, the suggestion is to use simpler models.</p>
+          <p>The professor presents a model that contains errors, explains the existing errors and goes step by step to correct these errors.</p>
+          <p>The professor presents another model and asks the students to locate the errors and construct a new model that presents the solution to the found errors.</p>
+          <p>To finalize the activity, the professor can choose one of the suggested types of feedback.</p>
+        </q-tab-panel>
 
-          <q-tab-panel name="erroneoIntermediarioModelo">
-            <div class="text-h4 q-mb-md">Exemplo errôneo aluno intermediário - Usando modelo com erros</div>
-            <p>O aluno intermediário é aquele que já realizou algum tipo de exercício que aborde o conteúdo a ser explorado.</p>
-            <p>Para alunos intermediários, a sugestão é que sejam utilizados modelos mais complexos.</p>
-            <p>O professor apresenta um modelo que contenha erros, explica os erros existentes e faz o passo a passo para corrigir esses erros.</p>
-            <p>O professor apresenta um outro modelo e solicita que os alunos localizem os erros e construam um novo modelo que apresente a solução dos erros encontrados.</p>
-            <p>Para finalizar a atividade o professor pode optar por um dos tipos de feedbacks sugeridos.</p>
-          </q-tab-panel>
+        <q-tab-panel name="erroneousIntermediateModel">
+          <div class="text-h4 q-mb-md">Erroneous example intermediate student - Using model with errors</div>
+          <p>The intermediate student is one who has already performed some type of exercise that addresses the content to be explored.</p>
+          <p>For intermediate students, the suggestion is to use more complex models.</p>
+          <p>The professor presents a model that contains errors, explains the existing errors and goes step by step to correct these errors.</p>
+          <p>The professor presents another model and asks the students to locate the errors and construct a new model that presents the solution to the found errors.</p>
+          <p>To finalize the activity, the professor can choose one of the suggested types of feedback.</p>
+        </q-tab-panel>
 
-          <q-tab-panel name="erroneoIntermediarioJogo7erros">
-            <div class="text-h4 q-mb-md">Exemplo errôneo aluno intermediário - Jogo 7 erros</div>
-            <p>O aluno intermediário é aquele que já realizou algum tipo de exercício que aborde o conteúdo a ser explorado.</p>
-            <p>O professor inicia as atividades apresentando um modelo com sete erros e explicando as regras do jogo.</p>
-            <p>Sugestão de regras: <br>
-                Erro encontrado corretamente e explicação do motivo correta: 10 pontos <br>
-                Erro encontrado corretamente, porém, explicação incorreta: 5 pontos <br>
-                Pódio: Os três alunos com maior pontuação.</p>
-            <p>Em seguida, a atividade entra em um loop no qual os alunos tentam localizar os erros presentes no modelo. Cada erro localizado precisa ser justificado pelo aluno perante a sala e logo em seguida o professor realiza a validação da explicação. Isso se repete até que mais nenhum erro seja apontado pelos alunos.</p>
-            <p>Por fim, o professor verifica se algum erro existente não foi localizado pelos alunos. Caso exista, o professor explica o erro e encerra a atividade demonstrando a correção do modelo.</p>
-          </q-tab-panel>
+        <q-tab-panel name="erroneousIntermediateGame7errors">
+          <div class="text-h4 q-mb-md">Erroneous example intermediate student - Game 7 errors</div>
+          <p>The intermediate student is one who has already performed some type of exercise that addresses the content to be explored.</p>
+          <p>The professor starts the activities by presenting a model with seven errors and explaining the rules of the game.</p>
+          <p>Suggested rules: <br>
+              Correctly found error and correct explanation of the reason: 10 points <br>
+              Correctly found error, however, incorrect explanation: 5 points <br>
+              Podium: The three students with the highest score.</p>
+          <p>Then, the activity enters a loop in which the students try to locate the errors present in the model. Each located error needs to be justified by the student before the room and then the professor validates the explanation. This repeats until no more errors are pointed out by the students.</p>
+          <p>Finally, the professor checks if any existing error was not located by the students. If there is, the professor explains the error and ends the activity by demonstrating the correction of the model.</p>
+        </q-tab-panel>
 
-          <q-tab-panel name="erroneoIntermediarioIdentificando">
-            <div class="text-h4 q-mb-md">Exemplo errôneo aluno intermediário - Alunos identificando erros</div>
-            <p>A atividade começa com o professor apresentando um modelo com erros.</p>
-            <p>Na sequência, o professor estabelece um tempo para que os alunos possam identificar os erros existentes.</p>
-            <p>Após os alunos relatarem os erros, o professor faz a correção dos erros identificados.</p>
-            <p>O professor pode escolher entre apresentar ou não uma aula com os anti-padrões relacionados aos erros do modelo e mostra como solucioná-los.</p>
-            <p>Para finalizar a atividade, o professor mostra os erros não encontrados (caso existam) e demonstra a correção do diagrama.</p>
-          </q-tab-panel>
+        <q-tab-panel name="erroneousIntermediateIdentifying">
+          <div class="text-h4 q-mb-md">Erroneous example intermediate student - Students identifying errors</div>
+          <p>The activity starts with the professor presenting a model with errors.</p>
+          <p>Next, the professor sets a time for the students to identify the existing errors.</p>
+          <p>After the students report the errors, the professor corrects the identified errors.</p>
+          <p>The professor can choose whether or not to present a class with the anti-patterns related to the model's errors and shows how to solve them.</p>
+          <p>To finalize the activity, the professor shows the errors not found (if any) and demonstrates the correction of the diagram.</p>
+        </q-tab-panel>
 
         </q-tab-panels>
       </template>
@@ -122,39 +122,39 @@ export default defineComponent({
   setup () {
     return {
       splitterModel: ref(30),
-      selected: ref('defaultCorreto'),
+      selected: ref('defaultCorrect'),
 
       simple: [
         {
-          label: 'Exemplo correto',
-          value: 'defaultCorreto',
+          label: 'Correct example',
+          value: 'defaultCorrect',
           children: [
             {
-              label: 'Aluno Iniciante',
-              value: 'corretoIniciante',
+              label: 'Beginner Student',
+              value: 'correctBeginner',
               children: [
                 {
-                  label: '- Escolher o exemplo',
+                  label: '- Choose the example',
                   disabled: true
                 },
                 {
-                  label: '- Professor realiza a demonstração',
+                  label: '- Professor performs the demonstration',
                   disabled: true
                 },
                 {
-                  label: '- Apresentar um domínio',
+                  label: '- Present a domain',
                   disabled: true
                 },
                 {
-                  label: '- Alunos realizam a modelagem',
+                  label: '- Students perform the modeling',
                   disabled: true
                 },
                 {
-                  label: '- Professor realiza a demonstração',
+                  label: '- Professor performs the demonstration',
                   disabled: true
                 },
                 {
-                  label: '- Alunos corrigem o modelo',
+                  label: '- Students correct the model',
                   disabled: true
                 },
                 {
@@ -164,23 +164,23 @@ export default defineComponent({
               ]
             },
             {
-              label: 'Aluno intermediario',
-              value: 'corretoIntermediario',
+              label: 'Intermediate Student',
+              value: 'correctIntermediate',
               children: [
                 {
-                  label: '- Escolher um exemplo positivo',
+                  label: '- Choose a positive example',
                   disabled: true
                 },
                 {
-                  label: '- Professor ensina o exemplo',
+                  label: '- Professor teaches the example',
                   disabled: true
                 },
                 {
-                  label: '- Apresentar um domínio',
+                  label: '- Present a domain',
                   disabled: true
                 },
                 {
-                  label: '- Alunos realizam a modelagem',
+                  label: '- Students perform the modeling',
                   disabled: true
                 },
                 {
@@ -192,39 +192,39 @@ export default defineComponent({
           ]
         },
         {
-          label: 'Exemplo errôneo',
-          value: 'defaultErroneo',
+          label: 'Erroneous example',
+          value: 'defaultErroneous',
           children: [
             {
-              label: 'Aluno Iniciante',
-              value: 'erroneoIniciante',
+              label: 'Beginner Student',
+              value: 'erroneousBeginner',
               children: [
                 {
-                  label: 'Modelagem de domínio',
-                  value: 'erroneoInicianteDominio',
+                  label: 'Domain Modeling',
+                  value: 'erroneousBeginnerDomain',
                   children: [
                     {
-                      label: '- Apresentar um domínio',
+                      label: '- Present a domain',
                       disabled: true
                     },
                     {
-                      label: '- Alunos realizam a modelagem',
+                      label: '- Students perform modeling',
                       disabled: true
                     },
                     {
-                      label: '- Selecionar anti-padrões',
+                      label: '- Identify anti-patterns',
                       disabled: true
                     },
                     {
-                      label: '- Explicação dos anti-padrões',
+                      label: '- Explanation of anti-patterns',
                       disabled: true
                     },
                     {
-                      label: '- Alunos corrigem seus diagramas',
+                      label: '- Students correct their diagrams',
                       disabled: true
                     },
                     {
-                      label: '- Alunos criam uma nova versão dos diagramas',
+                      label: '- Students create a new version of the diagrams',
                       disabled: true
                     },
                     {
@@ -235,31 +235,31 @@ export default defineComponent({
                   ]
                 },
                 {
-                  label: 'Modelo com erros',
-                  value: 'erroneoInicianteModelo',
+                  label: 'Error-prone Model',
+                  value: 'erroneousBeginnerModel',
                   children: [
                     {
-                      label: '- Apresentar um modelo com erros',
+                      label: '- Present a model with errors',
                       disabled: true
                     },
                     {
-                      label: '- Professor explica os erros modelo',
+                      label: '- Professor explains the model errors',
                       disabled: true
                     },
                     {
-                      label: '- Professor demonstra a correção',
+                      label: '- Professor demonstrates the correction',
                       disabled: true
                     },
                     {
-                      label: '- Professor apresenta outro modelo',
+                      label: '- Professor presents another model',
                       disabled: true
                     },
                     {
-                      label: '- Alunos identificam os erros',
+                      label: '- Students identify the errors',
                       disabled: true
                     },
                     {
-                      label: '- Alunos corrigem o modelo',
+                      label: '- Students correct the model',
                       disabled: true
                     },
                     {
@@ -271,35 +271,35 @@ export default defineComponent({
               ]
             },
             {
-              label: 'Aluno Intermediário',
-              value: 'erroneoIntermediario',
+              label: 'Intermediate Student',
+              value: 'erroneousIntermediate',
               children: [
                 {
-                  label: 'Modelo com erros',
-                  value: 'erroneoIntermediarioModelo',
+                  label: 'Error-prone Model',
+                  value: 'erroneousIntermediateModel',
                   children: [
                     {
-                      label: '- Apresentar um modelo com erros',
+                      label: '- Present a model with errors',
                       disabled: true
                     },
                     {
-                      label: '- Professor explica os erros modelo',
+                      label: '- Professor explains the model errors',
                       disabled: true
                     },
                     {
-                      label: '- Professor demonstra a correção',
+                      label: '- Professor demonstrates the correction',
                       disabled: true
                     },
                     {
-                      label: '- Professor apresenta outro modelo',
+                      label: '- Professor presents another model',
                       disabled: true
                     },
                     {
-                      label: '- Alunos identificam os erros',
+                      label: '- Students identify the errors',
                       disabled: true
                     },
                     {
-                      label: '- Alunos corrigem o modelo',
+                      label: '- Students correct the model',
                       disabled: true
                     },
                     {
@@ -309,65 +309,65 @@ export default defineComponent({
                   ]
                 },
                 {
-                  label: 'Jogo dos 7 erros',
-                  value: 'erroneoIntermediarioJogo7erros',
+                  label: 'Spot the 7 Errors Game',
+                  value: 'erroneousIntermediateGame7errors',
                   children: [
                     {
-                      label: '- Professor apresenta um modelo com 7 erros',
+                      label: '- Professor presents a model with 7 errors',
                       disabled: true
                     },
                     {
-                      label: '- Alunos tentam encontrar encontrar os erros',
+                      label: '- Students try to find the errors',
                       disabled: true
                     },
                     {
-                      label: '- Aluno explica o motivo do erro encontrado',
+                      label: '- Student explains the reason for the identified error',
                       disabled: true
                     },
                     {
-                      label: '- Professor faz a validação do erro encontrado',
+                      label: '- Professor validates the identified error',
                       disabled: true
                     },
                     {
-                      label: '- Se algum erro não for localizado, o professor faz a explicação do erro',
+                      label: '- If any error is not found, the professor explains the error',
                       disabled: true
                     },
                     {
-                      label: '- Professor faz a demonstração das correções dos erros do modelo',
+                      label: "- Professor demonstrates the corrections for the model's errors",
                       disabled: true
                     }
                   ]
                 },
                 {
-                  label: 'Alunos identificando erros',
-                  value: 'erroneoIntermediarioIdentificando',
+                  label: 'Students Identifying Errors',
+                  value: 'erroneousIntermediateIdentifying',
                   children: [
                     {
-                      label: '- Professor apresenta um modelo com erros',
+                      label: '- Professor presents a model with errors',
                       disabled: true
                     },
                     {
-                      label: '- Professor estabelece um tempo para os alunos identificarem os erros',
+                      label: '- Professor sets a time for students to identify the errors',
                       disabled: true
                     },
                     {
-                      label: '- Alunos relatam os erros encontrados',
+                      label: '- Students report the identified errors',
                       disabled: true
                     },
                     {
-                      label: '- Professor faz a correção dos erros encontrados',
+                      label: '- Professor corrects the identified errors',
                       disabled: true
                     },
                     {
-                      label: '- Professor mostra os erros não localizados',
+                      label: '- Professor highlights the errors not found',
                       disabled: true
                     },
                     {
-                      label: '- Opcional: Apresentação de anti-padrões',
+                      label: '- Optional: Presentation of anti-patterns',
                       disabled: true
                     },
                     {
-                      label: '- Professor faz a demonstração das correções dos erros do modelo',
+                      label: "- Professor demonstrates the corrections for the model's errors",
                       disabled: true
                     }
                   ]

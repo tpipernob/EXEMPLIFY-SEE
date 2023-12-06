@@ -11,7 +11,6 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-
         <q-toolbar-title> Aprendizagem Baseada em Exemplos </q-toolbar-title>
 
         <div></div>
