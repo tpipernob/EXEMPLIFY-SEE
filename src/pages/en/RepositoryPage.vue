@@ -12,7 +12,7 @@
         <q-toolbar-title
           class="example-title"
           style="padding: 5px 20px;"
-        ><span class="ellipsis">Repositório de Exemplos</span></q-toolbar-title>
+        ><span class="ellipsis">Examples Repository</span></q-toolbar-title>
       </q-ribbon>
     </q-toolbar>
     <q-card-section class="q-pb-sm">
@@ -60,12 +60,18 @@ export default {
         {
           name: 'exampleType',
           align: 'left',
-          label: 'Tipo',
+          label: 'Type',
           field: 'exampleType',
           sortable: true,
           filter_type: 'text'
         },
-        { name: 'model', align: 'left', label: 'Modelo', field: 'model', sortable: true },
+        {
+          name: 'model',
+          align: 'left',
+          label: 'Model',
+          field: 'model',
+          sortable: true
+        },
         {
           name: 'name',
           required: true,
@@ -76,65 +82,65 @@ export default {
           style: 'width: 10%',
           headerStyle: 'width: 0px'
         },
-        { name: 'additionalInformation', align: 'left', label: 'Informação adicinoal', field: 'additionalInformation' },
+        { name: 'additionalInformation', align: 'left', label: 'Additional Information', field: 'additionalInformation' },
         { name: 'link', align: 'left', label: 'Link', field: 'link' }
       ],
       data: [
         {
           name: 'Faculty',
-          exampleType: 'Exemplo Errôneo',
-          model: 'Diagrama de Caso de Uso',
-          additionalInformation: '21 exemplos de antipadrões',
+          exampleType: 'Erroneous Example',
+          model: 'Use Case Diagram',
+          additionalInformation: '21 Examples of Anti-patterns',
           link: 'https://faculty.kfupm.edu.sa/ICS/melattar/UCAntipatterns.htm'
 
         },
         {
           name: 'Metamodeling Anti-Patterns',
-          exampleType: 'Exemplo Errôneo',
-          model: 'Diagrama de Classes',
-          additionalInformation: '31 exemplos de antipadrões com imagens dos diagramas',
+          exampleType: 'Erroneous Example',
+          model: 'Class Diagram',
+          additionalInformation: '31 Examples of Anti-patterns with Diagrams',
           link: 'https://sites.google.com/site/metamodelingantipatterns/catalog/uml'
         },
         {
           name: 'OpenSMALS',
-          exampleType: 'Exemplo Errôneo',
-          model: 'Diagrama de Classes',
-          additionalInformation: '6 exemplos textuais',
+          exampleType: 'Erroneous Example',
+          model: 'Class Diagram',
+          additionalInformation: '6 Textual Examples',
           link: 'https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxhY3RpdmVsZWFybmluZ21ldGhvZHN8Z3g6MTFhOGY2ZDBhMGY4MGZhMg'
         },
         {
           name: 'OpenSMALS',
-          exampleType: 'Exemplo Correto',
-          model: 'Diagrama de Classes',
-          additionalInformation: '6 exemplos textuais',
+          exampleType: 'Correct Example',
+          model: 'Class Diagram',
+          additionalInformation: '6 Textual Examples',
           link: 'https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxhY3RpdmVsZWFybmluZ21ldGhvZHN8Z3g6MzgxZjY3MzczOGE5NWNmNg'
         },
         {
           name: 'OpenSMALS',
-          exampleType: 'Exemplo de domínio',
-          model: 'Não especificado',
-          additionalInformation: '9 exemplos de domínio que podem ser usados para modelagem',
+          exampleType: 'Domain Example',
+          model: 'Not specified',
+          additionalInformation: '9 Examples of Domains That Can Be Used for Modeling',
           link: 'https://sites.google.com/site/activelearningmethods/escolha-aqui-seu-cenario'
         },
         {
-          name: 'Artigo',
-          exampleType: 'Exemplo Correto e Errôneo',
-          model: 'Diagrama de Classes',
-          additionalInformation: 'Conteúdo no apêndice 1: Alguns problemas comuns de qualidade e exemplos positivos e negativos correspondentes',
+          name: 'Article',
+          exampleType: 'Correct and Erroneous Example',
+          model: 'Class Diagram',
+          additionalInformation: 'Content in Appendix 1: Some Common Quality Issues and Corresponding Positive and Negative Examples',
           link: 'https://link.springer.com/chapter/10.1007/978-1-4419-7355-9_8'
         },
         {
           name: 'Steam',
-          exampleType: 'Exemplo Errôneo',
-          model: 'Diagrama de Caso de Uso',
-          additionalInformation: 'Análise completa dos modelos de caso de uso de quatro sistemas do mundo real',
+          exampleType: 'Erroneous Example',
+          model: 'Use Case Diagram',
+          additionalInformation: 'Complete analysis of use case models of four real-world systems',
           link: 'http://www.steam.ualberta.ca/main/research_areas/AntiPatterns.htm'
         },
         {
           name: 'Evaluating the layout quality of UML class diagrams using machine learning',
-          exampleType: 'Exemplo Correto',
-          model: 'Diagrama de Classes',
-          additionalInformation: 'Um conjunto de 609 diagramas de classe UML rotulados.',
+          exampleType: 'Correct Example',
+          model: 'Class Diagram',
+          additionalInformation: 'A set of 609 labeled UML class diagrams.',
           link: 'https://zenodo.org/record/5037744#.Y3Y-eOzMLjh'
         }
       ]

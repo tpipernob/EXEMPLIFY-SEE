@@ -6,7 +6,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import TabOptions from 'src/components/TabOptions.vue'
+import TabOptions from 'src/components/TabOptionsEn.vue'
 
 export default defineComponent({
   name: 'TutorialPage',

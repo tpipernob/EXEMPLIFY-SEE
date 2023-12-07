@@ -11,7 +11,7 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-        <q-toolbar-title> Aprendizagem Baseada em Exemplos </q-toolbar-title>
+        <q-toolbar-title> {{titulo}} </q-toolbar-title>
 
         <div></div>
       </q-toolbar>
@@ -88,10 +88,13 @@ export default defineComponent({
       ]
     })
 
+    const titulo = computed(() => isEnglishRoute.value ? 'Example-Based Learning' : 'Aprendizagem Baseada em Exemplos')
+
     return {
       currentRoute: currentRouteName,
       essentialLinks,
       leftDrawerOpen,
+      titulo,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
       }

@@ -8,7 +8,7 @@
       O objetivo deste portal é auxiliar os professores na utilização/adoção da Aprendizagem Baseada em Exemplos durante o ensino de Engenharia de Software.
     </p>
     <p class="text-body1">
-      Você pode usar o nosso <a href="#/tutorial-page">tutorial</a> que vai te ajudar a construir um passo a passo para usar exemplos em sala de aula.
+      Você pode usar o nosso <a href="#pt/tutorial-page">tutorial</a> que vai te ajudar a construir um passo a passo para usar exemplos em sala de aula.
     </p>
     <p class="text-body1">
       Você também pode navegar pelo menu e ir direto ao tópico desejado caso já tenha um objetivo em mente.
