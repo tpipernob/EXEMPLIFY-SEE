@@ -31,7 +31,7 @@
     </p>
     <q-card class="my-card" style="max-width: 800px">
       <img
-        src="img/imagem-geral.png"
+        src="img/Diagrama-Exemplos[trad].png"
       >
 
       <q-card-section>
