@@ -1,4 +1,3 @@
-
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated class="print-hide">
@@ -60,6 +59,12 @@ export default defineComponent({
           caption: '',
           icon: 'home',
           route: { name: isEnglishRoute.value ? 'en-home' : 'home' }
+        },
+        {
+          title: isEnglishRoute.value ? 'Tutorial' : 'Tutorial',
+          caption: '',
+          icon: 'explore',
+          route: { name: isEnglishRoute.value ? 'en-tutorial' : 'tutorial' }
         },
         {
           title: isEnglishRoute.value ? 'Teaching Theory' : 'Ensino da Teoria',

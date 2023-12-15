@@ -11,18 +11,18 @@
           align="justify"
           narrow-indicator
         >
-          <q-tab name="tab-aulaTeorica" label="Aula Teórica" />
-          <q-tab name="tab-atividades" label="Atividades" />
+          <q-tab name="tab-aulaTeorica" label="Theoretical Class" />
+          <q-tab name="tab-atividades" label="Activities" />
           <q-tab name="tab-feedback" label="Feedback" />
         </q-tabs>
         <q-separator />
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="tab-aulaTeorica">
-            <div class="text-h6">Selecione as opções</div>
+            <div class="text-h6">Select the options.</div>
             <br />
             <div class="text-body1">
-              Os alunos já tiveram contato com o conteúdo?
+              Have the students already had contact with the content?
             </div>
             <div class="q-pa-md">
               <div class="q-gutter-sm">
@@ -31,21 +31,21 @@
                   unchecked-icon="panorama_fish_eye"
                   v-model="aulaTeorica"
                   val="sim"
-                  label="Sim"
+                  label="Yes"
                 />
                 <q-radio
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
                   v-model="aulaTeorica"
                   val="nao"
-                  label="Não"
+                  label="No"
                 />
               </div>
             </div>
 
             <div id="metodo" v-show="aulaTeorica == 'nao'">
               <div class="text-body1">
-                Qual o método de ensino prefere utilizar?
+                Which teaching method do you prefer to use?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
@@ -53,15 +53,15 @@
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="metodoEnsino"
-                    val="aulaEspositiva"
-                    label="Aula Espositiva"
+                    val="aulaexpositiva"
+                    label="Expository Lecture"
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="metodoEnsino"
                     val="salaInvertida"
-                    label="Sala de aula Invertida"
+                    label="Flipped Classroom"
                   />
                 </div>
               </div>
@@ -69,7 +69,7 @@
 
             <div id="metodo" v-show="aulaTeorica == 'nao'">
               <div class="text-body1">
-                Já possui exemplos dos conceitos a serem ensinados?
+                Do you already have examples of the concepts to be taught?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
@@ -78,24 +78,24 @@
                     unchecked-icon="panorama_fish_eye"
                     v-model="possuiExemplos"
                     val="sim"
-                    label="Sim"
+                    label="Yes"
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="possuiExemplos"
                     val="nao"
-                    label="Não"
+                    label="No"
                   />
                 </div>
               </div>
             </div>
           </q-tab-panel>
           <q-tab-panel name="tab-atividades">
-            <div class="text-h6">Selecione as opções</div>
+            <div class="text-h6">Select the options.</div>
             <br />
             <div class="text-body1">
-              Deseja trabalhar com exemplos corretos ou errôneos?
+              Do you want to work with correct or incorrect examples?
             </div>
             <div class="q-pa-md">
               <div class="q-gutter-sm">
@@ -104,25 +104,25 @@
                   unchecked-icon="panorama_fish_eye"
                   v-model="tipoExemplo"
                   val="correto"
-                  label="Corretos"
+                  label="Correct"
                 />
                 <q-radio
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
                   v-model="tipoExemplo"
                   val="erroneo"
-                  label="Errôneos"
+                  label="Incorrect"
                 />
               </div>
             </div>
 
             <div v-show="tipoExemplo == 'correto' || tipoExemplo == 'erroneo'">
               <div class="text-body1">
-                Selecione o nível dos alunos.
+                Select the students level.
                 <div class="text-body1 text-italic q-mt-sm">
-                  Iniciante: Aluno que não realizou exercícios sobre o conteúdo.
+                  Beginner: Student who has not completed exercises on the content.
                   <br />
-                  Intermediário: Aluno já realizou exercícios sobre o conteúdo
+                  Intermediate: Student has already completed exercises on the content.
                 </div>
               </div>
               <div class="q-pa-md">
@@ -132,14 +132,14 @@
                     unchecked-icon="panorama_fish_eye"
                     v-model="nivelAluno"
                     val="iniciante"
-                    label="Iniciante"
+                    label="Beginner"
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="nivelAluno"
                     val="intermediario"
-                    label="Intermediário"
+                    label="Intermediate"
                   />
                 </div>
               </div>
@@ -149,8 +149,7 @@
               v-show="tipoExemplo == 'correto' && nivelAluno == 'intermediario'"
             >
               <div class="text-body1">
-                Deseja combinar essa atividade com outra utilizando exemplos
-                errôneos?.
+                Do you want to combine this activity with another using incorrect examples?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
@@ -159,14 +158,14 @@
                     unchecked-icon="panorama_fish_eye"
                     v-model="atividadeCombinada"
                     val="sim"
-                    label="Sim"
+                    label="Yes"
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="atividadeCombinada"
                     val="nao"
-                    label="Não"
+                    label="No"
                   />
                 </div>
               </div>
@@ -180,8 +179,7 @@
               "
             >
               <div class="text-body1">
-                Deseja adicionar um artefato para os alunos utilizarem durante a
-                correção de seus diagramas?
+                Do you want to add an artifact for the students to use during the correction of their diagrams?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
@@ -190,14 +188,14 @@
                     unchecked-icon="panorama_fish_eye"
                     v-model="adicionarArtefato"
                     val="sim"
-                    label="Sim"
+                    label="Yes"
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="adicionarArtefato"
                     val="nao"
-                    label="Não"
+                    label="No"
                   />
                 </div>
               </div>
@@ -211,8 +209,7 @@
               "
             >
               <div class="text-body1">
-                Como desejar realizar a primeira correção dos modelos
-                construídos pelos alunos?
+                How do you wish to conduct the initial correction of the models built by the students?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
@@ -221,14 +218,14 @@
                     unchecked-icon="panorama_fish_eye"
                     v-model="primeiraCorrecao"
                     val="proprio"
-                    label="Alunos corrigem o próprio diagrama"
+                    label="Students correct their own diagram"
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="primeiraCorrecao"
                     val="unsDosOutros"
-                    label="Alunos corrigem o diagrama de outro aluno"
+                    label="Students correct another student's diagram"
                   />
                 </div>
               </div>
@@ -236,7 +233,7 @@
 
             <div v-show="tipoExemplo == 'erroneo' && nivelAluno == 'iniciante'">
               <div class="text-body1">
-                Prefere utilizar qual tipo de artefano no inicio da atividade?
+                What type of artifact do you prefer to use at the beginning of the activity?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
@@ -245,14 +242,14 @@
                     unchecked-icon="panorama_fish_eye"
                     v-model="tipoArtefatoInicio"
                     val="dominio"
-                    label="Domínio para os alunos realizarem a modelagem"
+                    label="Domain for students to perform modeling."
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="tipoArtefatoInicio"
                     val="modeloErros"
-                    label="Apresentar um modelo com erros"
+                    label="Present a model with errors."
                   />
                 </div>
               </div>
@@ -265,8 +262,7 @@
               "
             >
               <div class="text-body1">
-                Deseja adicionar um artefato para os alunos utilizarem durante a
-                correção de seus diagramas?
+                Do you want to add an artifact for the students to use during the correction of their diagrams?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
@@ -275,14 +271,14 @@
                     unchecked-icon="panorama_fish_eye"
                     v-model="adicionarArtefato"
                     val="sim"
-                    label="Sim"
+                    label="Yes"
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="adicionarArtefato"
                     val="nao"
-                    label="Não"
+                    label="No"
                   />
                 </div>
               </div>
@@ -296,8 +292,7 @@
               "
             >
               <div class="text-body1">
-                Como desejar realizar a primeira correção dos modelos
-                construídos pelos alunos?
+                How do you wish to conduct the initial correction of the models built by the students?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
@@ -306,14 +301,14 @@
                     unchecked-icon="panorama_fish_eye"
                     v-model="primeiraCorrecao"
                     val="proprio"
-                    label="Alunos corrigem o próprio diagrama"
+                    label="Students correct their own diagram."
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="primeiraCorrecao"
                     val="unsDosOutros"
-                    label="Alunos corrigem o diagrama de outro aluno"
+                    label="Students correct another student's diagram."
                   />
                 </div>
               </div>
@@ -323,7 +318,7 @@
               v-show="tipoExemplo == 'erroneo' && nivelAluno == 'intermediario'"
             >
               <div class="text-body1">
-                Escolha o tipo de atividade que pretente utilizar:
+                Choose the type of activity you intend to use:
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
@@ -332,21 +327,21 @@
                     unchecked-icon="panorama_fish_eye"
                     v-model="tipoAtividadeIntermediario"
                     val="modeloErros"
-                    label="Apresentar um modelo com erros"
+                    label="Present a model with errors."
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="tipoAtividadeIntermediario"
                     val="jogo7erros"
-                    label="Jogo dos 7 erros"
+                    label="Spot the 7 Errors Game"
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="tipoAtividadeIntermediario"
                     val="alunosIdentificandoErros"
-                    label="Alunos identificando erros"
+                    label="Students identifying errors"
                   />
                 </div>
               </div>
@@ -360,7 +355,7 @@
               "
             >
               <div class="text-body1">
-                Deseja incluir uma aula sobre anti-padrões?
+                Do you want to include a lesson on anti-patterns?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
@@ -369,24 +364,24 @@
                     unchecked-icon="panorama_fish_eye"
                     v-model="incluirAulaAntiPadroes"
                     val="sim"
-                    label="Sim"
+                    label="Yes"
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="incluirAulaAntiPadroes"
                     val="nao"
-                    label="Não"
+                    label="No"
                   />
                 </div>
               </div>
             </div>
           </q-tab-panel>
           <q-tab-panel name="tab-feedback">
-            <div class="text-h6">Selecione as opções</div>
+            <div class="text-h6">Select the options.</div>
             <br />
             <div class="text-body1">
-              Selecione o tipo de devolução dos trabalhos desejado:
+              Select the desired type of feedback for the assignments:
             </div>
             <div class="q-pa-md">
               <div class="q-gutter-sm">
@@ -395,21 +390,21 @@
                   unchecked-icon="panorama_fish_eye"
                   v-model="tipoDevolucao"
                   val="escrito"
-                  label="Entrega por escrito"
+                  label="Written submission"
                 />
                 <q-radio
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
                   v-model="tipoDevolucao"
                   val="seminario"
-                  label="Apresentação de seminários"
+                  label="Seminar presentation"
                 />
               </div>
             </div>
 
             <div v-show="tipoDevolucao == 'escrito'">
               <div class="text-body1">
-                Selecione o tipo de feedback desejado.
+                Select the desired type of feedback.
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
@@ -418,14 +413,14 @@
                     unchecked-icon="panorama_fish_eye"
                     v-model="tipoFeedback"
                     val="individual"
-                    label="Individual"
+                    label="Individual feedback"
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="tipoFeedback"
                     val="coletivo"
-                    label="Coletivo"
+                    label="Collective Feedback"
                   />
                 </div>
               </div>
@@ -433,7 +428,7 @@
             <div
               v-show="tipoDevolucao == 'escrito' && tipoFeedback == 'coletivo'"
             >
-              <div class="text-body1">Selecione o tipo de solução.</div>
+              <div class="text-body1">Select the type of solution.</div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
                   <q-radio
@@ -441,14 +436,14 @@
                     unchecked-icon="panorama_fish_eye"
                     v-model="tipoSolucao"
                     val="exemploSolucao"
-                    label="Exemplo de solução"
+                    label="Example of solution."
                   />
                   <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="tipoSolucao"
                     val="exemploAlunos"
-                    label="Soluções exemplares dos alunos"
+                    label="Exemplary solutions from the students"
                   />
                 </div>
               </div>
@@ -460,10 +455,9 @@
       <q-card>
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="tab-aulaTeorica">
-            <div class="text-h6">Passos sugeridos</div>
+            <div class="text-h6">Recommended steps</div>
             <p v-show="aulaTeorica == 'sim'">
-              Como os alunos já tiveram contato com o conteúdo anteriormente,
-              siga para as próximas opções
+              As the students have already been exposed to the content, proceed to the next options.
             </p>
 
             <!-- INICIO passos timeline salaInvertida -->
@@ -473,37 +467,32 @@
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
-                  <q-timeline-entry title="Compartilhar o material">
+                  <q-timeline-entry title="Share the material.">
                     <div class="text-body1">
-                      Professor deve compartilhar o material com os alunos antes
-                      da aula. Esse material pode ser um vídeo, um conteúdo de
-                      livro ou recurso online.
+                      The teacher should share the material with the students before the class. This material can be a video, content from a book, or an online resource.
                     </div>
                   </q-timeline-entry>
 
                   <q-timeline-entry
-                    title="Revisão dos conceitos e tira dúvidas"
+                    title="Review of concepts and Q&A (Questions and Answers)."
                   >
                     <div class="text-body1">
-                      Já no o horário da aula o professor deve iniciar as
-                      atividades tirando as dúvidas dos alunos em relação ao
-                      material disponibilizado anteriormente.
+                      During the class time, the teacher should start the activities by addressing any questions the students may have regarding the material provided earlier.
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry
-                    title="Fontes de Exemplos"
+                    title="Sources of Examples"
                     v-show="
                       metodoEnsino == 'salaInvertida' && possuiExemplos == 'nao'
                     "
                   >
-                    <div class="text-body1">Link para o respositório de exemplos</div>
+                    <div class="text-body1">Link to the examples repository.</div>
                   </q-timeline-entry>
                   <q-timeline-entry
-                    title="Explicar exemplos dos conceitos ensinados"
+                    title="Explain examples of the taught concepts."
                   >
                     <div class="text-body1">
-                      Utilização de exemplos para que os alunos relacionem os
-                      conceitos com uma situação concreta
+                      Use of examples for students to relate concepts to a concrete situation.
                     </div>
                   </q-timeline-entry>
                 </q-timeline>
@@ -511,47 +500,43 @@
             </div>
             <!-- FIM passos timeline salaInvertida -->
 
-            <!-- INICIO passos timeline aulaEspositiva -->
+            <!-- INICIO passos timeline aulaexpositiva -->
             <div
               id="q-app"
-              v-show="aulaTeorica == 'nao' && metodoEnsino == 'aulaEspositiva'"
+              v-show="aulaTeorica == 'nao' && metodoEnsino == 'aulaexpositiva'"
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
-                  <q-timeline-entry title="Palestra">
+                  <q-timeline-entry title="Lecture">
                     <div class="text-body1">
-                      Professor explica o conteúdo aos alunos. Professor deve
-                      compartilhar o material com os alunos antes da aula. Esse
-                      material pode ser um vídeo, um conteúdo de livro ou
-                      recurso online.
+                      The teacher explains the content to the students. The teacher should share the material with the students before the class. This material can be a video, content from a book, or an online resource.
                     </div>
                   </q-timeline-entry>
 
                   <q-timeline-entry
-                    title="Fontes de Exemplos"
+                    title="Sources of Examples"
                     v-show="
-                      metodoEnsino == 'aulaEspositiva' &&
+                      metodoEnsino == 'aulaexpositiva' &&
                       possuiExemplos == 'nao'
                     "
                   >
-                    <div class="text-body1">Link para o respositório de exemplos</div>
+                    <div class="text-body1">Link to the examples repository.</div>
                   </q-timeline-entry>
                   <q-timeline-entry
-                    title="Explicar exemplos dos conceitos ensinados"
+                    title="Explain examples of the taught concepts"
                   >
                     <div class="text-body1">
-                      Utilização de exemplos para que os alunos relacionem os
-                      conceitos com uma situação concreta
+                      Use of examples for students to relate concepts to a concrete situation.
                     </div>
                   </q-timeline-entry>
                 </q-timeline>
               </div>
             </div>
-            <!-- FIM passos timeline aulaEspositiva -->
+            <!-- FIM passos timeline aulaexpositiva -->
           </q-tab-panel>
 
           <q-tab-panel name="tab-atividades">
-            <div class="text-h6">Passos sugeridos</div>
+            <div class="text-h6">Recommended steps.</div>
             <!-- INICIO passos exemplos corretos Iniciante -->
             <div
               id="q-app"
@@ -559,37 +544,35 @@
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
-                  <q-timeline-entry title="Escolher o exemplo">
+                  <q-timeline-entry title="Choose the example">
                     <div class="text-body1">
-                      Professor seleciona um exemplo do modelo a ser ensinado.
-                      Caso não possua exemplo, realize uma busca no
-                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
-                        >Repositório de exemplos</a
+                      The teacher selects an example of the model to be taught. If there is no example available, perform a search in the
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/en/repository-page" target="_blank"
+                        >Example Repository</a
                       >
                     </div>
                   </q-timeline-entry>
 
-                  <q-timeline-entry title="Demonstração">
-                    <div class="text-body1">Professor demonstra a construção do modelo.</div>
+                  <q-timeline-entry title="Demonstration">
+                    <div class="text-body1">The teacher demonstrates the construction of the model.</div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Apresentar um domínio">
-                    <div class="text-body1">Professor apresenta um domínio para modelagem.</div>
+                  <q-timeline-entry title="Presenting a domain">
+                    <div class="text-body1">The teacher presents a domain for modeling.</div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Realização da modelagem">
-                    <div class="text-body1">Alunos realizam a modelagem.</div>
+                  <q-timeline-entry title="Modeling implementation">
+                    <div class="text-body1">Students perform the modeling.</div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Demonstração">
+                  <q-timeline-entry title="Demonstration">
                     <div class="text-body1">
-                      Professor faz a demonstração da modelagem correta para o
-                      domínio apresentado.
+                      The teacher demonstrates the correct modeling for the presented domain.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Correção do diagrama">
-                    <div class="text-body1">Alunos realizam a correção dos seus diagramas.</div>
+                  <q-timeline-entry title="Diagram correction">
+                    <div class="text-body1">Students correct their diagrams.</div>
                   </q-timeline-entry>
                   <q-timeline-entry title="Feedback">
                     <div class="text-body1">
-                      Selecione o feedback a ser utilizado na próxima aba.
+                      Select the feedback to be used in the next tab.
                     </div>
                   </q-timeline-entry>
                 </q-timeline>
@@ -604,84 +587,76 @@
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
-                  <q-timeline-entry title="Escolher o exemplo">
+                  <q-timeline-entry title="Choose the example">
                     <div class="text-body1">
-                      Professor seleciona exemplos positivos de um determinado
-                      modelo. Caso não possua exemplo, realize uma busca no
-                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
-                        >Repositório de exemplos</a
+                      The teacher selects positive examples of a specific model. If there are no examples available, perform a search in the
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/en/repository-page" target="_blank"
+                        >Example Repository</a
                       >
                     </div>
                   </q-timeline-entry>
 
-                  <q-timeline-entry title="Ensino dos exemplos">
+                  <q-timeline-entry title="Teaching of examples">
                     <div class="text-body1">
-                      Professor explica o exemplo positivo para o alunos.
+                      The teacher explains the positive example to the students
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Apresentar um domínio">
+                  <q-timeline-entry title="Presenting a domain">
                     <div class="text-body1">
-                      Professor apresenta um domínio para modelagem e explica
-                      aos alunos que o conceitos aprendidos com os exemplos
-                      corretos serão avaliados.
+                      The teacher introduces a domain for modeling and explains to the students that the concepts learned from the correct examples will be evaluated.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Realização da modelagem">
-                    <div class="text-body1">Alunos realizam a modelagem.</div>
+                  <q-timeline-entry title="Modeling implementation">
+                    <div class="text-body1">Students perform the modeling</div>
                   </q-timeline-entry>
 
                   <!-- se for usar atividade combinada colocamos aqui -->
                   <spam v-show="atividadeCombinada == 'sim'">
-                    <q-timeline-entry title="Selecionar anti-padrões">
+                    <q-timeline-entry title="Selecting anti-patterns">
                       <div class="text-body1">
-                        Professor seleciona os anti-padrões que deseja ensinar.
-                        Caso não possua, realize uma busca no
-                        <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
-                          >Repositório de exemplos</a
+                        The teacher selects the anti-patterns they want to teach. If none are available, perform a search in the
+                        <a href="https://tpipernob.github.io/example-basedLearning/#/en/repository-page" target="_blank"
+                          >Example Repository</a
                         >
                       </div>
                     </q-timeline-entry>
-                    <q-timeline-entry title="Explicação dos anti-padrões">
+                    <q-timeline-entry title="Explanation of anti-patterns.">
                       <div class="text-body1">
-                        Professor apresenta os anti-padrões e mostra como
-                        solucioná-los.
+                        The teacher presents the anti-patterns and demonstrates how to resolve them.
                       </div>
                     </q-timeline-entry>
                     <q-timeline-entry
                       v-if="adicionarArtefato == 'sim'"
-                      title="Disponibilizar artefato"
+                      title="Provide artifact"
                     >
                       <div class="text-body1">
-                        Professor disponibiliza um checklist com os anti-padrões
-                        ensinados ou um artefato educacional de inspeção.
+                        The teacher provides a checklist with the taught anti-patterns or an educational inspection artifact.
                       </div>
                     </q-timeline-entry>
                     <q-timeline-entry
                       v-if="primeiraCorrecao == 'proprio'"
-                      title="Correção do diagrama"
+                      title="Diagram correction"
                     >
-                      <div class="text-body1">Alunos realizam a correção dos seus diagramas.</div>
+                      <div class="text-body1">Students correct their diagrams.</div>
                     </q-timeline-entry>
                     <q-timeline-entry
                       v-if="primeiraCorrecao == 'unsDosOutros'"
-                      title="Correção do diagrama"
+                      title="Diagram correction"
                     >
                       <div class="text-body1">
-                        Alunos realizam a correção dos diagramas de outros
-                        colegas da turma.
+                        Students correct the diagrams of their classmates.
                       </div>
                     </q-timeline-entry>
-                    <q-timeline-entry title="Nova versão dos diagramas">
+                    <q-timeline-entry title="New version of the diagrams">
                       <div class="text-body1">
-                        Alunos realizam a nova versão dos diagramas aplicando as
-                        correções.
+                        Students create the new version of the diagrams applying the corrections.
                       </div>
                     </q-timeline-entry>
                   </spam>
 
                   <q-timeline-entry title="Feedback">
                     <div class="text-body1">
-                      Selecione o feedback a ser utilizado na próxima aba.
+                      Select the feedback to be used in the next tab.
                     </div>
                   </q-timeline-entry>
                 </q-timeline>
@@ -700,64 +675,58 @@
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
-                  <q-timeline-entry title="Apresentar um domínio">
+                  <q-timeline-entry title="Presenting a domain">
                     <div class="text-body1">
-                      Professor apresenta um domínio para que os alunos
-                      realizagem a modelagem.
+                      The teacher introduces a domain for the students to carry out the modeling.
                     </div>
                   </q-timeline-entry>
 
-                  <q-timeline-entry title="Realização da modelagem">
-                    <div class="text-body1">Alunos realizam a modelagem.</div>
+                  <q-timeline-entry title="Implementation of modeling">
+                    <div class="text-body1">Students carry out the modeling.</div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Selecionar anti-padrões">
+                  <q-timeline-entry title="Selecting anti-patterns.">
                     <div class="text-body1">
-                      Professor seleciona os anti-padrões que deseja ensinar.
-                      Caso não possua, realize uma busca no
-                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
-                        >Repositório de exemplos</a
+                      The teacher selects the anti-patterns they want to teach. If none are available, perform a search in the
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/en/repository-page" target="_blank"
+                        >Example Repository</a
                       >
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Explicação dos anti-padrões">
+                  <q-timeline-entry title="Explanation of anti-patterns.">
                     <div class="text-body1">
-                      Professor apresenta os anti-padrões e mostra como
-                      solucioná-los.
+                      The teacher presents the anti-patterns and demonstrates how to solve them.
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry
                     v-if="adicionarArtefato == 'sim'"
-                    title="Disponibilizar artefato"
+                    title="Provide artifact"
                   >
                     <div class="text-body1">
-                      Professor disponibiliza um checklist com os anti-padrões
-                      ensinados ou um artefato educacional de inspeção.
+                      The teacher provides a checklist with the taught anti-patterns or an educational inspection artifact.
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry
                     v-if="primeiraCorrecao == 'proprio'"
-                    title="Correção do diagrama"
+                    title="Diagram correction"
                   >
-                    <div class="text-body1">Alunos realizam a correção dos seus diagramas.</div>
+                    <div class="text-body1">Students correct their diagrams.</div>
                   </q-timeline-entry>
                   <q-timeline-entry
                     v-if="primeiraCorrecao == 'unsDosOutros'"
-                    title="Correção do diagrama"
+                    title="Diagram correction"
                   >
                     <div class="text-body1">
-                      Alunos realizam a correção dos diagramas de outros colegas
-                      da turma.
+                      Students correct the diagrams of their classmates.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Nova versão dos diagramas">
+                  <q-timeline-entry title="New version of the diagrams">
                     <div class="text-body1">
-                      Alunos realizam a nova versão dos diagramas aplicando as
-                      correções.
+                      Students create the new version of the diagrams applying the corrections.
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry title="Feedback">
                     <div class="text-body1">
-                      Selecione o feedback a ser utilizado na próxima aba.
+                      Select the feedback to be used in the next tab.
                     </div>
                   </q-timeline-entry>
                 </q-timeline>
@@ -776,47 +745,41 @@
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
-                  <q-timeline-entry title="Modelo com erros">
+                  <q-timeline-entry title="Model with errors">
                     <div class="text-body1">
-                      Como os alunos são de nível iniciante, o professor
-                      apresenta um modelo simples com erros. Caso não possua
-                      exemplo, realize uma busca no
-                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
-                        >Repositório de exemplos</a
+                      As the students are at a beginner level, the teacher presents a simple model with errors. If there is no example available, perform a search in the
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/en/repository-page" target="_blank"
+                        >Example Repository</a
                       >
                     </div>
                   </q-timeline-entry>
 
-                  <q-timeline-entry title="Explicação do modelo">
-                    <div class="text-body1">Professor explica os erros existentes no modelo.</div>
+                  <q-timeline-entry title="Explanation of the model">
+                    <div class="text-body1">The teacher explains the errors present in the model.</div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Demonstração">
+                  <q-timeline-entry title="Demonstration">
                     <div class="text-body1">
-                      Professor faz o passo a passo para corrigir os erros dos
-                      modelos.
+                      The teacher provides a step-by-step guide to correct the errors in the models.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Apresentar outro modelo">
+                  <q-timeline-entry title="Present another model">
                     <div class="text-body1">
-                      Professor apresenta outro modelo com erros similares aos
-                      apresentados no passo anterior.
+                      The teacher presents another model with errors similar to those shown in the previous step.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Identificação dos erros">
+                  <q-timeline-entry title="Identification of errors">
                     <div class="text-body1">
-                      Os alunos devem identificar os erros que existem no modelo
-                      apresentado.
+                     The students must identify the errors in the presented model.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Correção do modelo">
+                  <q-timeline-entry title="Model correction">
                     <div class="text-body1">
-                      Alunos criam um novo modelo com uma forma de solucionar os
-                      erros existentes.
+                      Students create a new model with a way to address the existing errors.
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry title="Feedback">
                     <div class="text-body1">
-                      Selecione o feedback a ser utilizado na próxima aba.
+                      Select the feedback to be used in the next tab.
                     </div>
                   </q-timeline-entry>
                 </q-timeline>
@@ -835,47 +798,41 @@
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
-                  <q-timeline-entry title="Modelo com erros">
+                  <q-timeline-entry title="Model with errors">
                     <div class="text-body1">
-                      Como os alunos são de nível intermediário, o professor
-                      apresenta um modelo com erros de maior complexidade. Caso
-                      não possua exemplo, realize uma busca no
-                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
-                        >Repositório de exemplos</a
+                      As the students are at an intermediate level, the teacher presents a Model with errors of greater complexity. If there is no example available, perform a search in the
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/en/repository-page" target="_blank"
+                        >Example Repository</a
                       >
                     </div>
                   </q-timeline-entry>
 
-                  <q-timeline-entry title="Explicação do modelo">
-                    <div class="text-body1">Professor explica os erros existentes no modelo.</div>
+                  <q-timeline-entry title="Explanation of the model">
+                    <div class="text-body1">The teacher explains the errors present in the model.</div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Demonstração">
+                  <q-timeline-entry title="Demonstration">
                     <div class="text-body1">
-                      Professor faz o passo a passo para corrigir os erros dos
-                      modelos.
+                      The teacher provides a step-by-step guide to correct the errors in the models.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Apresentar outro modelo">
+                  <q-timeline-entry title="Present another model">
                     <div class="text-body1">
-                      Professor apresenta outro modelo com erros similares aos
-                      apresentados no passo anterior.
+                      The teacher presents another model with errors similar to those shown in the previous step.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Identificação dos erros">
+                  <q-timeline-entry title="Identification of errors">
                     <div class="text-body1">
-                      Os alunos devem identificar os erros que existem no modelo
-                      apresentado.
+                     The students must identify the errors in the presented model.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Correção do modelo">
+                  <q-timeline-entry title="Model correction">
                     <div class="text-body1">
-                      Alunos criam um novo modelo com uma forma de solucionar os
-                      erros existentes.
+                      Students create a new model with a way to address the existing errors.
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry title="Feedback">
                     <div class="text-body1">
-                      Selecione o feedback a ser utilizado na próxima aba.
+                      Select the feedback to be used in the next tab.
                     </div>
                   </q-timeline-entry>
                 </q-timeline>
@@ -894,58 +851,51 @@
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
-                  <q-timeline-entry title="Início do jogo">
+                  <q-timeline-entry title="Game start">
                     <div class="text-body1">
-                      Professor apresenta um modelo com 7 erros e explica as
-                      regras do jogo. Caso não possua exemplo, realize uma busca
-                      no
-                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
-                        >Repositório de exemplos</a
+                      The teacher presents a model with 7 errors and explains the rules of the game. If there is no example available, perform a search in the
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/en/repository-page" target="_blank"
+                        >Example Repository</a
                       >
                     </div>
                     <div class="text-body1 text-italic q-mt-sm">
-                  Sugestão de regras: <br/>
-                  Erro encontrado corretamente e explicação do motivo correta: 10 pontos<br/>
-                  Erro encontrado corretamente, porém, explicação incorreta: 5 pontos<br/>
-                  Pódio: Os três alunos com maior pontuação.
+                  Rule suggestions: <br/>
+                  Correctly identified error with a correct explanation: 10 points<br/>
+                  Correctly identified error, but incorrect explanation: 5 points<br/>
+                  Podium: The three students with the highest score.
                 </div>
                   </q-timeline-entry>
 
                   <q-timeline-entry
                     color="orange"
-                    title="Início do ciclo de localização de erros"
+                    title="Start of the error localization cycle"
                   >
                     <div class="text-body1">
-                      O aluno que encontrar um erro deve se manifestar e
-                      explicar o motivo do erro.
+                      The student who finds an error must speak up and explain the reason for the error.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry color="orange" title="Explicação">
-                    <div class="text-body1">A explicação do aluno é acompanhada pela turma</div>
+                  <q-timeline-entry color="orange" title="Explanation">
+                    <div class="text-body1">The student's explanation is followed by the class</div>
                   </q-timeline-entry>
                   <q-timeline-entry
                     color="orange"
-                    title="Validação do erro encontrado"
+                    title="Validation of the identified error"
                   >
                     <div class="text-body1">
-                      O Professor realiza a validação do que foi apresentado
-                      pelo aluno. Se o aluno acertou, recebe a pontuação completa, caso
-                      contrário, recebe pontuação parcial e o erro continua em aberto.
+                      The teacher validates what was presented by the student. If the student is correct, they receive full points; otherwise, they receive partial points, and the error remains open.
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry
                     color="orange"
-                    title="Fim do ciclo de localização de erros"
+                    title="End of the error localization cycle"
                   >
                     <div class="text-body1">
-                      Caso algum erro não tenha sido localizado, o professor
-                      deve explciar o erro.
+                      If any error has not been located, the teacher must explain the error.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Correção do modelo">
+                  <q-timeline-entry title="Model correction">
                     <div class="text-body1">
-                      Professor faz a demonstração das correções dos erros do
-                      modelo.
+                      The teacher demonstrates the corrections of the model's errors.
                     </div>
                   </q-timeline-entry>
                 </q-timeline>
@@ -964,48 +914,42 @@
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
-                  <q-timeline-entry title="Modelo com erros">
+                  <q-timeline-entry title="Model with errors">
                     <div class="text-body1">
-                      Professor apresenta um modelo com erros. Caso não possua
-                      exemplo, realize uma busca no
-                      <a href="https://tpipernob.github.io/example-basedLearning/#/repository-page" target="_blank"
-                        >Repositório de exemplos</a
+                      The teacher presents a model with errors. If there is no example available, perform a search in the
+                      <a href="https://tpipernob.github.io/example-basedLearning/#/en/repository-page" target="_blank"
+                        >Example Repository</a
                       >
                     </div>
                   </q-timeline-entry>
 
-                  <q-timeline-entry title="Localização dos erros">
+                  <q-timeline-entry title="Error localization">
                     <div class="text-body1">
-                      Professor estabelece um tempo para os alunos identificarem
-                      os erros existentes.
+                      The teacher sets a time for the students to identify the existing errors.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Apresentação dos erros">
-                    <div class="text-body1">Os alunos relatam os erros encontrados por eles.</div>
+                  <q-timeline-entry title="Presentation of errors.">
+                    <div class="text-body1">The students report the errors they found.</div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Correção dos erros apresentados">
+                  <q-timeline-entry title="Correction of presented errors">
                     <div class="text-body1">
-                      O Professor faz a correção dos erros identificados pelos
-                      alunos.
+                      The teacher corrects the errors identified by the students.
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry
                     v-show="incluirAulaAntiPadroes == 'sim'"
-                    title="Apresentação de anti-padrões"
+                    title="Presentation of anti-patterns"
                   >
                     <div class="text-body1">
-                      Professor seleciona e apresenta os anti-padrões
-                      relacionados aos erros do modelo e mostra como
-                      solucioná-los.
+                      The teacher selects and presents the anti-patterns related to the model's errors and demonstrates how to resolve them.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Erros não localizados">
-                    <div class="text-body1">Professor mostra os erros não localizados.</div>
+                  <q-timeline-entry title="Errors not found">
+                    <div class="text-body1">The teacher shows the errors not found.</div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Correção do modelo">
+                  <q-timeline-entry title="Model correction">
                     <div class="text-body1">
-                      Professor faz a demonstração das correções dos erros do
-                      modelo.
+                      The teacher demonstrates the corrections of the model's errors.
                     </div>
                   </q-timeline-entry>
                 </q-timeline>
@@ -1015,29 +959,24 @@
           </q-tab-panel>
 
           <q-tab-panel name="tab-feedback">
-            <div class="text-h6">Passos sugeridos</div>
+            <div class="text-h6">Recommended steps</div>
             <!-- INICIO passos feedback por escrito -->
             <div id="q-app" v-show="tipoDevolucao == 'escrito'">
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
-                  <q-timeline-entry title="Entrega por escrito">
+                  <q-timeline-entry title="Written submission">
                     <div class="text-body1">
-                      Os alunos realizam a entrega da atividade solicitada por
-                      escrito. Isso pode ser feito por meios digitais, como
-                      e-mail ou pelo ambiente educacional utilizado na
-                      instituição.
+                      The students submit the requested activity in writing. This can be done digitally, such as by email or through the educational platform used in the institution.
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry
                     v-show="
                       tipoDevolucao == 'escrito' && tipoFeedback == 'individual'
                     "
-                    title="Feedback escrito"
+                    title="Written feedback"
                   >
                     <div class="text-body1">
-                      Professor escreve um feedback para a atividade entregue
-                      pelo aluno e ecaminha ou apresenta individualmente para
-                      aluno que realizou a tarefa.
+                      The teacher writes feedback for the activity submitted by the student and forwards or presents it individually to the student who completed the task.
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry
@@ -1046,11 +985,10 @@
                       tipoFeedback == 'coletivo' &&
                       tipoSolucao == 'exemploSolucao'
                     "
-                    title="Exemplo de solução"
+                    title="Example of solution"
                   >
                     <div class="text-body1">
-                      Professor mostra aos alunos um exemplo de solução correto
-                      para a atividade proposta.
+                      The teacher shows the students a correct example of a solution for the proposed activity.
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry
@@ -1059,11 +997,10 @@
                       tipoFeedback == 'coletivo' &&
                       tipoSolucao == 'exemploAlunos'
                     "
-                    title="Soluções exemplares dos alunos"
+                    title="Exemplary solutions from students"
                   >
                     <div class="text-body1">
-                      Professor seleciona e usa alguns exemplos de soluções
-                      realizadas pelos alunos que estão corretos.
+                      The teacher selects and uses some examples of solutions carried out by students that are correct.
                     </div>
                   </q-timeline-entry>
                 </q-timeline>
@@ -1075,19 +1012,14 @@
             <div id="q-app" v-show="tipoDevolucao == 'seminario'">
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
-                  <q-timeline-entry title="Apresentação de seminários">
+                  <q-timeline-entry title="Seminar presentation">
                     <div class="text-body1">
-                      Os alunos realizam a apresentação da atividade
-                      desenvolvida por meio de seminários.
+                      The students present the activity developed through seminars.
                     </div>
                   </q-timeline-entry>
-                  <q-timeline-entry title="Feedback das apresentações">
+                  <q-timeline-entry title="Feedback from presentations">
                     <div class="text-body1">
-                      Professor da o feedback para os alunos do conteúdo
-                      apresentado nos seminários. Professor pode apontar tanto
-                      os acertos quanto os erros dos alunos. Em relação aos
-                      erros é importante enfatizar o que pode ser feito para
-                      corrigi-lo.
+                      The teacher gives feedback to the students on the content presented in the seminars. The teacher can point out both the students' successes and mistakes. Regarding the mistakes, it is important to emphasize what can be done to correct them.
                     </div>
                   </q-timeline-entry>
                 </q-timeline>
