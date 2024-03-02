@@ -89,6 +89,12 @@ export default defineComponent({
           caption: '',
           icon: 'folder',
           route: { name: isEnglishRoute.value ? 'en-repository' : 'repository' }
+        },
+        {
+          title: isEnglishRoute.value ? 'Versão em Português' : 'Versão em Inglês',
+          caption: '',
+          icon: 'info',
+          route: { name: isEnglishRoute.value ? 'home' : 'en-home' }
         }
       ]
     })
