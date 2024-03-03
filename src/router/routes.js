@@ -2,6 +2,16 @@
 const routes = [
   {
     path: '/',
+    component: () => import('layouts/AuthLayout.vue'),
+    children: [
+      { path: '/', redirect: '/login' },
+      { path: 'login', component: () => import('src/pages/LoginPage.vue') },
+      { path: 'register', component: () => import('src/pages/RegisterPage.vue') }
+    ],
+    meta: { auth: false }
+  },
+  {
+    path: '/app',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', name: 'home', component: () => import('pages/pt/IndexPage.vue') },
@@ -16,15 +26,14 @@ const routes = [
       { path: 'en/activities-page', name: 'en-activities', component: () => import('src/pages/en/ActivitiesPage.vue') },
       { path: 'en/feedbacks-page', name: 'en-feedbacks', component: () => import('src/pages/en/FeedbacksPage.vue') },
       { path: 'en/repository-page', name: 'en-repository', component: () => import('src/pages/en/RepositoryPage.vue') }
-    ]
+    ],
+    meta: { auth: true }
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: '/:catchAll(.*)*',
     component: () => import('pages/pt/ErrorNotFound.vue')
   }
+
 ]
 
 export default routes
