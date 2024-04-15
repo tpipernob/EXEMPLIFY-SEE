@@ -27,39 +27,41 @@
             <div class="q-pa-md">
               <div class="q-gutter-sm">
                 <q-radio
+                  @click="salvarAulaTeorica({...aulaTeorica, conteudo: 'sim'})"
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
-                  v-model="aulaTeorica"
+                  v-model="aulaTeorica.conteudo"
                   val="sim"
                   label="Yes"
                 />
                 <q-radio
+                  @click="salvarAulaTeorica({...aulaTeorica, conteudo: 'nao'})"
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
-                  v-model="aulaTeorica"
+                  v-model="aulaTeorica.conteudo"
                   val="nao"
                   label="No"
                 />
               </div>
             </div>
 
-            <div id="metodo" v-show="aulaTeorica == 'nao'">
+            <div id="metodo" v-show="aulaTeorica.conteudo == 'nao'">
               <div class="text-body1">
                 Which teaching method do you prefer to use?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, metodoEnsino: 'aulaexpositiva'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="metodoEnsino"
+                    v-model="aulaTeorica.metodoEnsino"
                     val="aulaexpositiva"
                     label="Expository Lecture"
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, metodoEnsino: 'salaInvertida'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="metodoEnsino"
+                    v-model="aulaTeorica.metodoEnsino"
                     val="salaInvertida"
                     label="Flipped Classroom"
                   />
@@ -67,23 +69,23 @@
               </div>
             </div>
 
-            <div id="metodo" v-show="aulaTeorica == 'nao'">
+            <div id="metodo" v-show="aulaTeorica.conteudo == 'nao'">
               <div class="text-body1">
                 Do you already have examples of the concepts to be taught?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, possuiExemplos: 'sim'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="possuiExemplos"
+                    v-model="aulaTeorica.possuiExemplos"
                     val="sim"
                     label="Yes"
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, possuiExemplos: 'nao'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="possuiExemplos"
+                    v-model="aulaTeorica.possuiExemplos"
                     val="nao"
                     label="No"
                   />
@@ -99,24 +101,24 @@
             </div>
             <div class="q-pa-md">
               <div class="q-gutter-sm">
-                <q-radio
+                <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoExemplo: 'correto'})"
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
-                  v-model="tipoExemplo"
+                  v-model="aulaTeorica.tipoExemplo"
                   val="correto"
                   label="Correct"
                 />
-                <q-radio
+                <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoExemplo: 'erroneo'})"
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
-                  v-model="tipoExemplo"
+                  v-model="aulaTeorica.tipoExemplo"
                   val="erroneo"
                   label="Incorrect"
                 />
               </div>
             </div>
 
-            <div v-show="tipoExemplo == 'correto' || tipoExemplo == 'erroneo'">
+            <div v-show="aulaTeorica.tipoExemplo == 'correto' || aulaTeorica.tipoExemplo == 'erroneo'">
               <div class="text-body1">
                 Select the students level.
                 <div class="text-body1 text-italic q-mt-sm">
@@ -127,17 +129,17 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, nivelAluno: 'iniciante'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="nivelAluno"
+                    v-model="aulaTeorica.nivelAluno"
                     val="iniciante"
                     label="Beginner"
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, nivelAluno: 'intermediario'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="nivelAluno"
+                    v-model="aulaTeorica.nivelAluno"
                     val="intermediario"
                     label="Intermediate"
                   />
@@ -146,24 +148,24 @@
             </div>
 
             <div
-              v-show="tipoExemplo == 'correto' && nivelAluno == 'intermediario'"
+              v-show="aulaTeorica.tipoExemplo == 'correto' && aulaTeorica.nivelAluno == 'intermediario'"
             >
               <div class="text-body1">
                 Do you want to combine this activity with another using incorrect examples?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, atividadeCombinada: 'sim'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="atividadeCombinada"
+                    v-model="aulaTeorica.atividadeCombinada"
                     val="sim"
                     label="Yes"
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, atividadeCombinada: 'nao'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="atividadeCombinada"
+                    v-model="aulaTeorica.atividadeCombinada"
                     val="nao"
                     label="No"
                   />
@@ -173,9 +175,9 @@
 
             <div
               v-show="
-                atividadeCombinada == 'sim' &&
-                tipoExemplo == 'correto' &&
-                nivelAluno == 'intermediario'
+                aulaTeorica.atividadeCombinada == 'sim' &&
+                aulaTeorica.tipoExemplo == 'correto' &&
+                aulaTeorica.includesnivelAluno == 'intermediario'
               "
             >
               <div class="text-body1">
@@ -183,17 +185,17 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, adicionarArtefato: 'sim'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="adicionarArtefato"
+                    v-model="aulaTeorica.adicionarArtefato"
                     val="sim"
                     label="Yes"
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, adicionarArtefato: 'nao'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="adicionarArtefato"
+                    v-model="aulaTeorica.adicionarArtefato"
                     val="nao"
                     label="No"
                   />
@@ -203,9 +205,9 @@
 
             <div
               v-show="
-                atividadeCombinada == 'sim' &&
-                tipoExemplo == 'correto' &&
-                nivelAluno == 'intermediario'
+                aulaTeorica.atividadeCombinada == 'sim' &&
+                aulaTeorica.tipoExemplo == 'correto' &&
+                aulaTeorica.nivelAluno == 'intermediario'
               "
             >
               <div class="text-body1">
@@ -213,17 +215,17 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, primeiraCorrecao: 'proprio'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="primeiraCorrecao"
+                    v-model="aulaTeorica.primeiraCorrecao"
                     val="proprio"
                     label="Students correct their own diagram"
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, primeiraCorrecao: 'unsDosOutros'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="primeiraCorrecao"
+                    v-model="aulaTeorica.primeiraCorrecao"
                     val="unsDosOutros"
                     label="Students correct another student's diagram"
                   />
@@ -231,23 +233,23 @@
               </div>
             </div>
 
-            <div v-show="tipoExemplo == 'erroneo' && nivelAluno == 'iniciante'">
+            <div v-show="aulaTeorica.tipoExemplo == 'erroneo' && aulaTeorica.nivelAluno == 'iniciante'">
               <div class="text-body1">
                 What type of artifact do you prefer to use at the beginning of the activity?
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoArtefatoInicio: 'dominio'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="tipoArtefatoInicio"
+                    v-model="aulaTeorica.tipoArtefatoInicio"
                     val="dominio"
                     label="Domain for students to perform modeling."
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoArtefatoInicio: 'modeloErros'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="tipoArtefatoInicio"
+                    v-model="aulaTeorica.tipoArtefatoInicio"
                     val="modeloErros"
                     label="Present a model with errors."
                   />
@@ -256,9 +258,9 @@
             </div>
             <div
               v-show="
-                tipoExemplo == 'erroneo' &&
-                nivelAluno == 'iniciante' &&
-                tipoArtefatoInicio == 'dominio'
+                aulaTeorica.tipoExemplo == 'erroneo' &&
+                aulaTeorica.nivelAluno == 'iniciante' &&
+                aulaTeorica.tipoArtefatoInicio == 'dominio'
               "
             >
               <div class="text-body1">
@@ -266,17 +268,17 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, adicionarArtefato: 'sim'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="adicionarArtefato"
+                    v-model="aulaTeorica.adicionarArtefato"
                     val="sim"
                     label="Yes"
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, adicionarArtefato: 'nao'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="adicionarArtefato"
+                    v-model="aulaTeorica.adicionarArtefato"
                     val="nao"
                     label="No"
                   />
@@ -286,9 +288,9 @@
 
             <div
               v-show="
-                tipoExemplo == 'erroneo' &&
-                nivelAluno == 'iniciante' &&
-                tipoArtefatoInicio == 'dominio'
+                aulaTeorica.tipoExemplo == 'erroneo' &&
+                aulaTeorica.nivelAluno == 'iniciante' &&
+                aulaTeorica.tipoArtefatoInicio == 'dominio'
               "
             >
               <div class="text-body1">
@@ -296,17 +298,17 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, primeiraCorrecao: 'proprio'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="primeiraCorrecao"
+                    v-model="aulaTeorica.primeiraCorrecao"
                     val="proprio"
                     label="Students correct their own diagram."
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, primeiraCorrecao: 'unsDosOutros'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="primeiraCorrecao"
+                    v-model="aulaTeorica.primeiraCorrecao"
                     val="unsDosOutros"
                     label="Students correct another student's diagram."
                   />
@@ -315,31 +317,31 @@
             </div>
 
             <div
-              v-show="tipoExemplo == 'erroneo' && nivelAluno == 'intermediario'"
+              v-show="aulaTeorica.tipoExemplo == 'erroneo' && aulaTeorica.nivelAluno == 'intermediario'"
             >
               <div class="text-body1">
                 Choose the type of activity you intend to use:
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoAtividadeIntermediario: 'modeloErros'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="tipoAtividadeIntermediario"
+                    v-model="aulaTeorica.tipoAtividadeIntermediario"
                     val="modeloErros"
                     label="Present a model with errors."
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoAtividadeIntermediario: 'jogo7erros'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="tipoAtividadeIntermediario"
+                    v-model="aulaTeorica.tipoAtividadeIntermediario"
                     val="jogo7erros"
                     label="Spot the 7 Errors Game"
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoAtividadeIntermediario: 'alunosIdentificandoErros'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="tipoAtividadeIntermediario"
+                    v-model="aulaTeorica.tipoAtividadeIntermediario"
                     val="alunosIdentificandoErros"
                     label="Students identifying errors"
                   />
@@ -349,9 +351,9 @@
 
             <div
               v-show="
-                tipoExemplo == 'erroneo' &&
-                nivelAluno == 'intermediario' &&
-                tipoAtividadeIntermediario == 'alunosIdentificandoErros'
+                aulaTeorica.tipoExemplo == 'erroneo' &&
+                aulaTeorica.nivelAluno == 'intermediario' &&
+                aulaTeorica.tipoAtividadeIntermediario == 'alunosIdentificandoErros'
               "
             >
               <div class="text-body1">
@@ -359,17 +361,17 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, incluirAulaAntiPadroes: 'sim'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="incluirAulaAntiPadroes"
+                    v-model="aulaTeorica.incluirAulaAntiPadroes"
                     val="sim"
                     label="Yes"
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, incluirAulaAntiPadroes: 'nao'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="incluirAulaAntiPadroes"
+                    v-model="aulaTeorica.incluirAulaAntiPadroes"
                     val="nao"
                     label="No"
                   />
@@ -385,40 +387,40 @@
             </div>
             <div class="q-pa-md">
               <div class="q-gutter-sm">
-                <q-radio
+                <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoDevolucao: 'escrito'})"
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
-                  v-model="tipoDevolucao"
+                  v-model="aulaTeorica.tipoDevolucao"
                   val="escrito"
                   label="Written submission"
                 />
-                <q-radio
+                <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoDevolucao: 'seminario'})"
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
-                  v-model="tipoDevolucao"
+                  v-model="aulaTeorica.tipoDevolucao"
                   val="seminario"
                   label="Seminar presentation"
                 />
               </div>
             </div>
 
-            <div v-show="tipoDevolucao == 'escrito'">
+            <div v-show="aulaTeorica.tipoDevolucao == 'escrito'">
               <div class="text-body1">
                 Select the desired type of feedback.
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoFeedback: 'individual'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="tipoFeedback"
+                    v-model="aulaTeorica.tipoFeedback"
                     val="individual"
                     label="Individual feedback"
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoFeedback: 'coletivo'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="tipoFeedback"
+                    v-model="aulaTeorica.tipoFeedback"
                     val="coletivo"
                     label="Collective Feedback"
                   />
@@ -426,22 +428,22 @@
               </div>
             </div>
             <div
-              v-show="tipoDevolucao == 'escrito' && tipoFeedback == 'coletivo'"
+              v-show="aulaTeorica.tipoDevolucao == 'escrito' && aulaTeorica.tipoFeedback == 'coletivo'"
             >
               <div class="text-body1">Select the type of solution.</div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoSolucao: 'exemploSolucao'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="tipoSolucao"
+                    v-model="aulaTeorica.tipoSolucao"
                     val="exemploSolucao"
                     label="Example of solution."
                   />
-                  <q-radio
+                  <q-radio @click="salvarAulaTeorica({...aulaTeorica, tipoSolucao: 'exemploAlunos'})"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
-                    v-model="tipoSolucao"
+                    v-model="aulaTeorica.tipoSolucao"
                     val="exemploAlunos"
                     label="Exemplary solutions from the students"
                   />
@@ -456,14 +458,14 @@
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="tab-aulaTeorica">
             <div class="text-h6">Recommended steps</div>
-            <p v-show="aulaTeorica == 'sim'">
+            <p v-show="aulaTeorica.conteudo == 'sim'">
               As the students have already been exposed to the content, proceed to the next options.
             </p>
 
             <!-- INICIO passos timeline salaInvertida -->
             <div
               id="q-app"
-              v-show="aulaTeorica == 'nao' && metodoEnsino == 'salaInvertida'"
+              v-show="aulaTeorica.conteudo == 'nao' && aulaTeorica.metodoEnsino == 'salaInvertida'"
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
@@ -483,7 +485,7 @@
                   <q-timeline-entry
                     title="Sources of Examples"
                     v-show="
-                      metodoEnsino == 'salaInvertida' && possuiExemplos == 'nao'
+                      aulaTeorica.metodoEnsino == 'salaInvertida' && aulaTeorica.possuiExemplos == 'nao'
                     "
                   >
                     <div class="text-body1">Link to the examples repository.</div>
@@ -503,7 +505,7 @@
             <!-- INICIO passos timeline aulaexpositiva -->
             <div
               id="q-app"
-              v-show="aulaTeorica == 'nao' && metodoEnsino == 'aulaexpositiva'"
+              v-show="aulaTeorica.conteudo == 'nao' && aulaTeorica.metodoEnsino == 'aulaexpositiva'"
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
@@ -516,8 +518,8 @@
                   <q-timeline-entry
                     title="Sources of Examples"
                     v-show="
-                      metodoEnsino == 'aulaexpositiva' &&
-                      possuiExemplos == 'nao'
+                      aulaTeorica.metodoEnsino == 'aulaexpositiva' &&
+                      aulaTeorica.possuiExemplos == 'nao'
                     "
                   >
                     <div class="text-body1">Link to the examples repository.</div>
@@ -540,7 +542,7 @@
             <!-- INICIO passos exemplos corretos Iniciante -->
             <div
               id="q-app"
-              v-show="tipoExemplo == 'correto' && nivelAluno == 'iniciante'"
+              v-show="aulaTeorica.tipoExemplo == 'correto' && aulaTeorica.nivelAluno == 'iniciante'"
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
@@ -583,7 +585,7 @@
             <!-- INICIO passos exemplos corretos intermediário -->
             <div
               id="q-app"
-              v-show="tipoExemplo == 'correto' && nivelAluno == 'intermediario'"
+              v-show="aulaTeorica.tipoExemplo == 'correto' && aulaTeorica.nivelAluno == 'intermediario'"
             >
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
@@ -611,7 +613,7 @@
                   </q-timeline-entry>
 
                   <!-- se for usar atividade combinada colocamos aqui -->
-                  <spam v-show="atividadeCombinada == 'sim'">
+                  <spam v-show="aulaTeorica.atividadeCombinada == 'sim'">
                     <q-timeline-entry title="Selecting anti-patterns">
                       <div class="text-body1">
                         The teacher selects the anti-patterns they want to teach. If none are available, perform a search in the
@@ -626,7 +628,7 @@
                       </div>
                     </q-timeline-entry>
                     <q-timeline-entry
-                      v-if="adicionarArtefato == 'sim'"
+                      v-if="aulaTeorica.adicionarArtefato == 'sim'"
                       title="Provide artifact"
                     >
                       <div class="text-body1">
@@ -634,13 +636,13 @@
                       </div>
                     </q-timeline-entry>
                     <q-timeline-entry
-                      v-if="primeiraCorrecao == 'proprio'"
+                      v-if="aulaTeorica.primeiraCorrecao == 'proprio'"
                       title="Diagram correction"
                     >
                       <div class="text-body1">Students correct their diagrams.</div>
                     </q-timeline-entry>
                     <q-timeline-entry
-                      v-if="primeiraCorrecao == 'unsDosOutros'"
+                      v-if="aulaTeorica.primeiraCorrecao == 'unsDosOutros'"
                       title="Diagram correction"
                     >
                       <div class="text-body1">
@@ -668,9 +670,9 @@
             <div
               id="q-app"
               v-show="
-                tipoExemplo == 'erroneo' &&
-                nivelAluno == 'iniciante' &&
-                tipoArtefatoInicio == 'dominio'
+                aulaTeorica.tipoExemplo == 'erroneo' &&
+                aulaTeorica.nivelAluno == 'iniciante' &&
+                aulaTeorica.tipoArtefatoInicio == 'dominio'
               "
             >
               <div class="q-px-lg q-pb-md">
@@ -698,7 +700,7 @@
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry
-                    v-if="adicionarArtefato == 'sim'"
+                    v-if="aulaTeorica.adicionarArtefato == 'sim'"
                     title="Provide artifact"
                   >
                     <div class="text-body1">
@@ -706,13 +708,13 @@
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry
-                    v-if="primeiraCorrecao == 'proprio'"
+                    v-if="aulaTeorica.primeiraCorrecao == 'proprio'"
                     title="Diagram correction"
                   >
                     <div class="text-body1">Students correct their diagrams.</div>
                   </q-timeline-entry>
                   <q-timeline-entry
-                    v-if="primeiraCorrecao == 'unsDosOutros'"
+                    v-if="aulaTeorica.primeiraCorrecao == 'unsDosOutros'"
                     title="Diagram correction"
                   >
                     <div class="text-body1">
@@ -738,9 +740,9 @@
             <div
               id="q-app"
               v-show="
-                tipoExemplo == 'erroneo' &&
-                nivelAluno == 'iniciante' &&
-                tipoArtefatoInicio == 'modeloErros'
+                aulaTeorica.tipoExemplo == 'erroneo' &&
+                aulaTeorica.nivelAluno == 'iniciante' &&
+                aulaTeorica.tipoArtefatoInicio == 'modeloErros'
               "
             >
               <div class="q-px-lg q-pb-md">
@@ -791,9 +793,9 @@
             <div
               id="q-app"
               v-show="
-                tipoExemplo == 'erroneo' &&
-                nivelAluno == 'intermediario' &&
-                tipoAtividadeIntermediario == 'modeloErros'
+                aulaTeorica.tipoExemplo == 'erroneo' &&
+                aulaTeorica.nivelAluno == 'intermediario' &&
+                aulaTeorica.tipoAtividadeIntermediario == 'modeloErros'
               "
             >
               <div class="q-px-lg q-pb-md">
@@ -844,9 +846,9 @@
             <div
               id="q-app"
               v-show="
-                tipoExemplo == 'erroneo' &&
-                nivelAluno == 'intermediario' &&
-                tipoAtividadeIntermediario == 'jogo7erros'
+                aulaTeorica.tipoExemplo == 'erroneo' &&
+                aulaTeorica.nivelAluno == 'intermediario' &&
+                aulaTeorica.tipoAtividadeIntermediario == 'jogo7erros'
               "
             >
               <div class="q-px-lg q-pb-md">
@@ -907,9 +909,9 @@
             <div
               id="q-app"
               v-show="
-                tipoExemplo == 'erroneo' &&
-                nivelAluno == 'intermediario' &&
-                tipoAtividadeIntermediario == 'alunosIdentificandoErros'
+                aulaTeorica.tipoExemplo == 'erroneo' &&
+                aulaTeorica.nivelAluno == 'intermediario' &&
+                aulaTeorica.tipoAtividadeIntermediario == 'alunosIdentificandoErros'
               "
             >
               <div class="q-px-lg q-pb-md">
@@ -937,7 +939,7 @@
                     </div>
                   </q-timeline-entry>
                   <q-timeline-entry
-                    v-show="incluirAulaAntiPadroes == 'sim'"
+                    v-show="aulaTeorica.incluirAulaAntiPadroes == 'sim'"
                     title="Presentation of anti-patterns"
                   >
                     <div class="text-body1">
@@ -961,7 +963,7 @@
           <q-tab-panel name="tab-feedback">
             <div class="text-h6">Recommended steps</div>
             <!-- INICIO passos feedback por escrito -->
-            <div id="q-app" v-show="tipoDevolucao == 'escrito'">
+            <div id="q-app" v-show="aulaTeorica.tipoDevolucao == 'escrito'">
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
                   <q-timeline-entry title="Written submission">
@@ -971,7 +973,7 @@
                   </q-timeline-entry>
                   <q-timeline-entry
                     v-show="
-                      tipoDevolucao == 'escrito' && tipoFeedback == 'individual'
+                      aulaTeorica.tipoDevolucao == 'escrito' && aulaTeorica.tipoFeedback == 'individual'
                     "
                     title="Written feedback"
                   >
@@ -981,9 +983,9 @@
                   </q-timeline-entry>
                   <q-timeline-entry
                     v-if="
-                      tipoDevolucao == 'escrito' &&
-                      tipoFeedback == 'coletivo' &&
-                      tipoSolucao == 'exemploSolucao'
+                      aulaTeorica.tipoDevolucao == 'escrito' &&
+                      aulaTeorica.tipoFeedback == 'coletivo' &&
+                      aulaTeorica.tipoSolucao == 'exemploSolucao'
                     "
                     title="Example of solution"
                   >
@@ -993,9 +995,9 @@
                   </q-timeline-entry>
                   <q-timeline-entry
                     v-if="
-                      tipoDevolucao == 'escrito' &&
-                      tipoFeedback == 'coletivo' &&
-                      tipoSolucao == 'exemploAlunos'
+                      aulaTeorica.tipoDevolucao == 'escrito' &&
+                      aulaTeorica.tipoFeedback == 'coletivo' &&
+                      aulaTeorica.tipoSolucao == 'exemploAlunos'
                     "
                     title="Exemplary solutions from students"
                   >
@@ -1009,7 +1011,7 @@
             <!-- FIM passos timeline feedback por escrito -->
 
             <!-- INICIO passos feedback por por seminários -->
-            <div id="q-app" v-show="tipoDevolucao == 'seminario'">
+            <div id="q-app" v-show="aulaTeorica.tipoDevolucao == 'seminario'">
               <div class="q-px-lg q-pb-md">
                 <q-timeline color="primary">
                   <q-timeline-entry title="Seminar presentation">
@@ -1045,9 +1047,17 @@
 </template>
 
 <script>
+import { LocalStorage } from 'quasar'
 import { ref } from 'vue'
 
 export default {
+
+  methods: {
+    salvarAulaTeorica (data) {
+      LocalStorage.set('aulaTeorica', data)
+    }
+  },
+
   setup () {
     return {
       tab: ref('tab-aulaTeorica')
@@ -1055,22 +1065,7 @@ export default {
   },
   data () {
     return {
-      aulaTeorica: '',
-      metodoEnsino: '',
-      possuiExemplos: '',
-
-      tipoExemplo: '',
-      nivelAluno: '',
-      atividadeCombinada: '',
-      tipoArtefatoInicio: '',
-      adicionarArtefato: '',
-      primeiraCorrecao: '',
-      tipoAtividadeIntermediario: '',
-      incluirAulaAntiPadroes: '',
-
-      tipoDevolucao: '',
-      tipoFeedback: '',
-      tipoSolucao: ''
+      aulaTeorica: LocalStorage.getItem('aulaTeorica') || ''
     }
   }
 }

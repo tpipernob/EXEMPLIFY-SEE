@@ -7,7 +7,7 @@ import { Loading, Notify } from 'quasar'
 const login = (data) => {
   return new Promise((resolve, reject) => {
     Loading.show()
-
+    console.log(data.email, data.password)
     signInWithEmailAndPassword(auth, data.email, data.password).then(userCredential => {
       Loading.hide()
       resolve(userCredential.user)

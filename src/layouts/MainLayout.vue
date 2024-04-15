@@ -12,6 +12,16 @@
         />
         <q-toolbar-title> {{titulo}} </q-toolbar-title>
 
+        <q-btn
+          flat
+          dense
+          round
+          icon="exit_to_app"
+          aria-label="Logout"
+          @click="handleLogout">
+          &nbsp;Logout
+        </q-btn>
+
         <div></div>
       </q-toolbar>
     </q-header>
@@ -38,6 +48,7 @@
 import { defineComponent, ref, computed } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 import { useRouter } from 'vue-router'
+import { signOut } from 'src/firebase/firebase-login'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -108,6 +119,16 @@ export default defineComponent({
       titulo,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
+      }
+    }
+  },
+  methods: {
+    async handleLogout () {
+      try {
+        await signOut()
+        this.$router.push('/')
+      } catch (error) {
+        console.error(error)
       }
     }
   }
