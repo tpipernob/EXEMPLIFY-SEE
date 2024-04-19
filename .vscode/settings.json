@@ -11,5 +11,8 @@
     "javascriptreact",
     "typescript",
     "vue"
-  ]
+  ],
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

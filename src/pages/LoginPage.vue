@@ -1,6 +1,4 @@
 <template>
-  <!-- Design template by Joabson Arley
-   https://github.com/Joabsonlg/quasar-template-->
 
   <q-card class="q-ma-xl">
    <div class="row">
@@ -42,6 +40,8 @@
          <div>
           <q-btn class="full-width fredoka" color="primary" label="Login" rounded
            type="submit"></q-btn>
+          <q-btn class="full-width q-mt-md" color="primary" label="Login com o Google"
+           rounded @click="googleSubmit"></q-btn>
 
           <div class="q-mt-lg">
            <div class="q-mt-sm">
@@ -61,7 +61,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import login from 'src/firebase/firebase-login.js'
+import login, { signInWithGoogle } from 'src/firebase/firebase-login.js'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
@@ -71,6 +71,15 @@ const user = reactive({
 })
 
 const form = ref(null)
+
+const googleSubmit = async () => {
+  try {
+    await signInWithGoogle()
+    router.push('/app')
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 const submit = async () => {
   if (form.value.validate()) {

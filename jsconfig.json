@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "/example-basedLearning/",
     "paths": {
       "src/*": [
         "src/*"

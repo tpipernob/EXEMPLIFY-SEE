@@ -1,7 +1,6 @@
-// src/firebase/firebase-login.js
 
 import { auth } from './index.js'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { Loading, Notify } from 'quasar'
 
 const login = (data) => {
@@ -20,6 +19,21 @@ const login = (data) => {
       reject(err.message)
     })
   })
+// ...
+}
+
+const signInWithGoogle = () => {
+  return new Promise((resolve, reject) => {
+    Loading.show()
+    const provider = new GoogleAuthProvider()
+    signInWithPopup(auth, provider).then(result => {
+      Loading.hide()
+      resolve(result.user)
+    }).catch(err => {
+      Loading.hide()
+      reject(err.message)
+    })
+  })
 }
 
 const signOut = () => {
@@ -35,5 +49,5 @@ const signOut = () => {
   })
 }
 
-export { login, signOut }
+export { login, signInWithGoogle, signOut }
 export default login
