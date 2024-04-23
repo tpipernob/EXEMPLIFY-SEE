@@ -8,7 +8,7 @@
       The purpose of this portal is to assist teachers in the use/adoption of Example-Based Learning during the teaching of Software Engineering.
     </p>
     <p class="text-body1">
-      You can use our <a href="#en/tutorial-page">tutorial</a>, which will help you build a step-by-step guide for incorporating examples in the classroom.
+      You can use our <a href="app/en/tutorial-page">tutorial</a>, which will help you build a step-by-step guide for incorporating examples in the classroom.
     </p>
     <p class="text-body1">
       You can also navigate through the menu and go directly to the desired topic if you already have a specific goal in mind.

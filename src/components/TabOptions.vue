@@ -27,7 +27,6 @@
             <div class="q-pa-md">
               <div class="q-gutter-sm">
                 <q-radio
-                    @click="salvarAulaTeorica({ ...aulaTeorica, conteudo: 'sim' })"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.conteudo"
@@ -35,7 +34,6 @@
                     label="Sim"
                 />
                 <q-radio
-                    @click="salvarAulaTeorica({ ...aulaTeorica, conteudo: 'nao' })"
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.conteudo"
@@ -51,14 +49,14 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, metodoEnsino: 'aulaExpositiva' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.metodoEnsino"
                     val="aulaExpositiva"
                     label="Aula Expositiva"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, metodoEnsino: 'salaInvertida' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.metodoEnsino"
@@ -75,14 +73,14 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, possuiExemplos: 'sim' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.possuiExemplos"
                     val="sim"
                     label="Sim"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, possuiExemplos: 'nao' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.possuiExemplos"
@@ -101,14 +99,14 @@
             </div>
             <div class="q-pa-md">
               <div class="q-gutter-sm">
-                <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoExemplo: 'correto' })"
+                <q-radio
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
                   v-model="aulaTeorica.tipoExemplo"
                   val="correto"
                   label="Corretos"
                 />
-                <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoExemplo: 'erroneo' })"
+                <q-radio
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
                   v-model="aulaTeorica.tipoExemplo"
@@ -129,14 +127,14 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, nivelAluno: 'iniciante' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.nivelAluno"
                     val="iniciante"
                     label="Iniciante"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, nivelAluno: 'intermediario' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.nivelAluno"
@@ -156,14 +154,14 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, atividadeCombinada: 'sim' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.atividadeCombinada"
                     val="sim"
                     label="Sim"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, atividadeCombinada: 'nao' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.atividadeCombinada"
@@ -187,14 +185,14 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, adicionarArtefato: 'sim' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.adicionarArtefato"
                     val="sim"
                     label="Sim"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, adicionarArtefato: 'nao' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.adicionarArtefato"
@@ -218,14 +216,14 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, primeiraCorrecao: 'proprio' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.primeiraCorrecao"
                     val="proprio"
                     label="Alunos corrigem o próprio diagrama"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, primeiraCorrecao: 'unsDosOutros' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.primeiraCorrecao"
@@ -242,14 +240,14 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoArtefatoInicio: 'dominio' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.tipoArtefatoInicio"
                     val="dominio"
                     label="Domínio para os alunos realizarem a modelagem"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoArtefatoInicio: 'modeloErros' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.tipoArtefatoInicio"
@@ -272,14 +270,14 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, adicionarArtefato: 'sim' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.adicionarArtefato"
                     val="sim"
                     label="Sim"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, adicionarArtefato: 'nao' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.adicionarArtefato"
@@ -303,14 +301,14 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, primeiraCorrecao: 'proprio' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.primeiraCorrecao"
                     val="proprio"
                     label="Alunos corrigem o próprio diagrama"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, primeiraCorrecao: 'unsDosOutros' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.primeiraCorrecao"
@@ -329,21 +327,21 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoAtividadeIntermediario: 'modeloErros' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.tipoAtividadeIntermediario"
                     val="modeloErros"
                     label="Apresentar um modelo com erros"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoAtividadeIntermediario: 'jogo7erros' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.tipoAtividadeIntermediario"
                     val="jogo7erros"
                     label="Jogo dos 7 erros"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoAtividadeIntermediario: 'alunosIdentificandoErros' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.tipoAtividadeIntermediario"
@@ -366,14 +364,14 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, incluirAulaAntiPadroes: 'sim' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.incluirAulaAntiPadroes"
                     val="sim"
                     label="Sim"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, incluirAulaAntiPadroes: 'nao' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.incluirAulaAntiPadroes"
@@ -392,14 +390,14 @@
             </div>
             <div class="q-pa-md">
               <div class="q-gutter-sm">
-                <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoDevolucao: 'escrito' })"
+                <q-radio
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
                   v-model="aulaTeorica.tipoDevolucao"
                   val="escrito"
                   label="Entrega por escrito"
                 />
-                <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoDevolucao: 'seminario' })"
+                <q-radio
                   checked-icon="task_alt"
                   unchecked-icon="panorama_fish_eye"
                   v-model="aulaTeorica.tipoDevolucao"
@@ -415,14 +413,14 @@
               </div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoFeedback: 'individual' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.tipoFeedback"
                     val="individual"
                     label="Individual"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoFeedback: 'coletivo' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.tipoFeedback"
@@ -438,14 +436,14 @@
               <div class="text-body1">Selecione o tipo de solução.</div>
               <div class="q-pa-md">
                 <div class="q-gutter-sm">
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoSolucao: 'exemploSolucao' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.tipoSolucao"
                     val="exemploSolucao"
                     label="Exemplo de solução"
                   />
-                  <q-radio @click = "salvarAulaTeorica({ ...aulaTeorica, tipoSolucao: 'exemploAlunos' })"
+                  <q-radio
                     checked-icon="task_alt"
                     unchecked-icon="panorama_fish_eye"
                     v-model="aulaTeorica.tipoSolucao"
@@ -1133,8 +1131,13 @@ export default {
   },
   data () {
     return {
-      aulaTeorica: LocalStorage.getItem('aulaTeorica') || ''
-
+      aulaTeorica: LocalStorage.getItem('aulaTeorica') || { conteudo: '' }
+    }
+  },
+  watch: {
+    'aulaTeorica.conteudo': function (novoValor, valorAntigo) {
+      // Adicione sua lógica aqui, por exemplo, salvar a aula teórica
+      this.salvarAulaTeorica({ ...this.aulaTeorica, conteudo: novoValor })
     }
   }
 }
