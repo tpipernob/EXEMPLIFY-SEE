@@ -2,7 +2,7 @@
   "name": "quasar-project",
   "version": "0.0.1",
   "description": "A Quasar Project",
-  "productName": "Aprendizagem Baseada em Exemplos",
+  "productName": "EXEMPLIFY-SEE",
   "author": "Tiago Piperno Bonetti <tiagopiperno@gmail.com>",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.5.2",
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.6.5",
     "firebase": "^10.8.1",

@@ -1,10 +1,11 @@
 // src/firebase/index.js
 
 import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { LocalStorage } from 'quasar'
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyDA7T1Fg6CSR1WJHpOeNdaRYuWKtyBA7GU',
   authDomain: 'app-ebl.firebaseapp.com',
   projectId: 'app-ebl',
@@ -14,6 +15,7 @@ const firebaseConfig = {
 }
 
 export const app = initializeApp(firebaseConfig)
+export const db = getFirestore(app)
 export const auth = getAuth(app)
 
 onAuthStateChanged(auth, (user) => {

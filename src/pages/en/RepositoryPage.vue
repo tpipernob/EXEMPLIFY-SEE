@@ -1,26 +1,19 @@
 <template>
-  <q-card :class="!$q.dark.isActive?'my-lg q-pa-md q-ma-sm bg-grey-2':'my-lg q-pa-md q-ma-sm bg-grey-8'">
+  <q-card :class="!$q.dark.isActive ? 'my-lg q-pa-md q-ma-sm bg-grey-2' : 'my-lg q-pa-md q-ma-sm bg-grey-8'">
     <q-toolbar>
-      <q-ribbon
-        position="left"
-        color="rgba(0,0,0,.58)"
-        background-color="#c0c0c0"
-        leaf-color="#a0a0a0"
-        leaf-position="bottom"
-        decoration="rounded-out"
-      >
-        <q-toolbar-title
-          class="example-title"
-          style="padding: 5px 20px;"
-        ><span class="ellipsis">Examples Repository</span></q-toolbar-title>
+      <q-ribbon position="left" color="rgba(0,0,0,.58)" background-color="#c0c0c0" leaf-color="#a0a0a0"
+        leaf-position="bottom" decoration="rounded-out">
+        <q-toolbar-title class="example-title" style="padding: 5px 20px;"><span class="ellipsis">Examples
+            Repository</span></q-toolbar-title>
       </q-ribbon>
     </q-toolbar>
     <q-card-section class="q-pb-sm">
       <code-tabs :tagParts="tagParts"></code-tabs>
     </q-card-section>
     <q-card-section>
-      <q-grid :data="data" :columns="columns" :columns_filter="false" :draggable="true" :fullscreen="true" :csv_download="false" :global_search="true" :groupby_filter="false" :header_filter="true" >
-        <template v-slot:body="props" >
+      <q-grid :data="data" :columns="columns" :columns_filter="false" :draggable="true" :fullscreen="true"
+        :csv_download="false" :global_search="true" :groupby_filter="false" :header_filter="true">
+        <template v-slot:body="props">
           <q-tr :props="props">
             <q-td key="exampleType">
               {{ props.row.exampleType }}
@@ -32,16 +25,14 @@
               {{ props.row.name }}
             </q-td>
             <q-td key="additionalInformation" style="white-space: pre-wrap;">
-                {{ props.row.additionalInformation }}
+              {{ props.row.additionalInformation }}
+            </q-td>
+            <q-td key="review">
+              <StarRating :key="props.row.additionalInformation" :docIdprop="props.row.additionalInformation"
+                :reviewIdprop="reviewId" />
             </q-td>
             <q-td key="link">
-              <q-btn
-                 flat
-                 label = ""
-                 :href = "props.row.link"
-                 target="_blank"
-                 icon="link"
-            />
+              <q-btn flat label="" :href="props.row.link" target="_blank" icon="link" />
             </q-td>
           </q-tr>
         </template>
@@ -51,11 +42,13 @@
 </template>
 
 <script>
+import StarRating from '../../components/StarRating.vue'
 
 export default {
-
-  data () {
+  data() {
     return {
+      reviewId: '',
+
       columns: [
         {
           name: 'exampleType',
@@ -83,6 +76,12 @@ export default {
           headerStyle: 'width: 0px'
         },
         { name: 'additionalInformation', align: 'left', label: 'Additional Information', field: 'additionalInformation' },
+        {
+          name: 'review',
+          label: 'Rating',
+          align: 'left',
+          field: 'review'
+        },
         { name: 'link', align: 'left', label: 'Link', field: 'link' }
       ],
       data: [
@@ -91,6 +90,7 @@ export default {
           exampleType: 'Erroneous Example',
           model: 'Use Case Diagram',
           additionalInformation: '21 Examples of Anti-patterns',
+          review: () => this.getRating('21 Examples of Anti-patterns'),
           link: 'https://faculty.kfupm.edu.sa/ICS/melattar/UCAntipatterns.htm'
 
         },
@@ -99,20 +99,23 @@ export default {
           exampleType: 'Erroneous Example',
           model: 'Class Diagram',
           additionalInformation: '31 Examples of Anti-patterns with Diagrams',
+          review: () => this.getRating('31 Examples of Anti-patterns with Diagrams'),
           link: 'https://sites.google.com/site/metamodelingantipatterns/catalog/uml'
         },
         {
           name: 'OpenSMALS',
           exampleType: 'Erroneous Example',
           model: 'Class Diagram',
-          additionalInformation: '6 Textual Examples',
+          additionalInformation: '6 Textual Examples (Erroneous Examples)',
+          review: () => this.getRating('6 Textual Examples (Erroneous Examples)'),
           link: 'https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxhY3RpdmVsZWFybmluZ21ldGhvZHN8Z3g6MTFhOGY2ZDBhMGY4MGZhMg'
         },
         {
           name: 'OpenSMALS',
           exampleType: 'Correct Example',
           model: 'Class Diagram',
-          additionalInformation: '6 Textual Examples',
+          additionalInformation: '6 Textual Examples (Correct Examples)',
+          review: () => this.getRating('6 Textual Examples (Correct Examples)'),
           link: 'https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxhY3RpdmVsZWFybmluZ21ldGhvZHN8Z3g6MzgxZjY3MzczOGE5NWNmNg'
         },
         {
@@ -120,13 +123,15 @@ export default {
           exampleType: 'Domain Example',
           model: 'Not specified',
           additionalInformation: '9 Examples of Domains That Can Be Used for Modeling',
+          review: () => this.getRating('9 Examples of Domains That Can Be Used for Modeling'),
           link: 'https://sites.google.com/site/activelearningmethods/escolha-aqui-seu-cenario'
         },
         {
           name: 'Article',
           exampleType: 'Correct and Erroneous Example',
           model: 'Class Diagram',
-          additionalInformation: 'Content in Appendix 1: Some Common Quality Issues and Corresponding Positive and Negative Examples',
+          additionalInformation: 'Contents in Appendix 1: Some common quality problems and corresponding positive and negative examples',
+          review: () => this.getRating('Contents in Appendix 1: Some common quality problems and corresponding positive and negative examples'),
           link: 'https://link.springer.com/chapter/10.1007/978-1-4419-7355-9_8'
         },
         {
@@ -134,6 +139,7 @@ export default {
           exampleType: 'Erroneous Example',
           model: 'Use Case Diagram',
           additionalInformation: 'Complete analysis of use case models of four real-world systems',
+          review: () => this.getRating('Complete analysis of use case models of four real-world systems'),
           link: 'http://www.steam.ualberta.ca/main/research_areas/AntiPatterns.htm'
         },
         {
@@ -141,10 +147,27 @@ export default {
           exampleType: 'Correct Example',
           model: 'Class Diagram',
           additionalInformation: 'A set of 609 labeled UML class diagrams.',
+          review: () => this.getRating('A set of 609 labeled UML class diagrams.'),
           link: 'https://zenodo.org/record/5037744#.Y3Y-eOzMLjh'
         }
       ]
     }
+  },
+  created() {
+    const storedString = localStorage.getItem('user')
+    if (storedString) {
+      const validJsonString = storedString.replace('__q_objt|', '')
+      try {
+        const storedObject = JSON.parse(validJsonString)
+        const uid = storedObject.uid
+        this.reviewId = uid
+      } catch (e) {
+        console.error('Parsing error:', e)
+      }
+    }
+  },
+  components: {
+    StarRating
   },
   props: {
     tagParts: {

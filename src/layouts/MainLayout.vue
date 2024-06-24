@@ -110,7 +110,7 @@ export default defineComponent({
       ]
     })
 
-    const titulo = computed(() => isEnglishRoute.value ? 'Example-Based Learning' : 'Aprendizagem Baseada em Exemplos')
+    const titulo = computed(() => isEnglishRoute.value ? 'EXEMPLIFY-SEE Portal' : 'Portal EXEMPLIFY-SEE')
 
     return {
       currentRoute: currentRouteName,
