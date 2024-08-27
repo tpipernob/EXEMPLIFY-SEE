@@ -102,7 +102,7 @@ export default defineComponent({
           route: { name: isEnglishRoute.value ? 'en-repository' : 'repository' }
         },
         {
-          title: isEnglishRoute.value ? 'Versão em Português' : 'Versão em Inglês',
+          title: isEnglishRoute.value ? 'Versão em Português' : 'English Version',
           caption: '',
           icon: 'info',
           route: { name: isEnglishRoute.value ? 'home' : 'en-home' }

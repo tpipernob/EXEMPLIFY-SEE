@@ -1,8 +1,9 @@
 <template>
   <div>
     <i v-for="index in 5" :key="index" class="fa fa-star" :class="rating >= index ? 'fas' : 'far'"
-      @mouseover="starOver(index)" @click="setRating(index)"></i>
+    @click="setRating(index)"></i>
   </div>
+  <p>{{ reviewAmount }} reviews ({{ reviewAverage }} stars)</p>
 </template>
 
 <script>
@@ -26,7 +27,9 @@ export default {
       rating: 0, // initial value
       temp_rating: null,
       docId: this.docIdprop, // replace with your document ID
-      reviewId: this.reviewIdprop // replace with your user's unique id
+      reviewId: this.reviewIdprop, // replace with your user's unique id
+      reviewAmount: 0,
+      reviewAverage: 0
     }
   },
   methods: {
@@ -36,6 +39,7 @@ export default {
     },
     async setRating (index) {
       this.temp_rating = index
+      this.rating = index
       await this.addOrUpdateReview(this.docId, this.reviewId, this.reviewId, this.temp_rating)
     },
     async getRatingFromApi () {
@@ -49,6 +53,8 @@ export default {
       ratingsSnapshot.forEach(doc => {
         totalRating += doc.data().value
         count++
+        this.reviewAmount = count
+        this.reviewAverage = parseFloat((totalRating / count).toFixed(1))
       })
       return (count === 0) ? 0 : totalRating / count
     },
