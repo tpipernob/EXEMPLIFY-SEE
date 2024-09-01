@@ -1,5 +1,8 @@
 <template>
-  <button @click="handleClick">Export to PDF</button>
+  <div>
+     <q-btn color="primary" @click="handleClick" style="margin-left: 16px" >Exportar para PDF</q-btn>
+     <q-btn color="primary"  @click="limparAulaTeorica" style="margin-left: 10px">Criar novo Plano de Aula</q-btn>
+  </div>
   <div class="q-pa-md" >
     <div class="q-gutter-y-md" style="">
       <q-card>
@@ -1522,6 +1525,11 @@ export default {
     salvarAulaTeorica (data) {
       console.log(data)
       LocalStorage.set('aulaTeorica', data)
+    },
+
+    limparAulaTeorica() {
+      LocalStorage.remove('aulaTeorica')
+      window.location.reload()
     },
 
     exportToPDF() {
