@@ -1678,7 +1678,7 @@ export default {
 
     limparAulaTeorica() {
       LocalStorage.remove('aulaTeorica')
-      window.location.reload()
+      this.aulaTeorica = { conteudo: '' }
     },
 
     exportToPDF() {

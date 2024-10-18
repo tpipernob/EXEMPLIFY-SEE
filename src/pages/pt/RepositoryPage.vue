@@ -80,6 +80,213 @@ export default {
       ],
       data: [
         {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diferentes tipos de diagramas UML',
+          additionalInformation: 'Vários diagramas UML de diferentes tipos, todos parte de um modelo simples de compras online',
+          info: 'Online Shopping',
+          review: () => this.getRating('Online Shopping'),
+          link: 'https://www.uml-diagrams.org/examples/online-shopping-example.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diferentes tipos de diagramas UML',
+          additionalInformation: 'Máquina de venda automática que vende e produz bilhetes para passageiros',
+          info: 'Ticket vending machine',
+          review: () => this.getRating('Ticket vending machine'),
+          link: 'https://www.uml-diagrams.org/ticket-vending-machine-uml-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diferentes tipos de diagramas UML',
+          additionalInformation: 'Modelo de caixa eletrônico bancário',
+          info: 'Bank ATM UML diagrams',
+          review: () => this.getRating('Bank ATM UML diagrams'),
+          link: 'https://www.uml-diagrams.org/examples/bank-atm-example.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diferentes tipos de diagramas UML',
+          additionalInformation: 'Modelo de Gestão Hospitalar',
+          info: 'Hospital Management UML diagrams',
+          review: () => this.getRating('Hospital Management UML diagrams'),
+          link: 'https://www.uml-diagrams.org/examples/hospital-management-example.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diferentes tipos de diagramas UML',
+          additionalInformation: 'Diagramas UML relacionados ao Padrão Digital Imaging and Communications in Medicine (DICOM)',
+          info: 'DICOM UML diagrams',
+          review: () => this.getRating('DICOM UML diagrams'),
+          link: 'https://www.uml-diagrams.org/dicom-uml-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diferentes tipos de diagramas UML',
+          additionalInformation: 'Diagramas UML de diferentes tipos, relacionados à tecnologia Java™ e APIs',
+          info: 'Java™ and APIs UML diagrams',
+          review: () => this.getRating('Java™ and APIs UML diagrams'),
+          link: 'https://www.uml-diagrams.org/examples/java-uml-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diferentes tipos de diagramas UML',
+          additionalInformation: 'Diagramas UML relacionados a SDKs Android e desenvolvimento de aplicativos',
+          info: 'Android SDK UML diagrams',
+          review: () => this.getRating('Android SDK UML diagrams'),
+          link: 'https://www.uml-diagrams.org/examples/android-uml-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diferentes tipos de diagramas UML',
+          additionalInformation: 'Diagramas UML com alguma descrição simplificada do domínio de licenciamento de software, casos de uso, processo, implementação e implantação usando a solução de segurança de licenciamento de software SafeNet Sentinel HASP',
+          info: 'Software licensing domain UML diagrams',
+          review: () => this.getRating('Software licensing domain UML diagrams'),
+          link: 'https://www.uml-diagrams.org/software-licensing-sentinel-uml-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Atividades',
+          additionalInformation: '8 diagramas de atividades',
+          info: 'Activity Diagrams',
+          review: () => this.getRating('Activity Diagrams'),
+          link: 'https://www.uml-diagrams.org/activity-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de classes',
+          additionalInformation: '13 diagramas de classes',
+          info: 'Class Diagrams',
+          review: () => this.getRating('Class Diagrams'),
+          link: 'https://www.uml-diagrams.org/activity-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Comunicação',
+          additionalInformation: 'Exemplo de diagrama de comunicação',
+          info: 'Communication Diagram',
+          review: () => this.getRating('Communication Diagram'),
+          link: 'https://www.uml-diagrams.org/communication-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Componentes',
+          additionalInformation: 'Exemplos de diagrama de componentes',
+          info: 'Component Diagrams',
+          review: () => this.getRating('Component Diagrams'),
+          link: 'https://www.uml-diagrams.org/component-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Estrutura Composta',
+          additionalInformation: 'Exemplos de diagrama de estrutura composta',
+          info: 'Composite Structure Diagrams',
+          review: () => this.getRating('Composite Structure Diagrams'),
+          link: 'https://www.uml-diagrams.org/composite-structure-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Instalação',
+          additionalInformation: '8 Exemplos de diagrama de instalação',
+          info: 'Deployment Diagrams',
+          review: () => this.getRating('Deployment Diagrams'),
+          link: 'https://www.uml-diagrams.org/deployment-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Fluxo',
+          additionalInformation: 'Exemplo de diagrama de fluxo de informações',
+          info: 'Information Flow Diagrams',
+          review: () => this.getRating('Information Flow Diagrams'),
+          link: 'https://www.uml-diagrams.org/information-flow-diagrams/scheduled-workflow-example.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Interação',
+          additionalInformation: 'Exemplos de diagrama de interação',
+          info: 'Interaction Overview Diagrams',
+          review: () => this.getRating('Interaction Overview Diagrams'),
+          link: 'https://www.uml-diagrams.org/interaction-overview-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Objeto',
+          additionalInformation: 'Exemplo de diagrama de objeto',
+          info: 'Object Diagrams',
+          review: () => this.getRating('Object Diagrams'),
+          link: 'https://www.uml-diagrams.org/online-shopping-user-login-uml-object-diagram-example.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Pacotes',
+          additionalInformation: 'Exemplos de diagramas de pacotes',
+          info: 'Package Diagrams',
+          review: () => this.getRating('Package Diagrams'),
+          link: 'https://www.uml-diagrams.org/package-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Perfil',
+          additionalInformation: 'Exemplos de diagramas de perfil',
+          info: 'Profile Diagrams',
+          review: () => this.getRating('Profile Diagrams'),
+          link: 'https://www.uml-diagrams.org/profile-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Sequência',
+          additionalInformation: 'Exemplos de diagramas de sequência',
+          info: 'Sequence Diagrams',
+          review: () => this.getRating('Sequence Diagrams'),
+          link: 'https://www.uml-diagrams.org/sequence-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Estados',
+          additionalInformation: 'Exemplos de diagramas de estados',
+          info: 'State Machine Diagrams',
+          review: () => this.getRating('State Machine Diagrams'),
+          link: 'https://www.uml-diagrams.org/state-machine-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Tempo',
+          additionalInformation: 'Exemplos de diagramas de tempo',
+          info: 'Timing Diagrams',
+          review: () => this.getRating('Timing Diagrams'),
+          link: 'https://www.uml-diagrams.org/timing-diagrams-examples.html'
+        },
+        {
+          name: 'UML Diagrams Examples',
+          exampleType: 'Exemplo Correto',
+          model: 'Diagrama de Casos de Uso',
+          additionalInformation: 'Exemplos de diagramas de casos de uso',
+          info: 'Use Case Diagrams',
+          review: () => this.getRating('Use Case Diagrams'),
+          link: 'https://www.uml-diagrams.org/use-case-diagrams-examples.html'
+        },
+        {
           name: 'Faculty',
           exampleType: 'Exemplo Errôneo',
           model: 'Diagrama de Caso de Uso',
