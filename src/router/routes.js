@@ -25,7 +25,8 @@ const routes = [
       { path: 'en/theory-page', name: 'en-teachingTheory', component: () => import('src/pages/en/TeachingTheoryPage.vue') },
       { path: 'en/activities-page', name: 'en-activities', component: () => import('src/pages/en/ActivitiesPage.vue') },
       { path: 'en/feedbacks-page', name: 'en-feedbacks', component: () => import('src/pages/en/FeedbacksPage.vue') },
-      { path: 'en/repository-page', name: 'en-repository', component: () => import('src/pages/en/RepositoryPage.vue') }
+      { path: 'en/repository-page', name: 'en-repository', component: () => import('src/pages/en/RepositoryPage.vue') },
+      { path: 'pt/exampleDetails-page', name: 'exampleDetails', component: () => import('src/pages/pt/ExampleDetails.vue') }
     ],
     meta: { auth: true }
   },
