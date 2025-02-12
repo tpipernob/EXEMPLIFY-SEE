@@ -1,9 +1,8 @@
 <template>
   <q-page padding>
-    <div class="column items-center q-mt-xl">
+    <div class="column">
       <!-- Card Principal -->
       <q-card class="card-box q-mb-md" style="max-width: 900px; width: 100%;">
-        <q-img :src="example.image" class="example-image" />
 
         <q-card-section>
           <div class="text-h6">{{ example.title }}</div>
@@ -17,10 +16,10 @@
           </div>
 
           <!-- Quantidade de downloads -->
-          <div class="row items-center q-mt-xs">
-            <q-icon name="cloud_download" color="blue" size="1.2em" />
-            <span class="q-ml-xs text-grey">{{ example.downloads }} downloads</span>
-          </div>
+<!--          <div class="row items-center q-mt-xs">-->
+<!--            <q-icon name="cloud_download" color="blue" size="1.2em" />-->
+<!--            <span class="q-ml-xs text-grey">{{ example.downloads }} downloads</span>-->
+<!--          </div>-->
         </q-card-section>
 
         <q-separator />
@@ -32,7 +31,13 @@
         <q-separator />
 
         <q-card-actions align="right">
-          <q-btn color="primary" label="Baixar Exemplo" icon="cloud_download" @click="downloadExample" />
+          <q-btn
+            color="primary"
+            label="Baixar Exemplo"
+            icon="cloud_download"
+            :href="example.download"
+            target="_blank"
+          />
         </q-card-actions>
       </q-card>
 
@@ -49,32 +54,43 @@
         <q-card-section>
           <q-list dense>
             <q-item>
-              <q-item-section>Tipo do Exemplo</q-item-section>
-              <q-item-section side>
-                <q-chip color="primary" text-color="white">{{ example.exampleType }}</q-chip>
+              <q-item-section class="text-weight-bold">Tipo do Exemplo</q-item-section>
+              <q-item-section>
+                <div class="text-wrap break-all">{{ example.exampleType }}</div>
               </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-section>Modelo</q-item-section>
-              <q-item-section side>
-                <span class="text-weight-bold">{{ example.model }}</span>
+              <q-item-section class="text-weight-bold">Modelo(s)</q-item-section>
+              <q-item-section>
+                <div class="text-wrap break-all">{{ example.model }}</div>
               </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-section>Autor</q-item-section>
-              <q-item-section side>{{ example.author }}</q-item-section>
+              <q-item-section class="text-weight-bold">Incluído por</q-item-section>
+              <q-item-section>
+                <div class="text-wrap break-all">{{ example.uploader }}</div>
+              </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-section>Última Atualização</q-item-section>
-              <q-item-section side>{{ example.lastUpdated }}</q-item-section>
+              <q-item-section class="text-weight-bold">Fonte</q-item-section>
+              <q-item-section>
+                <template v-if="isValidUrl(example.source)">
+                  <a :href="example.source" target="_blank" class="text-blue">{{ example.source }}</a>
+                </template>
+                <template v-else>
+                  <div class="text-wrap break-all">{{ example.source }}</div>
+                </template>
+              </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-section>Licença</q-item-section>
-              <q-item-section side>{{ example.license }}</q-item-section>
+              <q-item-section class="text-weight-bold">Última Atualização</q-item-section>
+              <q-item-section>
+                <div class="text-wrap break-all">{{ example.lastUpdated }}</div>
+              </q-item-section>
             </q-item>
           </q-list>
         </q-card-section>
@@ -96,10 +112,7 @@
         <!-- Lista de Avaliações -->
         <q-card-section v-for="review in paginatedReviews" :key="review.id">
           <div class="row items-center">
-            <q-avatar>
-              <img :src="review.avatar" />
-            </q-avatar>
-            <div class="q-ml-md">
+            <div class="">
               <div class="text-weight-bold">{{ review.name }}</div>
               <div class="text-grey text-caption">{{ review.date }}</div>
             </div>
@@ -149,16 +162,16 @@ export default defineComponent({
   name: 'ExampleDetails',
   setup() {
     const example = ref({
-      title: 'Exemplo de Interface Conversacional',
-      category: 'Chatbots e Assistentes Virtuais',
-      image: '/img/example-image.png',
-      description: 'Este exemplo demonstra a implementação de um assistente virtual para facilitar a navegação do usuário.',
-      downloads: 700,
+      title: 'Modelo de caixa eletrônico bancário',
+      category: 'Exemplo correto',
+      description: 'Descreve o funcionamento de um sistema de caixa eletrônico (ATM) de banco por meio de diferentes tipos de diagramas da Linguagem de Modelagem Unificada (UML). O objetivo é fornecer uma visão abrangente do sistema, detalhando tanto a estrutura quanto o comportamento do ATM.',
       exampleType: 'Exemplo correto',
-      model: 'Diagrama de Classe',
-      author: 'Prof. João Silva',
+      model: 'Diagrama de Classe - Diagrama de Caso de Uso - Diagrama de Estrutura Composta - Diagrama de Máquina de Estados',
+      uploader: 'Prof. João Silva',
+      source: 'https://www.uml-diagrams.org/examples/bank-atm-example.html#google_vignette',
       lastUpdated: '10 de Fevereiro de 2025',
-      license: 'MIT'
+      license: 'MIT',
+      download: 'https://drive.google.com/drive/folders/1W6LwqT1_rX-5IuFgHi9wQ1c2jNQWe1M5?usp=drive_link'
     })
 
     const reviews = ref([
@@ -205,7 +218,11 @@ export default defineComponent({
       }
     }
 
-    return { example, reviews, currentPage, totalPages, paginatedReviews, averageRating, reviewDialog, newReview, submitReview }
+    const isValidUrl = (url) => {
+      return url.startsWith('http://') || url.startsWith('https://')
+    }
+
+    return { example, reviews, currentPage, totalPages, paginatedReviews, averageRating, reviewDialog, newReview, submitReview, isValidUrl }
   }
 })
 </script>
