@@ -1,7 +1,7 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="print-hide">
-      <q-toolbar>
+  <q-layout view="hHh Lpr lFf" class="bg-grey-1">
+    <q-header elevated class="print-hide q-py-xs" height-hint="58">
+      <q-toolbar >
         <q-btn
           flat
           dense
@@ -12,23 +12,59 @@
         />
         <q-toolbar-title> {{titulo}} </q-toolbar-title>
 
-        <q-btn
-          flat
-          dense
-          round
-          icon="exit_to_app"
-          aria-label="Logout"
-          @click="handleLogout">
-          &nbsp;Logout
+<!--        <q-btn-->
+<!--          flat-->
+<!--          dense-->
+<!--          round-->
+<!--          icon="exit_to_app"-->
+<!--          aria-label="Logout"-->
+<!--          @click="handleLogout">-->
+<!--          &nbsp;Logout-->
+<!--        </q-btn>-->
+        <q-btn flat no-wrap>
+          <q-avatar size="30px" icon="person">
+          </q-avatar>
+          <q-icon name="arrow_drop_down" size="20px" />
+
+          <q-menu auto-close>
+            <q-list dense>
+              <q-item class="GL__menu-link-signed-in">
+                <q-item-section>
+                  <div><strong>Tiago Piperno Bonetti</strong></div>
+                </q-item-section>
+              </q-item>
+              <q-separator />
+              <q-item clickable class="GL__menu-link">
+                <q-item-section>Perfil</q-item-section>
+              </q-item>
+              <q-item clickable class="GL__menu-link">
+                <q-item-section>Meus exemplos</q-item-section>
+              </q-item>
+              <q-item clickable class="GL__menu-link">
+                <q-item-section>Minhas avaliações</q-item-section>
+              </q-item>
+              <q-item clickable class="GL__menu-link">
+                <q-item-section>Exemplos favoritos</q-item-section>
+              </q-item>
+              <q-separator />
+              <q-item clickable class="GL__menu-link">
+                <q-item-section @click="handleLogout">Logout</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
         </q-btn>
 
         <div></div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header> Menu </q-item-label>
+    <q-drawer
+      v-model="leftDrawerOpen"
+      show-if-above
+      bordered
+      class="bg-grey-3"
+    >
+      <q-list padding>
 
         <EssentialLink
           v-for="link in essentialLinks"
