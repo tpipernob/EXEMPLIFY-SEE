@@ -62,7 +62,7 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      class="bg-grey-3"
+      class="bg-blue-grey-2"
       :width="240"
     >
       <q-list padding>
