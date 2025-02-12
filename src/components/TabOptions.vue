@@ -1,8 +1,45 @@
 <template>
-  <!-- <button @click="handleClick">Exportar para PDF</button> -->
-  <div>
-     <q-btn color="primary" @click="handleClick" style="margin-left: 16px" >Exportar para PDF</q-btn>
-     <q-btn color="primary"  @click="limparAulaTeorica" style="margin-left: 10px">Criar novo Plano de Aula</q-btn>
+  <div class="q-pa-md">
+    <q-card class="q-pa-md">
+      <div class="text-h6">Gerenciar Plano de Aula</div>
+
+      <!-- Botões principais -->
+      <div class="q-mt-md">
+        <q-btn color="primary" @click="handleClick">Exportar para PDF</q-btn>
+        <q-btn color="primary" class="q-ml-md" @click="limparAulaTeorica">Criar novo Plano de Aula</q-btn>
+        <q-btn color="primary" class="q-ml-md" @click="abrirDialogoSalvar">Salvar Plano de Aula</q-btn>
+      </div>
+
+      <q-separator class="q-my-md" />
+
+      <div class="text-h6">Planos Salvos</div>
+      <q-list bordered separator>
+        <q-item v-for="(plano, index) in planosSalvos" :key="index">
+          <q-item-section>
+            <q-item-label>{{ plano.nome }}</q-item-label>
+          </q-item-section>
+          <q-item-section side>
+            <q-btn color="primary" flat label="Carregar" @click="carregarPlano(plano)" />
+            <q-btn color="red" flat label="Excluir" @click="excluirPlano(plano.nome)" />
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-card>
+
+    <!-- Diálogo para salvar o plano -->
+    <q-dialog v-model="dialogoSalvar">
+      <q-card class="q-pa-md" style="max-width: 400px; width: 100%;">
+        <q-card-section>
+          <div class="text-h6">Salvar Plano de Aula</div>
+          <q-input v-model="nomePlano" label="Digite o nome do plano" outlined class="q-mt-md" />
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Cancelar" color="grey" v-close-popup />
+          <q-btn color="primary" label="Salvar" @click="salvarPlanoAula" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </div>
   <div class="q-pa-md">
     <div class="q-gutter-y-md" style="">
@@ -1665,8 +1702,8 @@
 </template>
 
 <script>
-import { LocalStorage } from 'quasar'
-import { ref } from 'vue'
+import { LocalStorage, useQuasar } from 'quasar'
+import { ref, onMounted } from 'vue'
 import html2pdf from 'html2pdf.js'
 
 export default {
@@ -1748,7 +1785,93 @@ export default {
   },
 
   setup () {
+    const $q = useQuasar()
+    const nomePlano = ref('')
+    const dialogoSalvar = ref(false)
+    const planosSalvos = ref(LocalStorage.getItem('planosSalvos') || [])
+
+    // Verifica se há um plano carregado após a recarga da página
+    onMounted(() => {
+      const planoCarregado = LocalStorage.getItem('planoCarregado')
+      if (planoCarregado) {
+        $q.notify({
+          message: `Plano "${planoCarregado}" carregado com sucesso!`,
+          color: 'info',
+          icon: 'info',
+          timeout: 3000
+        })
+
+        // Remove a chave do LocalStorage para que a mensagem não apareça novamente
+        LocalStorage.remove('planoCarregado')
+      }
+    })
+
+    // Abre o diálogo para salvar o plano
+    const abrirDialogoSalvar = () => {
+      nomePlano.value = ''
+      dialogoSalvar.value = true
+    }
+
+    // Salva o plano de aula no LocalStorage
+    const salvarPlanoAula = () => {
+      if (!nomePlano.value.trim()) {
+        $q.notify({
+          message: 'Por favor, insira um nome para o plano.',
+          color: 'negative', // Vermelho para erro
+          icon: 'error'
+        })
+        return
+      }
+
+      const novoPlano = {
+        nome: nomePlano.value.trim(),
+        dados: LocalStorage.getItem('aulaTeorica') || {}
+      }
+
+      planosSalvos.value.push(novoPlano)
+      LocalStorage.set('planosSalvos', planosSalvos.value)
+
+      $q.notify({
+        message: `Plano "${novoPlano.nome}" salvo com sucesso!`,
+        color: 'positive', // Verde para sucesso
+        icon: 'check_circle',
+        timeout: 3000 // Desaparece após 3 segundos
+      })
+
+      dialogoSalvar.value = false // Fecha o diálogo
+    }
+
+    // Carregar um plano salvo
+    const carregarPlano = (plano) => {
+      LocalStorage.set('aulaTeorica', plano.dados)
+
+      // Armazena no LocalStorage para exibir a notificação após o reload
+      LocalStorage.set('planoCarregado', plano.nome)
+
+      // Recarrega a página
+      location.reload()
+    }
+
+    // Excluir um plano salvo
+    const excluirPlano = (nome) => {
+      planosSalvos.value = planosSalvos.value.filter(plano => plano.nome !== nome)
+      LocalStorage.set('planosSalvos', planosSalvos.value)
+
+      $q.notify({
+        message: `Plano "${nome}" foi removido.`,
+        color: 'warning', // Amarelo para avisos
+        icon: 'delete',
+        timeout: 3000
+      })
+    }
     return {
+      nomePlano,
+      dialogoSalvar,
+      planosSalvos,
+      abrirDialogoSalvar,
+      salvarPlanoAula,
+      carregarPlano,
+      excluirPlano,
       tab: ref('tab-aulaTeorica')
     }
   },

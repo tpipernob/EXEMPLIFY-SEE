@@ -38,6 +38,9 @@
                 <q-item-section>Perfil</q-item-section>
               </q-item>
               <q-item clickable class="GL__menu-link">
+                <q-item-section>Meus planos de aula</q-item-section>
+              </q-item>
+              <q-item clickable class="GL__menu-link">
                 <q-item-section>Meus exemplos</q-item-section>
               </q-item>
               <q-item clickable class="GL__menu-link">
