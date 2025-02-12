@@ -63,6 +63,7 @@
       show-if-above
       bordered
       class="bg-grey-3"
+      :width="240"
     >
       <q-list padding>
 
