@@ -4,26 +4,43 @@
       <div class="text-h6">Gerenciar Plano de Aula</div>
 
       <!-- Botões principais -->
-      <div class="q-mt-md">
-        <q-btn color="primary" @click="handleClick">Exportar para PDF</q-btn>
-        <q-btn color="primary" class="q-ml-md" @click="limparAulaTeorica">Criar novo Plano de Aula</q-btn>
-        <q-btn color="primary" class="q-ml-md" @click="abrirDialogoSalvar">Salvar Plano de Aula</q-btn>
+      <div class="q-mt-md q-gutter-sm row">
+        <q-btn color="primary" icon="picture_as_pdf" label="Exportar para PDF" @click="handleClick" class="col-xs-12 col-sm-auto" />
+        <q-btn color="primary" icon="add" label="Criar novo Plano de Aula" @click="limparAulaTeorica" class="col-xs-12 col-sm-auto" />
+        <q-btn color="primary" icon="save" label="Salvar Plano de Aula" @click="abrirDialogoSalvar" class="col-xs-12 col-sm-auto" />
       </div>
 
-      <q-separator class="q-my-md" />
+      <q-expansion-item
+        expand-separator
+        icon="folder"
+        label="Planos Salvos"
+        class="q-mt-md"
+      >
+        <q-list bordered separator>
+          <q-item v-for="(plano, index) in planosSalvos" :key="index">
+            <q-item-section>
+              <q-item-label>{{ plano.nome }}</q-item-label>
+            </q-item-section>
+            <q-item-section side class="q-gutter-sm">
+              <q-btn
+                class="full-width"
+                color="primary"
+                icon="cloud_download"
+                label="Carregar"
+                @click="carregarPlano(plano)"
+              />
+              <q-btn
+                class="full-width"
+                color="negative"
+                icon="delete"
+                label="Excluir"
+                @click="excluirPlano(plano.nome)"
+              />
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-expansion-item>
 
-      <div class="text-h6">Planos Salvos</div>
-      <q-list bordered separator>
-        <q-item v-for="(plano, index) in planosSalvos" :key="index">
-          <q-item-section>
-            <q-item-label>{{ plano.nome }}</q-item-label>
-          </q-item-section>
-          <q-item-section side>
-            <q-btn color="primary" flat label="Carregar" @click="carregarPlano(plano)" />
-            <q-btn color="red" flat label="Excluir" @click="excluirPlano(plano.nome)" />
-          </q-item-section>
-        </q-item>
-      </q-list>
     </q-card>
 
     <!-- Diálogo para salvar o plano -->
