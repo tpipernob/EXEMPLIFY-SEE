@@ -70,8 +70,39 @@
     >
       <q-list padding>
 
+        <HomeLink
+          v-for="link in homeLinks"
+          :key="link.title"
+          v-bind="link"
+        />
+
+        <q-separator class="q-mb-sm" />
+
+        <q-item-label header class="text-weight-bold text-uppercase">
+          Plano de aula
+        </q-item-label>
+
         <EssentialLink
           v-for="link in essentialLinks"
+          :key="link.title"
+          v-bind="link"
+        />
+        <q-separator class="q-mb-sm" />
+
+        <q-item-label header class="text-weight-bold text-uppercase">
+          Etapas da Abordagem
+        </q-item-label>
+
+        <StepsLink
+          v-for="link in stepsLinks"
+          :key="link.title"
+          v-bind="link"
+        />
+
+        <q-separator class="q-mb-sm" />
+
+        <LanguageLink
+          v-for="link in languageLinks"
           :key="link.title"
           v-bind="link"
         />
@@ -87,6 +118,9 @@
 <script>
 import { defineComponent, ref, computed } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import StepsLink from 'components/StepsLink.vue'
+import HomeLink from 'components/HomeLink.vue'
+import LanguageLink from 'components/LanguageLink.vue'
 import { useRouter } from 'vue-router'
 import { signOut } from 'src/firebase/firebase-login'
 
@@ -94,7 +128,10 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+    EssentialLink,
+    StepsLink,
+    HomeLink,
+    LanguageLink
   },
 
   setup () {
@@ -103,20 +140,46 @@ export default defineComponent({
     const currentRouteName = computed(() => router.currentRoute.value.name)
     const isEnglishRoute = computed(() => currentRouteName.value.includes('en'))
 
-    const essentialLinks = computed(() => {
+    const homeLinks = computed(() => {
       return [
         {
           title: 'Home',
           caption: '',
           icon: 'home',
           route: { name: isEnglishRoute.value ? 'en-home' : 'home' }
-        },
+        }
+      ]
+    })
+    const essentialLinks = computed(() => {
+      return [
         {
-          title: isEnglishRoute.value ? 'Tutorial' : 'Tutorial',
+          title: isEnglishRoute.value ? 'Tutorial' : 'Criar Plano de Aula',
           caption: '',
-          icon: 'explore',
+          icon: 'edit_note',
           route: { name: isEnglishRoute.value ? 'en-tutorial' : 'tutorial' }
         },
+        {
+          title: isEnglishRoute.value ? 'Tutorial' : 'Meus Planos de Aula',
+          caption: '',
+          icon: 'assignment',
+          route: { name: isEnglishRoute.value ? 'en-tutorial' : '/' }
+        },
+        {
+          title: isEnglishRoute.value ? 'Tutorial' : 'Galeria de Planos de Aula',
+          caption: '',
+          icon: 'collections_bookmark',
+          route: { name: isEnglishRoute.value ? 'en-tutorial' : '/' }
+        },
+        {
+          title: isEnglishRoute.value ? 'Repository' : 'Repositório de Exemplos',
+          caption: '',
+          icon: 'folder',
+          route: { name: isEnglishRoute.value ? 'en-repository' : 'repository' }
+        }
+      ]
+    })
+    const stepsLinks = computed(() => {
+      return [
         {
           title: isEnglishRoute.value ? 'Teaching Theory' : 'Ensino da Teoria',
           caption: '',
@@ -126,21 +189,19 @@ export default defineComponent({
         {
           title: isEnglishRoute.value ? 'Activities' : 'Atividades',
           caption: '',
-          icon: 'tips_and_updates',
+          icon: 'checklist',
           route: { name: isEnglishRoute.value ? 'en-activities' : 'activities' }
         },
         {
           title: isEnglishRoute.value ? 'Feedbacks' : 'Feedbacks',
           caption: '',
-          icon: 'chat',
+          icon: 'rate_review',
           route: { name: isEnglishRoute.value ? 'en-feedbacks' : 'feedbacks' }
-        },
-        {
-          title: isEnglishRoute.value ? 'Repository' : 'Repositório',
-          caption: '',
-          icon: 'folder',
-          route: { name: isEnglishRoute.value ? 'en-repository' : 'repository' }
-        },
+        }
+      ]
+    })
+    const languageLinks = computed(() => {
+      return [
         {
           title: isEnglishRoute.value ? 'Versão em Português' : 'English Version',
           caption: '',
@@ -155,6 +216,9 @@ export default defineComponent({
     return {
       currentRoute: currentRouteName,
       essentialLinks,
+      stepsLinks,
+      homeLinks,
+      languageLinks,
       leftDrawerOpen,
       titulo,
       toggleLeftDrawer () {
