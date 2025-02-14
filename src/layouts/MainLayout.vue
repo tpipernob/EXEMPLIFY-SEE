@@ -153,25 +153,25 @@ export default defineComponent({
     const essentialLinks = computed(() => {
       return [
         {
-          title: isEnglishRoute.value ? 'Tutorial' : 'Criar Plano de Aula',
+          title: isEnglishRoute.value ? 'Create Lesson Plan' : 'Criar Plano de Aula',
           caption: '',
           icon: 'edit_note',
           route: { name: isEnglishRoute.value ? 'en-tutorial' : 'tutorial' }
         },
         {
-          title: isEnglishRoute.value ? 'Tutorial' : 'Meus Planos de Aula',
+          title: isEnglishRoute.value ? 'My Lesson Plans' : 'Meus Planos de Aula',
           caption: '',
           icon: 'assignment',
           route: { name: isEnglishRoute.value ? 'en-tutorial' : '/' }
         },
         {
-          title: isEnglishRoute.value ? 'Tutorial' : 'Galeria de Planos de Aula',
+          title: isEnglishRoute.value ? 'Lesson Plan Gallery' : 'Galeria de Planos de Aula',
           caption: '',
           icon: 'collections_bookmark',
           route: { name: isEnglishRoute.value ? 'en-tutorial' : '/' }
         },
         {
-          title: isEnglishRoute.value ? 'Repository' : 'Repositório de Exemplos',
+          title: isEnglishRoute.value ? 'Example Repository' : 'Repositório de Exemplos',
           caption: '',
           icon: 'folder',
           route: { name: isEnglishRoute.value ? 'en-repository' : 'repository' }
