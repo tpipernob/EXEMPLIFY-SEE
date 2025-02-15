@@ -19,41 +19,152 @@
         <q-list bordered separator>
           <q-item v-for="(plano, index) in planosSalvos" :key="index">
             <q-item-section>
-              <q-item-label>{{ plano.nome }}</q-item-label>
+              <!-- Nome do plano maior e destacado -->
+              <q-item-label class="text-bold text-subtitle1">
+                {{ plano.nome }}
+              </q-item-label>
+
+              <!-- Descrição menor e discreta -->
+              <q-item-label class="text-caption">
+                {{ plano.descricao || "Sem descrição disponível" }}
+              </q-item-label>
+
+              <!-- Informação de público/privado sem itálico -->
+              <q-item-label class="text-body2">
+                <q-icon :name="plano.publico ? 'public' : 'lock'" color="blue" class="q-mr-xs" />
+                {{ plano.publico ? "Público" : "Privado" }}
+              </q-item-label>
             </q-item-section>
-            <q-item-section side class="q-gutter-sm">
-              <q-btn
-                class="full-width"
-                color="primary"
-                icon="cloud_download"
-                label="Carregar"
-                @click="carregarPlano(plano)"
-              />
-              <q-btn
-                class="full-width"
-                color="negative"
-                icon="delete"
-                label="Excluir"
-                @click="excluirPlano(plano.nome)"
-              />
+
+            <q-item-section side>
+              <div class="q-gutter-sm row">
+                <q-btn
+                  color="primary"
+                  icon="cloud_download"
+                  label="Carregar"
+                  unelevated
+                  class="col-12 col-sm-auto"
+                  @click="carregarPlano(plano)"
+                />
+                <q-btn
+                  color="secondary"
+                  icon="edit"
+                  label="Editar"
+                  unelevated
+                  class="col-12 col-sm-auto"
+                  @click="abrirEdicao(plano, index)"
+                />
+                <q-btn
+                  color="negative"
+                  icon="delete"
+                  label="Excluir"
+                  unelevated
+                  class="col-12 col-sm-auto"
+                  @click="confirmarExclusao(plano, index)"
+                />
+              </div>
             </q-item-section>
+
+            <!-- Diálogo de Confirmação para Exclusão -->
+            <q-dialog v-model="dialogoConfirmacao">
+              <q-card class="q-pa-md" style="max-width: 400px;">
+                <q-card-section>
+                  <div class="text-h6">Confirmar Exclusão</div>
+                  <p>Tem certeza de que deseja excluir o plano <strong>{{ planoParaExcluir?.nome }}</strong>? Esta ação não pode ser desfeita.</p>
+                </q-card-section>
+
+                <q-card-actions align="right" class="q-gutter-sm">
+                  <q-btn flat label="Cancelar" color="grey" v-close-popup />
+                  <q-btn color="negative" label="Excluir" @click="excluirPlanoConfirmado" />
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
           </q-item>
         </q-list>
       </q-expansion-item>
-
     </q-card>
+
+    <q-dialog v-model="dialogoEditar">
+      <q-card class="q-pa-md" style="max-width: 450px; width: 100%;">
+        <q-card-section>
+          <div class="text-h6">Editar Plano de Aula</div>
+
+          <!-- Campo para editar nome -->
+          <q-input
+            v-model="planoEditado.nome"
+            label="Nome do plano"
+            outlined
+            class="q-mt-md"
+          />
+
+          <!-- Campo para editar descrição -->
+          <q-input
+            v-model="planoEditado.descricao"
+            label="Descrição do plano"
+            outlined
+            type="textarea"
+            class="q-mt-md"
+          />
+
+          <!-- Opção para definir se o plano é público -->
+          <q-checkbox
+            v-model="planoEditado.publico"
+            label="Tornar plano público"
+            class="q-mt-md"
+          />
+          <q-banner v-if="planoEditado.publico" dense class="bg-grey-2 q-mt-sm">
+            <q-icon name="info" color="blue" class="q-mr-sm" />
+            Ao tornar este plano público, ele ficará visível para outros usuários do site.
+          </q-banner>
+        </q-card-section>
+
+        <q-card-actions align="right" class="q-gutter-sm">
+          <q-btn flat label="Cancelar" color="grey" v-close-popup />
+          <q-btn color="primary" label="Salvar Alterações" @click="salvarEdicao" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
 
     <!-- Diálogo para salvar o plano -->
     <q-dialog v-model="dialogoSalvar">
-      <q-card class="q-pa-md" style="max-width: 400px; width: 100%;">
+      <q-card class="q-pa-md" style="max-width: 450px; width: 100%;">
         <q-card-section>
           <div class="text-h6">Salvar Plano de Aula</div>
-          <q-input v-model="nomePlano" label="Digite o nome do plano" outlined class="q-mt-md" />
+
+          <!-- Campo para nome do plano -->
+          <q-input
+            v-model="nomePlano"
+            label="Nome do plano"
+            outlined
+            class="q-mt-md"
+          />
+
+          <!-- Campo para descrição do plano -->
+          <q-input
+            v-model="descricaoPlano"
+            label="Descrição do plano"
+            outlined
+            type="textarea"
+            class="q-mt-md"
+          />
+
+          <!-- Caixa de seleção para tornar o plano público -->
+          <q-checkbox
+            v-model="planoPublico"
+            label="Tornar plano público"
+            class="q-mt-md"
+          />
+
+          <!-- Explicação sobre planos públicos -->
+          <q-banner v-if="planoPublico" dense class="bg-grey-2 q-mt-sm">
+            <q-icon name="info" color="blue" class="q-mr-sm" />
+            Ao tornar este plano público, ele ficará visível para outros usuários do site.
+          </q-banner>
         </q-card-section>
 
-        <q-card-actions align="right">
-          <q-btn flat label="Cancelar" color="grey" v-close-popup />
-          <q-btn color="primary" label="Salvar" @click="salvarPlanoAula" />
+        <q-card-actions align="right" class="q-gutter-sm">
+          <q-btn flat label="Cancelar" color="grey" class="full-width" v-close-popup />
+          <q-btn color="primary" label="Salvar" class="full-width" @click="salvarPlanoAula" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -1804,10 +1915,17 @@ export default {
   setup () {
     const $q = useQuasar()
     const nomePlano = ref('')
+    const descricaoPlano = ref('')
+    const planoPublico = ref(false)
     const dialogoSalvar = ref(false)
     const planosSalvos = ref(LocalStorage.getItem('planosSalvos') || [])
-
-    // Verifica se há um plano carregado após a recarga da página
+    const dialogoEditar = ref(false)
+    const planoEditado = ref({})
+    const indicePlanoEditado = ref(null)
+    const dialogoConfirmacao = ref(false)
+    const planoParaExcluir = ref(null)
+    const indicePlanoParaExcluir = ref(null)
+    // Exibir notificação se um plano for carregado após o reload
     onMounted(() => {
       const planoCarregado = LocalStorage.getItem('planoCarregado')
       if (planoCarregado) {
@@ -1817,19 +1935,39 @@ export default {
           icon: 'info',
           timeout: 3000
         })
-
-        // Remove a chave do LocalStorage para que a mensagem não apareça novamente
-        LocalStorage.remove('planoCarregado')
+        LocalStorage.remove('planoCarregado') // Remove para evitar notificações repetidas
       }
     })
 
-    // Abre o diálogo para salvar o plano
+    // Função para abrir o diálogo de edição
+    const abrirEdicao = (plano, index) => {
+      planoEditado.value = { ...plano } // Clona o plano para edição
+      indicePlanoEditado.value = index
+      dialogoEditar.value = true
+    }
+
+    // Função para salvar as alterações
+    const salvarEdicao = () => {
+      if (!planoEditado.value.nome.trim()) {
+        $q.notify({ type: 'negative', message: 'O nome do plano é obrigatório!' })
+        return
+      }
+
+      planosSalvos.value[indicePlanoEditado.value] = { ...planoEditado.value }
+      LocalStorage.set('planosSalvos', planosSalvos.value)
+
+      $q.notify({ type: 'positive', message: 'Plano atualizado com sucesso!' })
+      dialogoEditar.value = false
+    }
+    // Abre o diálogo para salvar um novo plano de aula
     const abrirDialogoSalvar = () => {
       nomePlano.value = ''
+      descricaoPlano.value = ''
+      planoPublico.value = false
       dialogoSalvar.value = true
     }
 
-    // Salva o plano de aula no LocalStorage
+    // Salvar plano de aula no LocalStorage
     const salvarPlanoAula = () => {
       if (!nomePlano.value.trim()) {
         $q.notify({
@@ -1842,6 +1980,8 @@ export default {
 
       const novoPlano = {
         nome: nomePlano.value.trim(),
+        descricao: descricaoPlano.value.trim(),
+        publico: planoPublico.value,
         dados: LocalStorage.getItem('aulaTeorica') || {}
       }
 
@@ -1852,7 +1992,7 @@ export default {
         message: `Plano "${novoPlano.nome}" salvo com sucesso!`,
         color: 'positive', // Verde para sucesso
         icon: 'check_circle',
-        timeout: 3000 // Desaparece após 3 segundos
+        timeout: 3000
       })
 
       dialogoSalvar.value = false // Fecha o diálogo
@@ -1861,34 +2001,54 @@ export default {
     // Carregar um plano salvo
     const carregarPlano = (plano) => {
       LocalStorage.set('aulaTeorica', plano.dados)
-
-      // Armazena no LocalStorage para exibir a notificação após o reload
-      LocalStorage.set('planoCarregado', plano.nome)
-
-      // Recarrega a página
-      location.reload()
+      LocalStorage.set('planoCarregado', plano.nome) // Salva para exibir notificação
+      location.reload() // Recarrega a página
     }
 
-    // Excluir um plano salvo
-    const excluirPlano = (nome) => {
-      planosSalvos.value = planosSalvos.value.filter(plano => plano.nome !== nome)
-      LocalStorage.set('planosSalvos', planosSalvos.value)
+    // Função para abrir o diálogo de confirmação antes de excluir
+    const confirmarExclusao = (plano, index) => {
+      planoParaExcluir.value = plano
+      indicePlanoParaExcluir.value = index
+      dialogoConfirmacao.value = true
+    }
 
-      $q.notify({
-        message: `Plano "${nome}" foi removido.`,
-        color: 'warning', // Amarelo para avisos
-        icon: 'delete',
-        timeout: 3000
-      })
+    // Função que realmente exclui o plano após a confirmação
+    const excluirPlanoConfirmado = () => {
+      if (indicePlanoParaExcluir.value !== null) {
+        planosSalvos.value.splice(indicePlanoParaExcluir.value, 1)
+        LocalStorage.set('planosSalvos', planosSalvos.value)
+
+        $q.notify({
+          message: `Plano "${planoParaExcluir.value.nome}" foi removido.`,
+          color: 'warning',
+          icon: 'delete',
+          timeout: 3000
+        })
+      }
+
+      // Resetando valores e fechando o diálogo
+      planoParaExcluir.value = null
+      indicePlanoParaExcluir.value = null
+      dialogoConfirmacao.value = false
     }
     return {
       nomePlano,
+      descricaoPlano,
+      planoPublico,
       dialogoSalvar,
       planosSalvos,
       abrirDialogoSalvar,
       salvarPlanoAula,
       carregarPlano,
-      excluirPlano,
+      dialogoEditar,
+      planoEditado,
+      abrirEdicao,
+      salvarEdicao,
+      dialogoConfirmacao,
+      planoParaExcluir,
+      indicePlanoParaExcluir,
+      confirmarExclusao,
+      excluirPlanoConfirmado,
       tab: ref('tab-aulaTeorica')
     }
   },
