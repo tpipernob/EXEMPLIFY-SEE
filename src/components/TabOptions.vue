@@ -44,7 +44,7 @@
                   label="Carregar"
                   unelevated
                   class="col-12 col-sm-auto"
-                  @click="carregarPlano(plano)"
+                  @click="carregarPlano(plano.id)"
                 />
                 <q-btn
                   color="secondary"
@@ -1833,11 +1833,11 @@
 import { LocalStorage, useQuasar } from 'quasar'
 import { ref, onMounted } from 'vue'
 import html2pdf from 'html2pdf.js'
-
+import { salvarPlano, carregarPlanos, editarPlano, excluirPlano } from '../firebase/firebase-planos'
+import { auth } from '../firebase/index'
 export default {
-
   methods: {
-    salvarAulaTeorica (data) {
+    salvarAulaTeorica(data) {
       LocalStorage.set('aulaTeorica', data)
     },
 
@@ -1847,49 +1847,36 @@ export default {
     },
 
     exportToPDF() {
-      // Criar um elemento temporário para armazenar o conteúdo combinado
       const combinedContent = document.createElement('div')
-
-      // IDs dos elementos que contêm o conteúdo de cada aba
       const tabContentIds = ['tab1-content', 'tab2-content', 'tab3-content']
-
-      // Títulos para cada aba
       const tabTitles = ['Aula Teórica', 'Atividades', 'Feedback']
-
-      // Armazenar os elementos que tiveram a classe 'hidden' removida
       const elementsWithHiddenRemoved = []
 
-      // Clonar e adicionar o conteúdo de cada aba ao elemento temporário
       tabContentIds.forEach((id, index) => {
         const originalElement = document.getElementById(id)
-        // Verificar e remover a classe 'hidden', se presente
         if (originalElement.classList.contains('hidden')) {
           originalElement.classList.remove('hidden')
           elementsWithHiddenRemoved.push(originalElement)
         }
 
-        // Criar e adicionar o título como um elemento h1 antes do conteúdo da aba
         const titleElement = document.createElement('h4')
-        titleElement.textContent = tabTitles[index] // Usar o índice para acessar o título correspondente
+        titleElement.textContent = tabTitles[index]
         combinedContent.appendChild(titleElement)
 
         const tabContent = originalElement.cloneNode(true)
         combinedContent.appendChild(tabContent)
 
-        // Adicionar uma quebra de página entre as abas, se necessário
-        if (id !== 'tab3-content') { // Não adicionar após a última aba
+        if (id !== 'tab3-content') {
           const pageBreak = document.createElement('div')
           pageBreak.style.pageBreakAfter = 'always'
           combinedContent.appendChild(pageBreak)
         }
       })
 
-      // Usar html2pdf no conteúdo combinado
       html2pdf(combinedContent, {
         margin: 1,
         filename: 'planoDeAula.pdf'
       }).then(() => {
-        // Após a exportação, adicionar novamente a classe 'hidden' aos elementos originais, se necessário
         elementsWithHiddenRemoved.forEach(element => {
           element.classList.add('hidden')
         })
@@ -1898,68 +1885,140 @@ export default {
 
     redirectToAulaTeorica() {
       return new Promise((resolve) => {
-        // Simula um redirecionamento assíncrono
         setTimeout(() => {
           this.tab = 'tab-aulaTeorica'
-          resolve() // Resolve a Promise quando o redirecionamento é concluído
-        }, 100) // Ajuste o tempo conforme necessário para o seu caso
+          resolve()
+        }, 100)
       })
     },
 
     async handleClick() {
-      await this.redirectToAulaTeorica() // Aguarda o redirecionamento
-      this.exportToPDF() // Chama exportToPDF após o redirecionamento
+      await this.redirectToAulaTeorica()
+      this.exportToPDF()
     }
   },
 
-  setup () {
+  setup() {
     const $q = useQuasar()
     const nomePlano = ref('')
     const descricaoPlano = ref('')
     const planoPublico = ref(false)
     const dialogoSalvar = ref(false)
-    const planosSalvos = ref(LocalStorage.getItem('planosSalvos') || [])
+    const planosSalvos = ref([])
     const dialogoEditar = ref(false)
     const planoEditado = ref({})
-    const indicePlanoEditado = ref(null)
     const dialogoConfirmacao = ref(false)
     const planoParaExcluir = ref(null)
-    const indicePlanoParaExcluir = ref(null)
-    // Exibir notificação se um plano for carregado após o reload
-    onMounted(() => {
-      const planoCarregado = LocalStorage.getItem('planoCarregado')
-      if (planoCarregado) {
-        $q.notify({
-          message: `Plano "${planoCarregado}" carregado com sucesso!`,
-          color: 'info',
-          icon: 'info',
-          timeout: 3000
+
+    // Carregar um plano salvo do Firestore
+    const carregarPlano = async (planoId) => {
+      try {
+        const planos = await carregarPlanos()
+
+        const planoSelecionado = planos.find(plano => plano.id === planoId)
+
+        if (!planoSelecionado) {
+          console.error('Plano não encontrado. IDs disponíveis:', planos.map(plano => plano.id))
+          $q.notify({ message: 'Plano não encontrado no Firestore.', color: 'negative', icon: 'error' })
+          return
+        }
+
+        console.log('Plano encontrado:', planoSelecionado) // Debugging
+
+        LocalStorage.set('aulaTeorica', planoSelecionado.dados)
+        LocalStorage.set('planoCarregado', planoSelecionado.nome)
+
+        // REMOVE ESSA NOTIFICAÇÃO PARA EVITAR DUPLICIDADE
+        // $q.notify({ message: `Plano "${planoSelecionado.nome}" carregado com sucesso!`, color: 'positive', icon: 'check_circle' })
+
+        location.reload()
+      } catch (error) {
+        console.error('Erro ao carregar plano:', error)
+        $q.notify({ message: 'Erro ao carregar plano.', color: 'negative', icon: 'error' })
+      }
+    }
+    // Exibir notificação se um plano foi carregado após reload
+    onMounted(async () => {
+      try {
+        const user = await new Promise((resolve) => {
+          const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+              resolve(user)
+              unsubscribe()
+            }
+          })
         })
-        LocalStorage.remove('planoCarregado') // Remove para evitar notificações repetidas
+
+        if (!user) {
+          console.error('Usuário não autenticado ao carregar planos.')
+          return
+        }
+
+        const planoCarregadoNome = LocalStorage.getItem('planoCarregado')
+        if (planoCarregadoNome) {
+          try {
+            const planos = await carregarPlanos()
+            const planoEncontrado = planos.find(plano => plano.nome === planoCarregadoNome)
+
+            if (planoEncontrado) {
+              LocalStorage.set('aulaTeorica', planoEncontrado.dados)
+              $q.notify({
+                message: `Plano "${planoCarregadoNome}" carregado com sucesso!`,
+                color: 'info',
+                icon: 'info',
+                timeout: 3000
+              })
+            } else {
+              $q.notify({
+                message: `O plano "${planoCarregadoNome}" não foi encontrado.`,
+                color: 'negative',
+                icon: 'error',
+                timeout: 3000
+              })
+            }
+          } catch (error) {
+            console.error('Erro ao carregar planos:', error)
+            $q.notify({
+              message: 'Erro ao carregar planos do Firestore.',
+              color: 'negative',
+              icon: 'error'
+            })
+          }
+
+          LocalStorage.remove('planoCarregado')
+        }
+
+        await carregarPlanosSalvos()
+      } catch (error) {
+        console.error('Erro ao autenticar usuário:', error)
       }
     })
 
-    // Função para abrir o diálogo de edição
-    const abrirEdicao = (plano, index) => {
-      planoEditado.value = { ...plano } // Clona o plano para edição
-      indicePlanoEditado.value = index
+    // Abrir o diálogo de edição
+    const abrirEdicao = (plano) => {
+      planoEditado.value = { ...plano }
       dialogoEditar.value = true
     }
 
-    // Função para salvar as alterações
-    const salvarEdicao = () => {
+    // Salvar alterações no Firestore
+    const salvarEdicao = async () => {
       if (!planoEditado.value.nome.trim()) {
-        $q.notify({ type: 'negative', message: 'O nome do plano é obrigatório!' })
+        $q.notify({ message: 'O nome do plano é obrigatório!', color: 'negative' })
         return
       }
 
-      planosSalvos.value[indicePlanoEditado.value] = { ...planoEditado.value }
-      LocalStorage.set('planosSalvos', planosSalvos.value)
-
-      $q.notify({ type: 'positive', message: 'Plano atualizado com sucesso!' })
-      dialogoEditar.value = false
+      try {
+        await editarPlano(planoEditado.value.id, planoEditado.value)
+        $q.notify({ message: 'Plano atualizado com sucesso!', color: 'positive' })
+        dialogoEditar.value = false
+        await carregarPlanosSalvos()
+      } catch (error) {
+        console.error(error)
+        $q.notify({ message: 'Erro ao editar plano.', color: 'negative' })
+      }
     }
-    // Abre o diálogo para salvar um novo plano de aula
+
+    // Abrir o diálogo para salvar um novo plano de aula
     const abrirDialogoSalvar = () => {
       nomePlano.value = ''
       descricaoPlano.value = ''
@@ -1967,70 +2026,69 @@ export default {
       dialogoSalvar.value = true
     }
 
-    // Salvar plano de aula no LocalStorage
-    const salvarPlanoAula = () => {
+    // Salvar plano de aula no Firestore
+    const salvarPlanoAula = async () => {
       if (!nomePlano.value.trim()) {
-        $q.notify({
-          message: 'Por favor, insira um nome para o plano.',
-          color: 'negative', // Vermelho para erro
-          icon: 'error'
-        })
+        $q.notify({ message: 'Por favor, insira um nome para o plano.', color: 'negative', icon: 'error' })
         return
       }
 
-      const novoPlano = {
-        nome: nomePlano.value.trim(),
-        descricao: descricaoPlano.value.trim(),
-        publico: planoPublico.value,
-        dados: LocalStorage.getItem('aulaTeorica') || {}
+      try {
+        const plano = {
+          nome: nomePlano.value.trim(),
+          descricao: descricaoPlano.value.trim(),
+          publico: planoPublico.value,
+          dados: LocalStorage.getItem('aulaTeorica') || {}
+        }
+
+        await salvarPlano(plano)
+        $q.notify({ message: `Plano "${plano.nome}" salvo com sucesso!`, color: 'positive', icon: 'check_circle' })
+        dialogoSalvar.value = false
+        await carregarPlanosSalvos()
+      } catch (error) {
+        console.error(error)
+        $q.notify({ message: 'Erro ao salvar plano.', color: 'negative', icon: 'error' })
       }
-
-      planosSalvos.value.push(novoPlano)
-      LocalStorage.set('planosSalvos', planosSalvos.value)
-
-      $q.notify({
-        message: `Plano "${novoPlano.nome}" salvo com sucesso!`,
-        color: 'positive', // Verde para sucesso
-        icon: 'check_circle',
-        timeout: 3000
-      })
-
-      dialogoSalvar.value = false // Fecha o diálogo
     }
 
-    // Carregar um plano salvo
-    const carregarPlano = (plano) => {
-      LocalStorage.set('aulaTeorica', plano.dados)
-      LocalStorage.set('planoCarregado', plano.nome) // Salva para exibir notificação
-      location.reload() // Recarrega a página
+    // Carregar planos do Firestore
+    const carregarPlanosSalvos = async () => {
+      try {
+        planosSalvos.value = await carregarPlanos()
+      } catch (error) {
+        console.error(error)
+        $q.notify({ message: 'Erro ao carregar planos.', color: 'negative', icon: 'error' })
+      }
     }
 
-    // Função para abrir o diálogo de confirmação antes de excluir
-    const confirmarExclusao = (plano, index) => {
+    // Abrir confirmação antes de excluir
+    const confirmarExclusao = (plano) => {
       planoParaExcluir.value = plano
-      indicePlanoParaExcluir.value = index
       dialogoConfirmacao.value = true
     }
 
-    // Função que realmente exclui o plano após a confirmação
-    const excluirPlanoConfirmado = () => {
-      if (indicePlanoParaExcluir.value !== null) {
-        planosSalvos.value.splice(indicePlanoParaExcluir.value, 1)
-        LocalStorage.set('planosSalvos', planosSalvos.value)
+    // Excluir plano do Firestore
+    const excluirPlanoConfirmado = async () => {
+      if (!planoParaExcluir.value.id) return
 
+      try {
+        await excluirPlano(planoParaExcluir.value.id)
         $q.notify({
           message: `Plano "${planoParaExcluir.value.nome}" foi removido.`,
           color: 'warning',
           icon: 'delete',
           timeout: 3000
         })
+        await carregarPlanosSalvos()
+      } catch (error) {
+        console.error(error)
+        $q.notify({ message: 'Erro ao excluir plano.', color: 'negative', icon: 'error' })
       }
 
-      // Resetando valores e fechando o diálogo
       planoParaExcluir.value = null
-      indicePlanoParaExcluir.value = null
       dialogoConfirmacao.value = false
     }
+
     return {
       nomePlano,
       descricaoPlano,
@@ -2039,6 +2097,7 @@ export default {
       planosSalvos,
       abrirDialogoSalvar,
       salvarPlanoAula,
+      carregarPlanosSalvos,
       carregarPlano,
       dialogoEditar,
       planoEditado,
@@ -2046,20 +2105,15 @@ export default {
       salvarEdicao,
       dialogoConfirmacao,
       planoParaExcluir,
-      indicePlanoParaExcluir,
       confirmarExclusao,
       excluirPlanoConfirmado,
       tab: ref('tab-aulaTeorica')
     }
   },
-  data () {
+
+  data() {
     return {
       aulaTeorica: LocalStorage.getItem('aulaTeorica') || { conteudo: '' }
-    }
-  },
-  watch: {
-    'aulaTeorica.conteudo': function (novoValor, valorAntigo) {
-      this.salvarAulaTeorica({ ...this.aulaTeorica, conteudo: novoValor })
     }
   }
 }
