@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
-
-    <p class="text-h5">
+    <q-card class="q-pa-md q-ma-sm">
+    <p class="text-h5 text-bold">
       Seja bem vindo ao Portal EXEMPLIFY-SEE!
     </p>
     <p class="text-body1">
@@ -13,9 +13,9 @@
     <p class="text-body1">
       Você também pode navegar pelo menu e ir direto ao tópico desejado caso já tenha um objetivo em mente.
     </p>
-    <q-separator />
-
-    <p class="text-h5 q-mt-md">
+    </q-card>
+    <q-card class="q-pa-md q-ma-sm q-mt-md">
+    <p class="text-h5 text-bold">
       Aprendizagem Baseada em Exemplos
     </p>
 
@@ -56,7 +56,7 @@
     <p class="text-body2 text-italic">
       VAN GOG, T. Example-based learning. In: International Handbook of the Learning Sciences. Routledge, 2018. Disponível em: <a href="https://www.routledgehandbooks.com/doi/10.4324/9781315617572-20" target="_blank">https://www.routledgehandbooks.com/doi/10.4324/9781315617572-20</a>
     </p>
-
+    </q-card>
   </q-page>
 </template>
 

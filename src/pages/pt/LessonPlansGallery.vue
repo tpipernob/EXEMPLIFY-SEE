@@ -48,7 +48,14 @@
               <div class="text-caption text-primary"><strong>Autor:</strong> {{ props.row.autor }}</div>
             </q-card-section>
             <q-card-actions align="right">
-              <q-btn flat color="primary" label="Carregar Plano" @click="carregarPlanoAula(props.row.id)" />
+              <q-btn
+                  color="primary"
+                  icon="cloud_download"
+                  label="Carregar Plano"
+                  unelevated
+                  class="col-12 col-sm-auto"
+                  @click="carregarPlanoAula(props.row.id)"
+              />
             </q-card-actions>
           </q-card>
         </template>
