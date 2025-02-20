@@ -168,8 +168,9 @@
       </q-card>
     </q-dialog>
   <div class="q-pa-sm">
-    <div class="q-gutter-y-md" style="">
-      <q-card>
+    <div class="q-gutter-y-md">
+      <q-card class="">
+        <div class="text-h6 q-pa-md">Etapas da Aula</div>
         <q-tabs
           v-model="tab"
           dense
