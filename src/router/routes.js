@@ -27,8 +27,16 @@ const routes = [
       { path: 'en/feedbacks-page', name: 'en-feedbacks', component: () => import('src/pages/en/FeedbacksPage.vue') },
       { path: 'en/repository-page', name: 'en-repository', component: () => import('src/pages/en/RepositoryPage.vue') },
       { path: 'pt/exampleDetails-page', name: 'exampleDetails', component: () => import('src/pages/pt/ExampleDetails.vue') },
-      { path: 'pt/perfil', name: 'perfil', component: () => import('src/pages/pt/UserProfile.vue') },
-      { path: 'pt/lesson-plans-gallery', name: 'lessonPlansGallery', component: () => import('src/pages/pt/LessonPlansGallery.vue') }
+      {
+        path: '/perfil',
+        name: 'perfil',
+        component: () => import('src/pages/pt/UserProfile.vue') // Arquivo da página de edição de perfil
+      },
+      {
+        path: 'pt/lesson-plans-gallery',
+        name: 'lessonPlansGallery',
+        component: () => import('src/pages/pt/LessonPlansGallery.vue')
+      }
     ],
     meta: { auth: true }
   },

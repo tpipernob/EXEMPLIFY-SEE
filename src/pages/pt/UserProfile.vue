@@ -1,5 +1,4 @@
 <template>
-  <q-page padding>
   <div class="q-pa-md">
     <q-card class="q-pa-md">
       <div class="text-h6">Editar Perfil</div>
@@ -27,7 +26,6 @@
       </div>
     </q-card>
   </div>
-  </q-page>
 </template>
 
 <script>

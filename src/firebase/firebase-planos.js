@@ -1,5 +1,5 @@
 import { db, auth } from './index.js'
-import { collection, doc, getDocs, getDoc, setDoc, updateDoc, deleteDoc, query, where, orderBy, limit, startAfter } from 'firebase/firestore'
+import { collection, doc, getDocs, getDoc, setDoc, updateDoc, deleteDoc, query, where } from 'firebase/firestore'
 import { LocalStorage } from 'quasar'
 
 // Referência à coleção no Firestore
@@ -48,46 +48,41 @@ export const excluirPlano = async (id) => {
   await deleteDoc(planoRef)
 }
 
-// Contar o número total de planos públicos para paginação
-export const contarTotalPlanosPublicos = async () => {
+// Buscar todos os planos públicos e incluir o nome do autor
+export const carregarPlanosPublicos = async () => {
   try {
+    const planosCollection = collection(db, 'planosDeEnsino')
     const q = query(planosCollection, where('publico', '==', true))
     const querySnapshot = await getDocs(q)
-    return querySnapshot.size // Retorna o total de documentos
-  } catch (error) {
-    console.error('Erro ao contar planos públicos:', error)
-    throw error
-  }
-}
 
-// Buscar planos públicos com paginação
-export const carregarPlanosPublicos = async (ultimoDoc = null, pageSize = 6) => {
-  try {
-    let q = query(
-      planosCollection,
-      where('publico', '==', true),
-      orderBy('nome'),
-      limit(pageSize)
+    const planos = await Promise.all(
+      querySnapshot.docs.map(async (docSnap) => {
+        const plano = docSnap.data()
+        const userId = plano.userId || null
+
+        let autorNome = 'Desconhecido'
+
+        if (userId) {
+          const userRef = doc(db, 'users', userId)
+          const userDoc = await getDoc(userRef)
+
+          if (userDoc.exists()) {
+            autorNome = userDoc.data().name || 'Usuário'
+          }
+        }
+
+        return {
+          id: docSnap.id,
+          ...plano,
+          autor: autorNome
+        }
+      })
     )
 
-    if (ultimoDoc) {
-      q = query(q, startAfter(ultimoDoc))
-    }
-
-    const querySnapshot = await getDocs(q)
-
-    const planos = querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }))
-
-    return {
-      planos,
-      ultimoDoc: querySnapshot.docs.length > 0 ? querySnapshot.docs[querySnapshot.docs.length - 1] : null
-    }
+    return planos
   } catch (error) {
     console.error('Erro ao carregar planos públicos:', error)
-    throw error
+    throw new Error('Erro ao carregar planos públicos.')
   }
 }
 
