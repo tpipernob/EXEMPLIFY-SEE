@@ -3,8 +3,14 @@
     <q-card class="q-pa-md">
       <div class="text-h6">Editar Perfil</div>
 
+      <!-- Exibir loading enquanto os dados não carregam -->
+      <div v-if="loading" class="q-mt-md text-center">
+        <q-spinner size="40px" color="primary" />
+        <p>Carregando perfil...</p>
+      </div>
+
       <!-- Formulário -->
-      <div class="q-mt-md">
+      <div v-else class="q-mt-md">
         <q-form @submit.prevent="updateProfile">
           <div class="row q-col-gutter-md">
             <div class="col-12">
@@ -42,6 +48,7 @@ export default {
     const email = ref('')
     const role = ref('user') // Padrão: usuário comum
     const roleLabel = ref('Usuário')
+    const loading = ref(true) // 🔹 Adicionado estado de carregamento
 
     const loadUserProfile = async (user) => {
       if (user) {
@@ -61,12 +68,16 @@ export default {
           roleLabel.value = 'Usuário'
         }
       }
+
+      loading.value = false // 🔹 Marca como carregado após obter os dados
     }
 
     onMounted(() => {
       auth.onAuthStateChanged((user) => {
         if (user) {
           loadUserProfile(user)
+        } else {
+          loading.value = false // 🔹 Se não houver usuário logado, remove o estado de carregamento
         }
       })
     })
@@ -96,6 +107,7 @@ export default {
       name,
       email,
       roleLabel,
+      loading, // 🔹 Agora controlamos o carregamento
       updateProfile: updateProfileData
     }
   }
