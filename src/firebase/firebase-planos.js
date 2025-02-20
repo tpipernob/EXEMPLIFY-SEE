@@ -1,5 +1,5 @@
 import { db, auth } from './index.js'
-import { collection, doc, getDocs, setDoc, updateDoc, deleteDoc } from 'firebase/firestore'
+import { collection, doc, getDocs, getDoc, setDoc, updateDoc, deleteDoc, query, where } from 'firebase/firestore'
 
 // Referência à coleção no Firestore
 const planosCollection = collection(db, 'planosDeEnsino')
@@ -45,4 +45,42 @@ export const excluirPlano = async (id) => {
 
   const planoRef = doc(planosCollection, id)
   await deleteDoc(planoRef)
+}
+
+// Buscar todos os planos públicos e incluir o nome do autor
+export const carregarPlanosPublicos = async () => {
+  try {
+    const planosCollection = collection(db, 'planosDeEnsino')
+    const q = query(planosCollection, where('publico', '==', true))
+    const querySnapshot = await getDocs(q)
+
+    const planos = await Promise.all(
+      querySnapshot.docs.map(async (docSnap) => {
+        const plano = docSnap.data()
+        const userId = plano.userId || null
+
+        let autorNome = 'Desconhecido'
+
+        if (userId) {
+          const userRef = doc(db, 'users', userId)
+          const userDoc = await getDoc(userRef)
+
+          if (userDoc.exists()) {
+            autorNome = userDoc.data().name || 'Usuário'
+          }
+        }
+
+        return {
+          id: docSnap.id,
+          ...plano,
+          autor: autorNome
+        }
+      })
+    )
+
+    return planos
+  } catch (error) {
+    console.error('Erro ao carregar planos públicos:', error)
+    throw new Error('Erro ao carregar planos públicos.')
+  }
 }

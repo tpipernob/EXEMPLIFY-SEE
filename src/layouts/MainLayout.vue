@@ -28,13 +28,7 @@
 
           <q-menu auto-close>
             <q-list dense>
-              <q-item class="GL__menu-link-signed-in">
-                <q-item-section>
-                  <div><strong>Tiago Piperno Bonetti</strong></div>
-                </q-item-section>
-              </q-item>
-              <q-separator />
-              <q-item clickable class="GL__menu-link">
+              <q-item clickable class="GL__menu-link" :to="perfilLinks[0].route">
                 <q-item-section>Perfil</q-item-section>
               </q-item>
               <q-item clickable class="GL__menu-link">
@@ -140,6 +134,16 @@ export default defineComponent({
     const currentRouteName = computed(() => router.currentRoute.value.name)
     const isEnglishRoute = computed(() => currentRouteName.value.includes('en'))
 
+    const perfilLinks = computed(() => {
+      return [
+        {
+          title: 'Perfil',
+          caption: 'Editar Perfil',
+          icon: 'person',
+          route: { name: isEnglishRoute.value ? 'en-perfil' : 'perfil' } // Ajuste aqui
+        }
+      ]
+    })
     const homeLinks = computed(() => {
       return [
         {
@@ -215,6 +219,7 @@ export default defineComponent({
 
     return {
       currentRoute: currentRouteName,
+      perfilLinks,
       essentialLinks,
       stepsLinks,
       homeLinks,
