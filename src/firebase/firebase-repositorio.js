@@ -90,3 +90,20 @@ export const excluirExemplo = async (exemploId) => {
     throw error
   }
 }
+
+export const carregarExemploPorId = async (id) => {
+  try {
+    const exemploRef = doc(db, 'exemplos', id)
+    const exemploSnap = await getDoc(exemploRef)
+
+    if (exemploSnap.exists()) {
+      return { id: exemploSnap.id, ...exemploSnap.data() }
+    } else {
+      console.warn('Exemplo não encontrado:', id)
+      return null
+    }
+  } catch (error) {
+    console.error('Erro ao carregar exemplo:', error)
+    throw error
+  }
+}
