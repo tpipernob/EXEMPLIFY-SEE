@@ -36,6 +36,11 @@ const routes = [
         path: 'pt/lesson-plans-gallery',
         name: 'lessonPlansGallery',
         component: () => import('src/pages/pt/LessonPlansGallery.vue')
+      },
+      {
+        path: 'pt/create-example',
+        name: 'CreateExample',
+        component: () => import('src/pages/pt/CreateExample.vue')
       }
     ],
     meta: { auth: true }
