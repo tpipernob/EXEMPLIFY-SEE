@@ -1,6 +1,5 @@
 <template>
-  <div class="q-pa-md">
-    <q-card class="q-pa-md">
+    <q-card class="q-pa-md q-ma-sm">
       <div class="text-h6">Gerenciar Plano de Aula</div>
 
       <!-- Botões principais -->
@@ -85,7 +84,7 @@
     </q-card>
 
     <q-dialog v-model="dialogoEditar">
-      <q-card class="q-pa-md" style="max-width: 450px; width: 100%;">
+      <q-card class="q-pa-md q-ma-sm" style="max-width: 450px; width: 100%;">
         <q-card-section>
           <div class="text-h6">Editar Plano de Aula</div>
 
@@ -127,7 +126,7 @@
 
     <!-- Diálogo para salvar o plano -->
     <q-dialog v-model="dialogoSalvar">
-      <q-card class="q-pa-md" style="max-width: 450px; width: 100%;">
+      <q-card class="q-pa-md q-ma-sm" style="max-width: 450px; width: 100%;">
         <q-card-section>
           <div class="text-h6">Salvar Plano de Aula</div>
 
@@ -168,8 +167,7 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
-  </div>
-  <div class="q-pa-md">
+  <div class="q-pa-sm">
     <div class="q-gutter-y-md" style="">
       <q-card>
         <q-tabs

@@ -1,6 +1,6 @@
 <template>
-  <div class="q-pa-md">
-    <q-card class="q-pa-md">
+  <q-page padding>
+    <q-card class="q-pa-md q-ma-sm">
       <div class="text-h6">Editar Perfil</div>
 
       <!-- Exibir loading enquanto os dados não carregam -->
@@ -31,7 +31,7 @@
         </q-form>
       </div>
     </q-card>
-  </div>
+  </q-page>
 </template>
 
 <script>
