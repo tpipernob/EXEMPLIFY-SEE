@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <q-card class="q-pa-md q-ma-sm">
-    <p class="text-h5 text-bold">
+    <p class="text-h6 text-bold">
       Seja bem vindo ao Portal EXEMPLIFY-SEE!
     </p>
     <p class="text-body1">
@@ -15,7 +15,7 @@
     </p>
     </q-card>
     <q-card class="q-pa-md q-ma-sm q-mt-md">
-    <p class="text-h5 text-bold">
+    <p class="text-h6 text-bold">
       Aprendizagem Baseada em Exemplos
     </p>
 
