@@ -1956,34 +1956,15 @@ export default {
 
         const planoCarregadoNome = LocalStorage.getItem('planoCarregado')
         if (planoCarregadoNome) {
-          try {
-            const planos = await carregarPlanos()
-            const planoEncontrado = planos.find(plano => plano.nome === planoCarregadoNome)
+          // Apenas carrega do LocalStorage, já que a verificação acontece em carregarPlano()
+          LocalStorage.set('aulaTeorica', LocalStorage.getItem('aulaTeorica'))
 
-            if (planoEncontrado) {
-              LocalStorage.set('aulaTeorica', planoEncontrado.dados)
-              $q.notify({
-                message: `Plano "${planoCarregadoNome}" carregado com sucesso!`,
-                color: 'info',
-                icon: 'info',
-                timeout: 3000
-              })
-            } else {
-              $q.notify({
-                message: `O plano "${planoCarregadoNome}" não foi encontrado.`,
-                color: 'negative',
-                icon: 'error',
-                timeout: 3000
-              })
-            }
-          } catch (error) {
-            console.error('Erro ao carregar planos:', error)
-            $q.notify({
-              message: 'Erro ao carregar planos do Firestore.',
-              color: 'negative',
-              icon: 'error'
-            })
-          }
+          $q.notify({
+            message: `Plano "${planoCarregadoNome}" carregado com sucesso!`,
+            color: 'info',
+            icon: 'info',
+            timeout: 3000
+          })
 
           LocalStorage.remove('planoCarregado')
         }
