@@ -172,7 +172,7 @@ export default defineComponent({
           title: isEnglishRoute.value ? 'Lesson Plan Gallery' : 'Galeria de Planos de Aula',
           caption: '',
           icon: 'collections_bookmark',
-          route: { name: isEnglishRoute.value ? 'en-tutorial' : '/' }
+          route: { name: isEnglishRoute.value ? 'en-tutorial' : 'lessonPlansGallery' }
         },
         {
           title: isEnglishRoute.value ? 'Example Repository' : 'Repositório de Exemplos',

@@ -1,5 +1,6 @@
 import { db, auth } from './index.js'
 import { collection, doc, getDocs, getDoc, setDoc, updateDoc, deleteDoc, query, where } from 'firebase/firestore'
+import { LocalStorage } from 'quasar'
 
 // Referência à coleção no Firestore
 const planosCollection = collection(db, 'planosDeEnsino')
@@ -82,5 +83,31 @@ export const carregarPlanosPublicos = async () => {
   } catch (error) {
     console.error('Erro ao carregar planos públicos:', error)
     throw new Error('Erro ao carregar planos públicos.')
+  }
+}
+
+// Função para carregar um plano salvo (público ou do usuário)
+export const carregarPlano = async (planoId) => {
+  try {
+    const planoRef = doc(db, 'planosDeEnsino', planoId)
+    const planoSnap = await getDoc(planoRef)
+
+    if (!planoSnap.exists()) {
+      console.error('Plano não encontrado:', planoId)
+      throw new Error('Plano não encontrado.')
+    }
+
+    const planoSelecionado = { id: planoSnap.id, ...planoSnap.data() }
+
+    console.log('Plano encontrado:', planoSelecionado)
+
+    // Salvar os dados no LocalStorage para serem carregados em TutorialPage
+    LocalStorage.set('aulaTeorica', planoSelecionado.dados)
+    LocalStorage.set('planoCarregado', planoSelecionado.nome)
+
+    return planoSelecionado
+  } catch (error) {
+    console.error('Erro ao carregar plano:', error)
+    throw error
   }
 }
