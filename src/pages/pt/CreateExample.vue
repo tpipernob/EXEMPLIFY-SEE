@@ -100,6 +100,16 @@ export default {
       try {
         await adicionarExemplo(exemplo.value)
         $q.notify({ type: 'positive', message: 'Exemplo cadastrado com sucesso!' })
+        // 🔹 Resetar os campos após salvar
+        exemplo.value = {
+          titulo: '',
+          tipo: '',
+          modelo: [],
+          descricao: '',
+          fonte: '',
+          link: '',
+          aprovado: false // Mantém como "false" por padrão
+        }
       } catch (error) {
         $q.notify({ type: 'negative', message: 'Erro ao salvar exemplo.' })
       }

@@ -179,6 +179,11 @@ export default defineComponent({
           caption: '',
           icon: 'folder',
           route: { name: isEnglishRoute.value ? 'en-repository' : 'repository' }
+        },
+        {
+          title: isEnglishRoute.value ? 'Add Example' : 'Adicionar Exemplo',
+          icon: 'add',
+          route: { name: isEnglishRoute.value ? 'en-createExample' : 'createExample' }
         }
       ]
     })

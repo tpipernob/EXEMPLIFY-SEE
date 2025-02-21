@@ -39,7 +39,7 @@ const routes = [
       },
       {
         path: 'pt/create-example',
-        name: 'CreateExample',
+        name: 'createExample',
         component: () => import('src/pages/pt/CreateExample.vue')
       }
     ],
