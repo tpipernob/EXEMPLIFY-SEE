@@ -61,7 +61,7 @@
             <q-item>
               <q-item-section class="text-weight-bold">Incluído por</q-item-section>
               <q-item-section>
-                <div class="text-wrap break-all">{{ example?.userId }}</div>
+                <div class="text-wrap break-all">{{ example?.userName }}</div>
               </q-item-section>
             </q-item>
 

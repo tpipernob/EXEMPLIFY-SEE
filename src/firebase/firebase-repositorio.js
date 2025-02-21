@@ -97,12 +97,33 @@ export const carregarExemploPorId = async (id) => {
     const exemploRef = doc(db, 'exemplos', id)
     const exemploSnap = await getDoc(exemploRef)
 
-    if (exemploSnap.exists()) {
-      return { id: exemploSnap.id, ...exemploSnap.data() }
-    } else {
+    if (!exemploSnap.exists()) {
       console.warn('Exemplo não encontrado:', id)
       return null
     }
+
+    const exemplo = { id: exemploSnap.id, ...exemploSnap.data() }
+
+    // 🔹 Buscar nome do usuário que cadastrou o exemplo
+    if (exemplo.userId) {
+      try {
+        const userRef = doc(db, 'users', exemplo.userId)
+        const userSnap = await getDoc(userRef)
+
+        if (userSnap.exists()) {
+          exemplo.userName = userSnap.data().name || 'Usuário desconhecido'
+        } else {
+          exemplo.userName = 'Usuário não encontrado'
+        }
+      } catch (error) {
+        console.error('Erro ao carregar nome do usuário:', error)
+        exemplo.userName = 'Erro ao carregar nome'
+      }
+    } else {
+      exemplo.userName = 'Usuário desconhecido'
+    }
+
+    return exemplo
   } catch (error) {
     console.error('Erro ao carregar exemplo:', error)
     throw error
