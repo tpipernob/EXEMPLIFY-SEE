@@ -1,5 +1,5 @@
 import { db, auth } from './index'
-import { collection, addDoc, updateDoc, doc, getDocs, getDoc, deleteDoc } from 'firebase/firestore'
+import { collection, addDoc, updateDoc, doc, getDocs, getDoc, deleteDoc, arrayUnion } from 'firebase/firestore'
 
 // 🔹 Criar um novo exemplo no Firestore
 export const adicionarExemplo = async (dadosExemplo) => {
@@ -104,6 +104,68 @@ export const carregarExemploPorId = async (id) => {
     }
   } catch (error) {
     console.error('Erro ao carregar exemplo:', error)
+    throw error
+  }
+}
+
+// 🔹 Adicionar avaliação a um exemplo
+export const salvarAvaliacao = async (exemploId, avaliacao) => {
+  try {
+    const user = auth.currentUser
+    if (!user) throw new Error('Usuário não autenticado.')
+
+    // 🔹 Buscar o nome do usuário no Firestore, caso `displayName` não esteja configurado
+    let userName = user.displayName || 'Usuário Anônimo'
+    const userRef = doc(db, 'users', user.uid)
+    const userSnap = await getDoc(userRef)
+
+    if (userSnap.exists()) {
+      userName = userSnap.data().name || 'Usuário Anônimo'
+    }
+
+    const exemploRef = doc(db, 'exemplos', exemploId)
+    const exemploSnap = await getDoc(exemploRef)
+
+    if (!exemploSnap.exists()) throw new Error('Exemplo não encontrado.')
+
+    const novaAvaliacao = {
+      author: userName,
+      rating: avaliacao.rating,
+      comment: avaliacao.comment,
+      date: new Date().toISOString(),
+      userId: user.uid // 🔹 Vincula a avaliação ao usuário logado
+    }
+
+    await updateDoc(exemploRef, {
+      ratings: arrayUnion(novaAvaliacao)
+    })
+
+    return novaAvaliacao
+  } catch (error) {
+    console.error('Erro ao salvar avaliação:', error)
+    throw error
+  }
+}
+
+export const editarAvaliacao = async (exemploId, avaliacaoAtualizada) => {
+  try {
+    const user = auth.currentUser
+    if (!user) throw new Error('Usuário não autenticado.')
+
+    const exemploRef = doc(db, 'exemplos', exemploId)
+    const exemploSnap = await getDoc(exemploRef)
+
+    if (!exemploSnap.exists()) throw new Error('Exemplo não encontrado.')
+
+    const exemplo = exemploSnap.data()
+    const avaliacoesAtualizadas = exemplo.ratings.map(avaliacao =>
+      avaliacao.userId === user.uid ? avaliacaoAtualizada : avaliacao
+    )
+
+    await updateDoc(exemploRef, { ratings: avaliacoesAtualizadas })
+    return avaliacaoAtualizada
+  } catch (error) {
+    console.error('Erro ao editar avaliação:', error)
     throw error
   }
 }
