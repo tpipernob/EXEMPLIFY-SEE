@@ -73,7 +73,7 @@
               </div>
               <div class="row items-center">
                 <q-rating v-model="props.row.avaliacaoMedia" size="1.5em" color="amber" readonly />
-                <span class="q-ml-sm text-weight-bold">{{ props.row.avaliacaoMedia.toFixed(1) }}</span>
+                <span class="q-ml-sm text-weight-bold">{{ props.row.avaliacaoMedia || '0.0' }}</span>
                 <span class="q-ml-xs text-grey">({{ props.row.totalAvaliacoes }} avaliações)</span>
               </div>
             </q-card-section>
@@ -190,8 +190,14 @@ export default {
 
     const calcularMedia = (ratings) => {
       if (!ratings || ratings.length === 0) return 0
-      const soma = ratings.reduce((total, r) => total + r.stars, 0)
-      return soma / ratings.length
+
+      const soma = ratings.reduce((total, r) => {
+        const estrelas = Number(r.rating) || 0 // 🔹 Converte para número, se for inválido usa 0
+        return total + estrelas
+      }, 0)
+
+      const media = soma / ratings.length
+      return isNaN(media) ? 0 : media.toFixed(1) // 🔹 Evita NaN e formata com 1 casa decimal
     }
 
     const abrirDetalhes = (exemploId) => {
