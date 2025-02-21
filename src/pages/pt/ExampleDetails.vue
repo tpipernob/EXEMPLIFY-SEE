@@ -31,7 +31,64 @@
             :href="example?.link"
             target="_blank"
           />
+          <template v-if="usuarioAtual && example">
+            <q-btn
+              v-if="usuarioAtual.role === 'admin' || usuarioAtual.uid === example.userId"
+              color="blue"
+              icon="edit"
+              label="Editar"
+              @click="abrirEdicaoExemplo"
+            />
+            <q-btn
+              v-if="usuarioAtual.role === 'admin'"
+              color="red"
+              icon="delete"
+              label="Excluir"
+              @click="confirmarExclusaoExemplo"
+            />
+          </template>
         </q-card-actions>
+        <q-dialog v-model="editarDialogExemplo">
+          <q-card class="card-box" style="max-width: 600px; width: 100%;">
+            <q-card-section>
+              <div class="text-h6">Editar Exemplo</div>
+            </q-card-section>
+
+            <q-separator />
+
+            <q-card-section>
+              <q-input v-model="exemploEditando.titulo" label="Título" class="q-mt-md" />
+              <q-input v-model="exemploEditando.descricao" label="Descrição" type="textarea" class="q-mt-md" />
+              <q-input v-model="exemploEditando.fonte" label="Fonte" class="q-mt-md" />
+              <q-input
+                v-model="exemploEditando.link"
+                label="Link do Exemplo"
+                class="q-mt-md"
+                :disable="usuarioAtual?.role !== 'admin'"
+              />
+              <q-select v-model="exemploEditando.tipo" label="Tipo do Exemplo" :options="tiposExemplo" class="q-mt-md" />
+              <q-select v-model="exemploEditando.modelo" label="Modelo(s) UML" multiple :options="modelosUML" class="q-mt-md" />
+            </q-card-section>
+
+            <q-card-actions align="right">
+              <q-btn flat label="Cancelar" color="grey" v-close-popup />
+              <q-btn color="primary" label="Salvar Alterações" @click="salvarEdicaoExemplo" />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
+        <q-dialog v-model="dialogoConfirmacaoExemplo">
+          <q-card class="q-pa-md" style="max-width: 400px;">
+            <q-card-section>
+              <div class="text-h6">Confirmar Exclusão</div>
+              <p>Tem certeza de que deseja excluir este exemplo? Esta ação não pode ser desfeita.</p>
+            </q-card-section>
+
+            <q-card-actions align="right" class="q-gutter-sm">
+              <q-btn flat label="Cancelar" color="grey" v-close-popup />
+              <q-btn color="negative" label="Excluir" @click="excluirExemploConfirmado" />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
       </q-card>
 
       <!-- Seção de Detalhes do Exemplo -->
@@ -200,14 +257,22 @@
 
 <script>
 import { ref, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { carregarExemploPorId, salvarAvaliacao, editarAvaliacao, removerAvaliacao } from '../../firebase/firebase-repositorio'
-import { auth } from '../../firebase/index'
+import { useRoute, useRouter } from 'vue-router'
+import {
+  carregarExemploPorId,
+  salvarAvaliacao,
+  editarAvaliacao,
+  removerAvaliacao,
+  excluirExemplo, atualizarExemplo
+} from '../../firebase/firebase-repositorio'
+import { auth, db } from '../../firebase/index'
 import { onAuthStateChanged } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore'
 import { useQuasar } from 'quasar'
 export default {
   setup() {
     const route = useRoute()
+    const router = useRouter()
     const $q = useQuasar()
     const example = ref(null)
     const reviews = ref([])
@@ -221,6 +286,29 @@ export default {
     const dialogoConfirmacaoAvaliacao = ref(false)
     const avaliacaoParaExcluir = ref(null)
     const indexAvaliacaoParaExcluir = ref(null)
+    // Controle de Edição do Exemplo
+    const editarDialogExemplo = ref(false)
+    const exemploEditando = ref({})
+
+    // Controle de Exclusão do Exemplo
+    const dialogoConfirmacaoExemplo = ref(false)
+
+    const tiposExemplo = ['Exemplo Correto', 'Exemplo Errôneo', 'Ambos']
+    const modelosUML = [
+      'Diagrama de Classes',
+      'Diagrama de Objetos',
+      'Diagrama de Componentes',
+      'Diagrama de Pacotes',
+      'Diagrama de Estrutura Composta',
+      'Diagrama de Implantação (Deployment)',
+      'Diagrama de Caso de Uso',
+      'Diagrama de Sequência',
+      'Diagrama de Comunicação',
+      'Diagrama de Estados (State Machine)',
+      'Diagrama de Atividades',
+      'Diagrama de Interação Geral (Interaction Overview)',
+      'Diagrama de Tempo (Timing Diagram)'
+    ]
 
     const carregarDetalhes = async () => {
       const exemploId = route.query.id
@@ -343,10 +431,58 @@ export default {
       return reviews.value.some(review => review.userId === usuarioAtual.value.uid)
     })
 
+    // 🔹 Edição de Exemplo
+    const abrirEdicaoExemplo = () => {
+      exemploEditando.value = { ...example.value }
+      editarDialogExemplo.value = true
+    }
+
+    const salvarEdicaoExemplo = async () => {
+      try {
+        await atualizarExemplo(exemploEditando.value.id, exemploEditando.value)
+        example.value = { ...exemploEditando.value }
+        editarDialogExemplo.value = false
+        $q.notify({ type: 'positive', message: 'Exemplo atualizado com sucesso!' })
+      } catch (error) {
+        console.error('Erro ao editar exemplo:', error)
+      }
+    }
+
+    // 🔹 Exclusão de Exemplo
+    const confirmarExclusaoExemplo = () => {
+      dialogoConfirmacaoExemplo.value = true
+    }
+
+    const excluirExemploConfirmado = async () => {
+      try {
+        await excluirExemplo(example.value.id)
+        $q.notify({ type: 'positive', message: 'Exemplo excluído com sucesso!' })
+        router.push({ name: 'repository' }) // Redireciona para lista de exemplos
+      } catch (error) {
+        console.error('Erro ao excluir exemplo:', error)
+      }
+      dialogoConfirmacaoExemplo.value = false
+    }
+
     onMounted(() => {
-      onAuthStateChanged(auth, (user) => {
+      onAuthStateChanged(auth, async (user) => {
         if (user) {
-          usuarioAtual.value = user
+          const userRef = doc(db, 'users', user.uid)
+          const userSnap = await getDoc(userRef)
+
+          if (userSnap.exists()) {
+            usuarioAtual.value = {
+              uid: user.uid,
+              role: userSnap.data().role || 'user' // 🔹 Agora buscamos a role do Firestore
+            }
+          } else {
+            usuarioAtual.value = {
+              uid: user.uid,
+              role: 'user' // 🔹 Caso o usuário não tenha um registro no Firestore
+            }
+          }
+
+          console.log(`Usuário autenticado: ${usuarioAtual.value.uid}, Role: ${usuarioAtual.value.role}`)
         } else {
           usuarioAtual.value = null
         }
@@ -378,7 +514,17 @@ export default {
       excluirAvaliacaoConfirmada,
       dialogoConfirmacaoAvaliacao,
       avaliacaoParaExcluir,
-      indexAvaliacaoParaExcluir
+      indexAvaliacaoParaExcluir,
+      usuarioAtual,
+      editarDialogExemplo,
+      exemploEditando,
+      abrirEdicaoExemplo,
+      salvarEdicaoExemplo,
+      dialogoConfirmacaoExemplo,
+      confirmarExclusaoExemplo,
+      excluirExemploConfirmado,
+      tiposExemplo,
+      modelosUML
     }
   }
 }

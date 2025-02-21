@@ -1,8 +1,7 @@
 import { db, auth } from './index'
-import { collection, addDoc, updateDoc, doc, getDocs, getDoc, deleteDoc, arrayUnion } from 'firebase/firestore'
+import { collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, arrayUnion } from 'firebase/firestore'
 import { v4 as uuidv4 } from 'uuid' // Gera UUIDs únicos
 
-// 🔹 Criar um novo exemplo no Firestore
 export const adicionarExemplo = async (dadosExemplo) => {
   try {
     const user = auth.currentUser
@@ -24,33 +23,78 @@ export const adicionarExemplo = async (dadosExemplo) => {
   }
 }
 
-// 🔹 Atualizar um exemplo (apenas admins ou donos do exemplo)
+// Atualizar um exemplo (apenas admins ou donos do exemplo)
 export const atualizarExemplo = async (exemploId, novosDados) => {
   try {
+    const user = auth.currentUser
+    if (!user) throw new Error('Usuário não autenticado.')
+
     const exemploRef = doc(db, 'exemplos', exemploId)
     const exemploSnap = await getDoc(exemploRef)
 
     if (!exemploSnap.exists()) throw new Error('Exemplo não encontrado.')
 
-    const user = auth.currentUser
-    if (!user) throw new Error('Usuário não autenticado.')
+    const exemplo = exemploSnap.data()
 
-    // 🔹 Apenas admins podem alterar o campo "aprovado"
-    if ('aprovado' in novosDados && !user.isAdmin) {
-      throw new Error('Apenas administradores podem aprovar exemplos.')
+    // 🔹 Busca a role do usuário no Firestore
+    const userRef = doc(db, 'users', user.uid)
+    const userSnap = await getDoc(userRef)
+    const userRole = userSnap.exists() ? userSnap.data().role : 'user'
+
+    // 🔹 Verifica se o usuário pode editar o exemplo
+    if (userRole !== 'admin' && user.uid !== exemplo.userId) {
+      throw new Error('Você não tem permissão para editar este exemplo.')
     }
 
-    await updateDoc(exemploRef, {
+    // 🔹 Usuários comuns não podem modificar os campos "aprovado" e "link"
+    if (userRole !== 'admin') {
+      delete novosDados.aprovado
+      delete novosDados.link
+    }
+
+    // 🔹 Todos podem editar "tipo" e "modelo"
+    const dadosAtualizados = {
       ...novosDados,
-      lastUpdated: new Date().toISOString() // Atualiza a data sempre que houver alteração
-    })
+      lastUpdated: new Date().toISOString() // Atualiza a data de modificação
+    }
+
+    // 🔹 Atualiza o Firestore
+    await updateDoc(exemploRef, dadosAtualizados)
   } catch (error) {
     console.error('Erro ao atualizar exemplo:', error)
     throw error
   }
 }
 
-// 🔹 Obter todos os exemplos públicos
+export const excluirExemplo = async (exemploId) => {
+  try {
+    const user = auth.currentUser
+    if (!user) throw new Error('Usuário não autenticado.')
+
+    const exemploRef = doc(db, 'exemplos', exemploId)
+    const exemploSnap = await getDoc(exemploRef)
+
+    if (!exemploSnap.exists()) throw new Error('Exemplo não encontrado.')
+
+    const exemplo = exemploSnap.data()
+
+    // 🔹 Verifica se o usuário tem permissão para excluir
+    const userRef = doc(db, 'users', user.uid)
+    const userSnap = await getDoc(userRef)
+    const userRole = userSnap.exists() ? userSnap.data().role : 'user'
+
+    if (userRole !== 'admin' && user.uid !== exemplo.userId) {
+      throw new Error('Você não tem permissão para excluir este exemplo.')
+    }
+
+    await deleteDoc(exemploRef)
+    return true
+  } catch (error) {
+    console.error('Erro ao excluir exemplo:', error)
+    throw error
+  }
+}
+
 export const carregarExemplos = async () => {
   try {
     const querySnapshot = await getDocs(collection(db, 'exemplos'))
@@ -61,7 +105,6 @@ export const carregarExemplos = async () => {
   }
 }
 
-// 🔹 Adicionar avaliação a um exemplo
 export const adicionarAvaliacao = async (exemploId, avaliacao) => {
   try {
     const exemploRef = doc(db, 'exemplos', exemploId)
@@ -75,19 +118,6 @@ export const adicionarAvaliacao = async (exemploId, avaliacao) => {
     await updateDoc(exemploRef, { ratings: novasAvaliacoes })
   } catch (error) {
     console.error('Erro ao adicionar avaliação:', error)
-    throw error
-  }
-}
-
-// 🔹 Excluir um exemplo (somente admin)
-export const excluirExemplo = async (exemploId) => {
-  try {
-    const user = auth.currentUser
-    if (!user || !user.isAdmin) throw new Error('Apenas administradores podem excluir exemplos.')
-
-    await deleteDoc(doc(db, 'exemplos', exemploId))
-  } catch (error) {
-    console.error('Erro ao excluir exemplo:', error)
     throw error
   }
 }
@@ -130,7 +160,6 @@ export const carregarExemploPorId = async (id) => {
   }
 }
 
-// 🔹 Adicionar avaliação a um exemplo
 export const salvarAvaliacao = async (exemploId, avaliacao) => {
   try {
     const user = auth.currentUser
