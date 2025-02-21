@@ -92,7 +92,12 @@
         <q-card-section>
           <div class="row justify-between">
             <div class="text-h6">Avaliações dos Professores</div>
-            <q-btn color="primary" label="Adicionar Avaliação" icon="add_comment" @click="abrirDialogo()" />
+            <template v-if="!jaAvaliou">
+              <q-btn color="primary" label="Adicionar Avaliação" icon="add_comment" @click="abrirDialogo()" />
+            </template>
+            <template v-else>
+              <div class="text-grey text-caption">Você já avaliou este exemplo.</div>
+            </template>
           </div>
         </q-card-section>
 
@@ -150,11 +155,32 @@
               <div class="text-weight-bold">{{ review.author }}</div>
               <div class="text-grey text-caption">{{ formatarData(review.date) }}</div>
             </div>
-            <q-btn
-              v-if="review.userId === auth.currentUser?.uid"
-              flat dense icon="edit" color="blue"
-              @click="abrirEdicao(review)"
-            />
+
+            <div class="row">
+              <q-btn
+                v-if="review.userId === auth.currentUser?.uid"
+                flat dense icon="edit" color="blue"
+                @click="abrirEdicao(review)"
+              />
+              <q-btn
+                v-if="review.userId === auth.currentUser?.uid"
+                flat dense icon="delete" color="red"
+                @click="confirmarExclusaoAvaliacao(review)"
+              />
+              <q-dialog v-model="dialogoConfirmacaoAvaliacao">
+                <q-card class="q-pa-md" style="max-width: 400px;">
+                  <q-card-section>
+                    <div class="text-h6">Confirmar Exclusão</div>
+                    <p>Tem certeza de que deseja excluir a avaliação? Esta ação não pode ser desfeita.</p>
+                  </q-card-section>
+
+                  <q-card-actions align="right" class="q-gutter-sm">
+                    <q-btn flat label="Cancelar" color="grey" v-close-popup />
+                    <q-btn color="negative" label="Excluir" @click="excluirAvaliacaoConfirmada" />
+                  </q-card-actions>
+                </q-card>
+              </q-dialog>
+            </div>
           </div>
 
           <q-rating v-model="review.rating" size="1.2em" color="amber" readonly class="q-mt-xs" />
@@ -175,11 +201,14 @@
 <script>
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { carregarExemploPorId, salvarAvaliacao, editarAvaliacao } from '../../firebase/firebase-repositorio'
+import { carregarExemploPorId, salvarAvaliacao, editarAvaliacao, removerAvaliacao } from '../../firebase/firebase-repositorio'
 import { auth } from '../../firebase/index'
+import { onAuthStateChanged } from 'firebase/auth'
+import { useQuasar } from 'quasar'
 export default {
   setup() {
     const route = useRoute()
+    const $q = useQuasar()
     const example = ref(null)
     const reviews = ref([])
     const currentPage = ref(1)
@@ -188,6 +217,10 @@ export default {
     const newReview = ref({ author: '', rating: 5, comment: '' })
     const editarDialog = ref(false)
     const reviewEditando = ref({})
+    const usuarioAtual = ref(null)
+    const dialogoConfirmacaoAvaliacao = ref(false)
+    const avaliacaoParaExcluir = ref(null)
+    const indexAvaliacaoParaExcluir = ref(null)
 
     const carregarDetalhes = async () => {
       const exemploId = route.query.id
@@ -267,6 +300,31 @@ export default {
       }
     }
 
+    // Método para abrir o diálogo de confirmação
+    const confirmarExclusaoAvaliacao = (review) => {
+      avaliacaoParaExcluir.value = review
+      dialogoConfirmacaoAvaliacao.value = true
+    }
+
+    // Método para excluir a avaliação após confirmação
+    const excluirAvaliacaoConfirmada = async () => {
+      if (!avaliacaoParaExcluir.value) return
+
+      try {
+        const novasAvaliacoes = await removerAvaliacao(example.value.id, avaliacaoParaExcluir.value.id)
+
+        // Atualiza a lista corretamente
+        reviews.value = novasAvaliacoes
+
+        $q.notify({ type: 'positive', message: 'Avaliação excluída com sucesso!' })
+      } catch (error) {
+        console.error('Erro ao excluir avaliação:', error)
+        $q.notify({ type: 'negative', message: 'Erro ao excluir avaliação. Tente novamente.' })
+      }
+
+      dialogoConfirmacaoAvaliacao.value = false
+    }
+
     const abrirDialogo = () => {
       reviewDialog.value = true
     }
@@ -280,7 +338,21 @@ export default {
       editarDialog.value = true
     }
 
-    onMounted(carregarDetalhes)
+    const jaAvaliou = computed(() => {
+      if (!usuarioAtual.value) return false // 🔹 Aguarda carregamento da autenticação
+      return reviews.value.some(review => review.userId === usuarioAtual.value.uid)
+    })
+
+    onMounted(() => {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          usuarioAtual.value = user
+        } else {
+          usuarioAtual.value = null
+        }
+      })
+      carregarDetalhes() // 🔹 Carrega os detalhes apenas após a autenticação
+    })
 
     return {
       example,
@@ -300,7 +372,13 @@ export default {
       salvarEdicao,
       auth,
       editarDialog,
-      reviewEditando
+      reviewEditando,
+      jaAvaliou,
+      confirmarExclusaoAvaliacao,
+      excluirAvaliacaoConfirmada,
+      dialogoConfirmacaoAvaliacao,
+      avaliacaoParaExcluir,
+      indexAvaliacaoParaExcluir
     }
   }
 }

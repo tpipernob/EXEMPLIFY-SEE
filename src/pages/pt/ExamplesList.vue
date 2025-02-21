@@ -232,7 +232,7 @@ export default {
   border-radius: 8px;
 }
 .example-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.01);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   background-color: #f0f0f0;
 }

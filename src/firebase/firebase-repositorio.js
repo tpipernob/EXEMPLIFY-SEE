@@ -1,5 +1,6 @@
 import { db, auth } from './index'
 import { collection, addDoc, updateDoc, doc, getDocs, getDoc, deleteDoc, arrayUnion } from 'firebase/firestore'
+import { v4 as uuidv4 } from 'uuid' // Gera UUIDs únicos
 
 // 🔹 Criar um novo exemplo no Firestore
 export const adicionarExemplo = async (dadosExemplo) => {
@@ -114,30 +115,21 @@ export const salvarAvaliacao = async (exemploId, avaliacao) => {
     const user = auth.currentUser
     if (!user) throw new Error('Usuário não autenticado.')
 
-    // 🔹 Buscar o nome do usuário no Firestore, caso `displayName` não esteja configurado
-    let userName = user.displayName || 'Usuário Anônimo'
-    const userRef = doc(db, 'users', user.uid)
-    const userSnap = await getDoc(userRef)
-
-    if (userSnap.exists()) {
-      userName = userSnap.data().name || 'Usuário Anônimo'
-    }
-
-    const exemploRef = doc(db, 'exemplos', exemploId)
-    const exemploSnap = await getDoc(exemploRef)
-
-    if (!exemploSnap.exists()) throw new Error('Exemplo não encontrado.')
+    // Gera um ID único para a avaliação
+    const avaliacaoId = uuidv4()
 
     const novaAvaliacao = {
-      author: userName,
+      id: avaliacaoId, // Adiciona um ID único
+      author: user.displayName || 'Usuário Anônimo',
       rating: avaliacao.rating,
       comment: avaliacao.comment,
       date: new Date().toISOString(),
-      userId: user.uid // 🔹 Vincula a avaliação ao usuário logado
+      userId: user.uid
     }
 
+    const exemploRef = doc(db, 'exemplos', exemploId)
     await updateDoc(exemploRef, {
-      ratings: arrayUnion(novaAvaliacao)
+      ratings: arrayUnion(novaAvaliacao) // Adiciona a avaliação sem sobrescrever as existentes
     })
 
     return novaAvaliacao
@@ -159,13 +151,31 @@ export const editarAvaliacao = async (exemploId, avaliacaoAtualizada) => {
 
     const exemplo = exemploSnap.data()
     const avaliacoesAtualizadas = exemplo.ratings.map(avaliacao =>
-      avaliacao.userId === user.uid ? avaliacaoAtualizada : avaliacao
+      avaliacao.id === avaliacaoAtualizada.id ? avaliacaoAtualizada : avaliacao
     )
 
     await updateDoc(exemploRef, { ratings: avaliacoesAtualizadas })
     return avaliacaoAtualizada
   } catch (error) {
     console.error('Erro ao editar avaliação:', error)
+    throw error
+  }
+}
+
+export const removerAvaliacao = async (exemploId, avaliacaoId) => {
+  try {
+    const exemploRef = doc(db, 'exemplos', exemploId)
+    const exemploSnap = await getDoc(exemploRef)
+
+    if (!exemploSnap.exists()) throw new Error('Exemplo não encontrado.')
+
+    const exemplo = exemploSnap.data()
+    const novasAvaliacoes = exemplo.ratings.filter(avaliacao => avaliacao.id !== avaliacaoId)
+
+    await updateDoc(exemploRef, { ratings: novasAvaliacoes })
+    return novasAvaliacoes
+  } catch (error) {
+    console.error('Erro ao remover avaliação:', error)
     throw error
   }
 }
